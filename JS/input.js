@@ -8,10 +8,10 @@ $(document).ready(function() {
    // Start the game loop
   start();
       
-   $('#myCanvas').addEventListener('mousemove', function() {
+   /*$('#myCanvas').addEventListener('mousemove', function() {
       xPos = evt.pageX - $('#element').offset().left;
       yPos = evt.pageY - $('#element').offset().top;
-   });
+   });*/
 });
 
 // Start the game loop
