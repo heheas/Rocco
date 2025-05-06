@@ -15,7 +15,7 @@ $(document).ready(function() {
 });
 
 // Start the game loop
-start() {
+function start() {
  if (!this.isRunning) {
    this.isRunning = true;
    requestAnimationFrame(this.loop);
@@ -24,13 +24,13 @@ start() {
 }
 
 // Stop the game loop
-stop() {
+function stop() {
  this.isRunning = false;
  console.log('Game loop stopped');
 }
 
 // The main loop
-loop(timestamp) {
+function loop(timestamp) {
  // Calculate delta time (time since last frame) in seconds
  const deltaTime = (timestamp - this.lastTimestamp) / 1000;
  this.lastTimestamp = timestamp;
@@ -45,7 +45,7 @@ loop(timestamp) {
 }
 
 // Update game state - override this method in your implementation
-update(deltaTime) {
+function update(deltaTime) {
  // This would be where you update your game state
  console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 }
