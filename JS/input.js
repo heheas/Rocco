@@ -67,7 +67,7 @@ function drawBoard(x, y, side) {
    for (let row=-side; row <= side; row++) {
       let rowWidth = side-Math.abs(row);
       for (let col = -side; col < rowWidth; col++) {
-         drawHexagon(scale*(col - rowWidth/2 + side/2) + scale/2, scale*(row - (row*inaradius/side/4)), scale * side);
+         drawHexagon(xPos + scale*(col - rowWidth/2 + side/2) + scale/2,yPos + scale*(row - (row*inaradius/side/4)), scale * side);
       }
    }
 }
