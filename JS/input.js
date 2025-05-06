@@ -15,7 +15,8 @@ $(document).ready(function() {
    $( "#myCanvas" ).on( "mousemove", function( event ) {
       xPos = event.pageX - $('#myCanvas').offset().left;
       yPos = event.pageY - $('#myCanvas').offset().top;
-   }).addEventListener('wheel', function(event) {
+   });
+   $("#myCanvas").on('wheel', function(event) {
      if (event.deltaY < 0) {
        // Scrolled up
        scale++;
