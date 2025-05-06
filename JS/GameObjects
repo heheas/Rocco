@@ -18,7 +18,10 @@ const TileType = {
 }
 class Tile extends GameObject {
   let type = TileType.INVALID;
-  constructor(x, y, type = TileType.INVALID) {
+  let isDebris = true;
+  constructor(x, y, type = TileType.INVALID, isDebris = true) {
     super(x,y);
+    this.type = type;
+    this.isDebris = isDebris;
   }
 }
