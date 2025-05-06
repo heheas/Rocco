@@ -54,6 +54,7 @@ function update(deltaTime) {
    
  // This would be where you update your game state
  console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
-  ctx.font = "48px serif";
-  ctx.fillText("Hello world", 10, 50);
+  ctx.font = "10px serif";
+  ctx.fillText(xPos, xPos, yPos);
+  ctx.fillText(", " + yPos, xPos + 10, yPos);
 }
