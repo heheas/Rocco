@@ -14,12 +14,13 @@ const TileType = {
   TRIDENT: "trident",
   UTURN: "uturn",
   SIXWAY: "sixway",
-  INVALID: "invalid"
+  INVALID: "invalid",
+  EMPTY: "empty"
 }
 class Tile extends GameObject {
-  let type = TileType.INVALID;
+  let type = TileType.EMPTY;
   let isDebris = true;
-  constructor(x, y, type = TileType.INVALID, isDebris = true) {
+  constructor(x, y, type = TileType.EMPTY, isDebris = true) {
     super(x,y);
     this.type = type;
     this.isDebris = isDebris;
