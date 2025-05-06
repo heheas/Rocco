@@ -15,6 +15,14 @@ $(document).ready(function() {
    $( "#myCanvas" ).on( "mousemove", function( event ) {
       xPos = event.pageX - $('#myCanvas').offset().left;
       yPos = event.pageY - $('#myCanvas').offset().top;
+   }).addEventListener('wheel', function(event) {
+     if (event.deltaY < 0) {
+       // Scrolled up
+       scale++;
+     } else {
+       // Scrolled down or no vertical scroll
+       scale = scale > 1 ? scale - 1 : 1;
+     }
    });
 });
 
