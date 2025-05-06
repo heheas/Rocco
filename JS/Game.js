@@ -18,6 +18,8 @@ public class Game {
 
         } else if (tileLocations.some(tile => tile.x == x && tile.y == y)) {
 
+        } else {
+          
         }
       }
     }
