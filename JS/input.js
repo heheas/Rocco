@@ -1,5 +1,6 @@
 var xPos = 0;
 var yPos = 0;
+var scale = 1;
 var isRunning = false;
 var lastTimestamp = 0;
 var canvas;
@@ -54,7 +55,7 @@ function update(deltaTime) {
    
  // This would be where you update your game state
  console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
-  ctx.font = "10px serif";
+  ctx.font = Math.floor(10 * scale) + "px serif";
   ctx.fillText(xPos, xPos, yPos);
   ctx.fillText(", " + yPos, xPos + 10, yPos);
 
