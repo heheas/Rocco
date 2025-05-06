@@ -67,7 +67,7 @@ function update(deltaTime) {
   ctx.fillText(xPos, xPos, yPos);
   ctx.fillText(", " + yPos, xPos + 10, yPos);
 
-   drawHexagon(xPos, yPos, 20);
+   drawHexagon(xPos, yPos, 20 * scale);
 }
 
 function drawHexagon(x, y, radius) {
