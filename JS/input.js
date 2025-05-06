@@ -16,15 +16,6 @@ $(document).ready(function() {
       xPos = event.pageX - $('#myCanvas').offset().left;
       yPos = event.pageY - $('#myCanvas').offset().top;
    });
-   $("#myCanvas").on('wheel', function(event) {
-     if (event.deltaY < 0) {
-       // Scrolled up
-       scale++;
-     } else {
-       // Scrolled down or no vertical scroll
-       scale = scale > 1 ? scale - 1 : 1;
-     }
-   });
 });
 
 // Start the game loop
@@ -68,7 +59,17 @@ function update(deltaTime) {
   ctx.fillText(xPos, xPos, yPos);
   ctx.fillText(", " + yPos, xPos + 10, yPos);
 
-   drawHexagon(xPos, yPos, 20 * scale);
+  drawBoard(canvas.width/2, canvas.height/2, 5);
+}
+
+function drawBoard(x, y, side) {
+   let inaradius = (side * Math.sqrt(3))/2;
+   for (let row=-side; row <= side; row++) {
+      let rowWidth = side-Math.abs(row);
+      for (let col = -side; col < rowWidth; col++) {
+         drawHexagon(scale*(col - rowWidth/2 + side/2) + scale/2, scale*(row - (row*inaradius/side/4)), scale * side);
+      }
+   }
 }
 
 function drawHexagon(x, y, radius) {
