@@ -13,13 +13,13 @@ public class Game {
       board[y] = [];
       for (let x = 0; y < 11; y++) {
         if (homeLocations.some(home => home.x == x && home.y == y)) {
-
+          board[x][y] new Tile(x,y, TileType.HOME);
         } else if (resourceLocations.some(resource => resource.x == x && resource.y == y) {
-
+          board[x][y] = new Tile(x,y, TileType.RESOURCE);
         } else if (tileLocations.some(tile => tile.x == x && tile.y == y)) {
-
+          board[x][y] = new Tile(x,y, TileType.EMPTY);
         } else {
-          
+          board[x][y] = new Tile(x,y, TileType.INVALID);
         }
       }
     }
