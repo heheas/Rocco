@@ -12,8 +12,8 @@ $(document).ready(function() {
   start();
       
    $( "#myCanvas" ).on( "mousemove", function( event ) {
-      xPos = evt.pageX - $('#element').offset().left;
-      yPos = evt.pageY - $('#element').offset().top;
+      xPos = event.pageX - $('#element').offset().left;
+      yPos = event.pageY - $('#element').offset().top;
    });
 });
 
