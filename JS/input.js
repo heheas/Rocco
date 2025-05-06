@@ -1,3 +1,5 @@
+import { Game } from "./Game.js"
+
 var xPos = 0;
 var yPos = 0;
 var scale = 1;
