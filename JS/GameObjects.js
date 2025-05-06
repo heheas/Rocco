@@ -1,4 +1,4 @@
-public class GameObject {
+export class GameObject {
   let x = -1;
   let y = -1;
   let parent;
@@ -19,7 +19,7 @@ const TileType = {
   INVALID: "invalid",
   EMPTY: "empty"
 }
-public class Tile extends GameObject {
+export class Tile extends GameObject {
   let type = TileType.EMPTY;
   let isDebris = true;
   let direction = 1; //1-6 directions
