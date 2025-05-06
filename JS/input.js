@@ -65,6 +65,7 @@ function update(deltaTime) {
 }
 
 function drawBoard(x, y, side) {
+   console.log(JSON.stringify(game.getBoardState()));
    let inaradius = (side * Math.sqrt(3))/2;
    for (let row=-side; row <= side; row++) {
       let rowWidth = side-Math.abs(row);
