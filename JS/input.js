@@ -5,6 +5,7 @@ var isRunning = false;
 var lastTimestamp = 0;
 var canvas;
 var ctx;
+Game game;
 
 $(document).ready(function() {
    canvas = document.getElementById('myCanvas');
@@ -21,6 +22,7 @@ $(document).ready(function() {
 // Start the game loop
 function start() {
  if (!this.isRunning) {
+    game = new Game();
    this.isRunning = true;
    requestAnimationFrame(this.loop);
    console.log('Game loop started');
