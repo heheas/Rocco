@@ -14,6 +14,8 @@ const TileType = {
   TRIDENT: "trident",
   UTURN: "uturn",
   SIXWAY: "sixway",
+  HOME: "home",
+  RESOURCE: "resource",
   INVALID: "invalid",
   EMPTY: "empty"
 }
