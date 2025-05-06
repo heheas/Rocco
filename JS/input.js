@@ -5,7 +5,7 @@ var lastTimestamp = 0;
 var ctx;
 
 $(document).ready(function() {
-   ctx = $('#myCanvas').getContext('2d');
+   ctx = document.getElementById('myCanvas').getContext('2d');
    // Start the game loop
   start();
       
