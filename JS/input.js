@@ -2,10 +2,12 @@ var xPos = 0;
 var yPos = 0;
 var isRunning = false;
 var lastTimestamp = 0;
+var canvas;
 var ctx;
 
 $(document).ready(function() {
-   ctx = document.getElementById('myCanvas').getContext('2d');
+   canvas = document.getElementById('myCanvas');
+   ctx = canvas.getContext('2d');
    // Start the game loop
   start();
       
