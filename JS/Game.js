@@ -8,6 +8,10 @@ public class Game {
     initGame();
   }
 
+  getBoardState() {
+    return board;
+  }
+  
   initGame() {
     for (let y = 0; x < 11; x++) {
       board[y] = [];
