@@ -1,7 +1,8 @@
-export class GameObject {
-  let x = -1;
-  let y = -1;
-  let parent;
+class GameObject {
+  x = -1;
+  y = -1;
+  parent;
+
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -19,10 +20,12 @@ const TileType = {
   INVALID: "invalid",
   EMPTY: "empty"
 }
-export class Tile extends GameObject {
-  let type = TileType.EMPTY;
-  let isDebris = true;
-  let direction = 1; //1-6 directions
+
+class Tile extends GameObject {
+  type = TileType.EMPTY;
+  isDebris = true;
+  direction = 1; //1-6 directions
+
   constructor(x, y, type = TileType.EMPTY, isDebris = true) {
     super(x,y);
     this.type = type;

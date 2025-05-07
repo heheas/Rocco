@@ -1,5 +1,3 @@
-import { Game } from "./Game.js"
-
 var xPos = 0;
 var yPos = 0;
 var scale = 1;
@@ -7,7 +5,7 @@ var isRunning = false;
 var lastTimestamp = 0;
 var canvas;
 var ctx;
-Game game;
+var game;
 
 $(document).ready(function() {
    canvas = document.getElementById('myCanvas');
@@ -66,18 +64,20 @@ function update(deltaTime) {
   drawBoard(canvas.width/2, canvas.height/2, 5);
 }
 
-function drawBoard(x, y, side) {
-   console.log(JSON.stringify(game.getBoardState()));
-   let inaradius = (side * Math.sqrt(3))/2;
-   for (let row=-side; row <= side; row++) {
-      let rowWidth = side-Math.abs(row);
-      for (let col = -side; col < rowWidth; col++) {
-         drawHexagon(scale*(x + col - rowWidth/2 + side/2) + scale/2,scale*(y + row - (row*inaradius/side/4)), scale * side);
-      }
+function drawBoard(xPos, yPos, side) {
+   for (let y = 0; y < 11; y++) {
+     for (let x = 0; x < 13; x++) {
+         let tile = game.getTile(x,y);
+         if (tile != undefined && tile.type != TileType.INVALID) {
+            let oddfset = y % 2 == 0 ? 0 : 5;
+            drawHexagon(((oddfset*1.5) + xPos - side/2) + (x*10), ((oddfset*1.5) + yPos - side/2) + (y*10), 10);
+         }
+     }
    }
 }
 
 function drawHexagon(x, y, radius) {
+   console.log("Drawing Hexagon @: " + x + "," + y + " w/ Radius: " + radius);
    ctx.beginPath();
    ctx.moveTo(x + radius/2, y);
    ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);

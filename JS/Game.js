@@ -1,29 +1,35 @@
-public class Game {
-  let homeLocations = [{x:1, y:2}];
-  let resourceLocations = [{x:1, y:2}];
-  let tileLocations = [{x:1, y:2}];
+class Game {
+  homeLocations = [{x:6, y:0},{x:1, y:3},{x:12, y:3}, {x:1, y:8},{x:12, y:8},{x:6, y:10}];
+  resourceLocations = [];
+  tileLocations = [];
 
-  let board = [];
+  board;
+
   constructor() {
-    initGame();
+    this.initGame();
   }
 
   getBoardState() {
-    return board;
+    return this.board;
+  }
+
+  getTile(x,y) {
+    return this.board.get("[" + x + "," + y + "]");
   }
   
   initGame() {
-    for (let y = 0; x < 11; x++) {
-      board[y] = [];
-      for (let x = 0; y < 11; y++) {
-        if (homeLocations.some(home => home.x == x && home.y == y)) {
-          board[x][y] new Tile(x,y, TileType.HOME);
-        } else if (resourceLocations.some(resource => resource.x == x && resource.y == y) {
-          board[x][y] = new Tile(x,y, TileType.RESOURCE);
-        } else if (tileLocations.some(tile => tile.x == x && tile.y == y)) {
-          board[x][y] = new Tile(x,y, TileType.EMPTY);
+    console.log("Initialize Board");
+    this.board = new Map([]);
+    for (let y = 0; y < 11; y++) {
+      for (let x = 0; x < 13; x++) {
+        if (this.homeLocations.some(home => home.x == x && home.y == y)) {
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.HOME));
+        } else if (this.resourceLocations.some(resource => resource.x == x && resource.y == y)) {
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.RESOURCE));
+        } else if (this.tileLocations.some(tile => tile.x == x && tile.y == y)) {
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.EMPTY));
         } else {
-          board[x][y] = new Tile(x,y, TileType.INVALID);
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.INVALID));
         }
       }
     }
