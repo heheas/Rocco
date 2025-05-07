@@ -57,27 +57,36 @@ function update(deltaTime) {
    
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
-  ctx.font = Math.floor(10 * scale) + "px serif";
-  ctx.fillText(xPos, xPos, yPos);
-  ctx.fillText(", " + yPos, xPos + 10, yPos);
 
-  drawBoard(canvas.width/4, canvas.height/4, 20);
+  drawBoard(canvas.width/4, canvas.height/4, 40);
+   
+  ctx.font = Math.floor(16 * scale) + "px serif";
+   ctx.fillStyle = "black";
+  ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
 }
 
-function drawBoard(xPos, yPos, side) {
-   for (let y = 0; y < 21; y++) {
-     for (let x = 0; x < 13; x++) {
+function drawBoard(xPos, yPos, hexRadius) {
+   for (let y = 0; y < 22; y++) {
+     for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
-            let oddfset = y % 2 == 0 ? 0 : side/2;
-            drawHexagon((xPos - side/2) + (x*side), (yPos - side/2 - oddfset) + (y*side), side);
+            //console.log(tile.type);
+            if (tile.type === TileType.HOME) {
+               ctx.fillStyle = "yellow";
+            } else if (tile.type === TileType.RESOURCE) {
+               ctx.fillStyle = "purple";
+            } else {
+               ctx.fillStyle = "black";
+            }
+            let oddfset = y % 2 == 0 ? 0 : hexRadius;
+            drawHexagon((xPos + oddfset*Math.sqrt(3)/2) + (x*hexRadius*Math.sqrt(3)), (yPos) + (y*hexRadius/2), hexRadius);
          }
      }
    }
 }
 
 function drawHexagon(x, y, radius) {
-   console.log("Drawing Hexagon @: " + x + "," + y + " w/ Radius: " + radius);
+   //console.log("Drawing Hexagon @: " + x + "," + y + " w/ Radius: " + radius);
    ctx.beginPath();
    ctx.moveTo(x + radius/2, y);
    ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);
