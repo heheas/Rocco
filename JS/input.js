@@ -70,9 +70,9 @@ function drawBoard(xPos, yPos, side) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
             if (tile.Type === TileType.HOME) {
-               ctx.fillStyle = "#0000FF";
+               ctx.fillStyle = "#0000ff";
             } else if (tile.Type === TileType.RESOURCE) {
-               ctx.fillStyle = "#00FFFF";
+               ctx.fillStyle = "#00ffff";
             } else {
                ctx.fillStyle = "#000000";
             }
