@@ -1,6 +1,6 @@
 class Game {
-  homeLocations = [{x:3, y:0},{x:0, y:5},{x:5, y:5}, {x:0, y:15},{x:5, y:15},{x:3, y:21}];
-  resourceLocations = [{x:1, y:1},{x:4, y:1},{x:1, y:11},{x:4, y:11},{x:0, y:6},{x:6, y:6}];
+  homeLocations = [{x:3, y:0},{x:0, y:5},{x:5, y:5}, {x:0, y:15},{x:5, y:15},{x:3, y:20}];
+  resourceLocations = [{x:1, y:1},{x:4, y:1},{x:1, y:18},{x:4, y:18},{x:0, y:6},{x:6, y:6}];
   tileLocations = [
     {x:2, y:1},{x:3, y:1},
     {x:2, y:2},{x:3, y:2},{x:4, y:2},
@@ -20,6 +20,7 @@ class Game {
     {x:1, y:16},{x:2, y:16},{x:3, y:16},{x:4, y:16},{x:5, y:16},
     {x:1, y:17},{x:2, y:17},{x:3, y:17},{x:4, y:17},
     {x:2, y:18},{x:3, y:18},{x:4, y:18},
+    {x:2, y:19},{x:3, y:19},
   ];
 
   board;
