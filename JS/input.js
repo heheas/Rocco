@@ -74,7 +74,7 @@ function drawBoard(xPos, yPos, side) {
             } else if (tile.Type === TileType.RESOURCE) {
                ctx.fillStyle = "#00FFFF";
             } else {
-               ctx.fillStyle = "#FFFFFF";
+               ctx.fillStyle = "#000000";
             }
             let oddfset = y % 2 == 0 ? 0 : side/2;
             drawHexagon((xPos - side/2 + oddfset) + (x*side), (yPos - side/2) + (y*side), side);
