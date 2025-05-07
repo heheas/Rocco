@@ -1,6 +1,6 @@
 class Game {
   homeLocations = [{x:6, y:0},{x:1, y:5},{x:11, y:5}, {x:1, y:16},{x:11, y:16},{x:6, y:20}];
-  resourceLocations = [{x:3, y:1},{x:9, y:1},{x:3, y:19},{x:9, y:19},{x:0, y:10},{x:12, y:10}];
+  resourceLocations = [];
   tileLocations = [];
 
   board;
@@ -20,8 +20,8 @@ class Game {
   initGame() {
     console.log("Initialize Board");
     this.board = new Map([]);
-    for (let y = 0; y < 21; y++) {
-      for (let x = 0; x < 13; x++) {
+    for (let y = 0; y < 11; y++) {
+      for (let x = 0; x < 7; x++) {
         if (this.homeLocations.some(home => home.x == x && home.y == y)) {
           this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.HOME));
         } else if (this.resourceLocations.some(resource => resource.x == x && resource.y == y)) {
