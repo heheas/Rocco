@@ -60,21 +60,8 @@ function update(deltaTime) {
   ctx.font = Math.floor(10 * scale) + "px serif";
   ctx.fillText(xPos, xPos, yPos);
   ctx.fillText(", " + yPos, xPos + 10, yPos);
-const x = 50;
-const y = 50;
-const radius = 40;
 
-ctx.fillStyle = "purple"; 
-ctx.beginPath();
-   ctx.moveTo(x + radius/2, y);
-   ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);
-   ctx.lineTo(x - radius/4, y - (radius/2)*Math.sqrt(3)/2);
-   ctx.lineTo(x - radius/2, y);
-   ctx.lineTo(x - radius/4, y + (radius/2)*Math.sqrt(3)/2);
-   ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
-   ctx.lineTo(x + radius/2, y);
-   ctx.closePath();
-   ctx.fill();
+  drawBoard(canvas.width/4, canvas.height/4, 20);
 }
 
 function drawBoard(xPos, yPos, side) {
@@ -82,6 +69,7 @@ function drawBoard(xPos, yPos, side) {
      for (let x = 0; x < 7; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
+            console.log(tile.Type);
             if (tile.Type === TileType.HOME) {
                ctx.fillStyle = "#0000ff";
             } else if (tile.Type === TileType.RESOURCE) {
