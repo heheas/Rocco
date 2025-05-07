@@ -64,7 +64,7 @@ function update(deltaTime) {
   drawBoard(canvas.width/4, canvas.height/4, 20);
 }
 
-function drawBoard(xPos, yPos, side) {
+function drawBoard(xPos, yPos, hexRadius) {
    for (let y = 0; y < 13; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
@@ -77,8 +77,8 @@ function drawBoard(xPos, yPos, side) {
             } else {
                ctx.fillStyle = "black";
             }
-            let oddfset = y % 2 == 0 ? 0 : side;
-            drawHexagon((xPos - side/2 + oddfset) + (x*side*Math.sqrt(3)), (yPos - side/2) + (y*side/2), side);
+            let oddfset = y % 2 == 0 ? 0 : hexRadius;
+            drawHexagon((xPos + oddfset*Math.sqrt(3)) + (x*hexRadius*Math.sqrt(3)), (yPos) + (y*hexRadius/2), hexRadius);
          }
      }
    }
