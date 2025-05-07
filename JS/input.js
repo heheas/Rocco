@@ -61,7 +61,7 @@ function update(deltaTime) {
    ctx.fillStyle = "black";
   ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
 
-  drawBoard(canvas.width/4, canvas.height/4, 20);
+  drawBoard(canvas.width/4, canvas.height/4, 80);
 }
 
 function drawBoard(xPos, yPos, hexRadius) {
