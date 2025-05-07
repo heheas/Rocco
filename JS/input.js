@@ -66,7 +66,7 @@ function update(deltaTime) {
 }
 
 function drawBoard(xPos, yPos, hexRadius) {
-   for (let y = 0; y < 13; y++) {
+   for (let y = 0; y < 14; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
