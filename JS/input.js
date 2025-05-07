@@ -60,8 +60,21 @@ function update(deltaTime) {
   ctx.font = Math.floor(10 * scale) + "px serif";
   ctx.fillText(xPos, xPos, yPos);
   ctx.fillText(", " + yPos, xPos + 10, yPos);
+const x = 50;
+const y = 50;
+const radius = 40;
 
-  drawBoard(canvas.width/4, canvas.height/4, 20);
+ctx.fillStyle = "purple"; 
+ctx.beginPath();
+   ctx.moveTo(x + radius/2, y);
+   ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);
+   ctx.lineTo(x - radius/4, y - (radius/2)*Math.sqrt(3)/2);
+   ctx.lineTo(x - radius/2, y);
+   ctx.lineTo(x - radius/4, y + (radius/2)*Math.sqrt(3)/2);
+   ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
+   ctx.lineTo(x + radius/2, y);
+   ctx.closePath();
+   ctx.fill();
 }
 
 function drawBoard(xPos, yPos, side) {
@@ -86,8 +99,6 @@ function drawBoard(xPos, yPos, side) {
 function drawHexagon(x, y, radius) {
    //console.log("Drawing Hexagon @: " + x + "," + y + " w/ Radius: " + radius);
    ctx.beginPath();
-   ctx.fillstyle="red";
-   ctx.strokestyle="green";
    ctx.moveTo(x + radius/2, y);
    ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);
    ctx.lineTo(x - radius/4, y - (radius/2)*Math.sqrt(3)/2);
