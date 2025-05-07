@@ -61,16 +61,16 @@ function update(deltaTime) {
   ctx.fillText(xPos, xPos, yPos);
   ctx.fillText(", " + yPos, xPos + 10, yPos);
 
-  drawBoard(canvas.width/2, canvas.height/2, 5);
+  drawBoard(canvas.width/4, canvas.height/4, 20);
 }
 
 function drawBoard(xPos, yPos, side) {
-   for (let y = 0; y < 11; y++) {
+   for (let y = 0; y < 21; y++) {
      for (let x = 0; x < 13; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
-            let oddfset = y % 2 == 0 ? 0 : 5;
-            drawHexagon(((oddfset*1.5) + xPos - side/2) + (x*10), ((oddfset*1.5) + yPos - side/2) + (y*10), 10);
+            let oddfset = y % 2 == 0 ? 0 : side/2;
+            drawHexagon((xPos - side/2) + (x*side), (yPos - side/2 - oddfset) + (y*side), side);
          }
      }
    }
