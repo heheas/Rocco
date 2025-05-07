@@ -9,10 +9,12 @@ class Game {
     {x:0, y:5},{x:1, y:5},{x:2, y:5},{x:3, y:5},{x:4, y:5},{x:5, y:5},
     {x:0, y:6},{x:1, y:6},{x:2, y:6},{x:4, y:6},{x:5, y:6},{x:6, y:6},
     {x:0, y:7},{x:1, y:7},{x:2, y:7},{x:3, y:7},{x:4, y:7},{x:5, y:7},
-    {x:1, y:8},{x:2, y:8},{x:3, y:8},{x:4, y:8},{x:5, y:8},
-    {x:1, y:9},{x:2, y:9},{x:3, y:9},{x:4, y:9},
-    {x:2, y:10},{x:3, y:10},{x:4, y:10},
-    {x:2, y:11},{x:3, y:11},
+    {x:0, y:8},{x:1, y:8},{x:2, y:8},{x:4, y:8},{x:5, y:8},{x:6, y:8},
+    {x:0, y:9},{x:1, y:9},{x:2, y:9},{x:3, y:9},{x:4, y:9},{x:5, y:9},
+    {x:1, y:10},{x:2, y:10},{x:3, y:10},{x:4, y:10},{x:5, y:10},
+    {x:1, y:11},{x:2, y:11},{x:3, y:11},{x:4, y:11},
+    {x:2, y:12},{x:3, y:12},{x:4, y:12},
+    {x:2, y:13},{x:3, y:13},
   ];
 
   board;
@@ -32,7 +34,7 @@ class Game {
   initGame() {
     console.log("Initialize Board");
     this.board = new Map([]);
-    for (let y = 0; y < 13; y++) {
+    for (let y = 0; y < 14; y++) {
       for (let x = 0; x < 9; x++) {
         if (this.homeLocations.some(home => home.x == x && home.y == y)) {
           this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.HOME));
