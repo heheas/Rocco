@@ -57,11 +57,12 @@ function update(deltaTime) {
    
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
+
+  drawBoard(canvas.width/4, canvas.height/4, 40);
+   
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
-
-  drawBoard(canvas.width/4, canvas.height/4, 80);
 }
 
 function drawBoard(xPos, yPos, hexRadius) {
