@@ -78,7 +78,7 @@ function drawBoard(xPos, yPos, side) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : side;
-            drawHexagon((xPos - side/2 + oddfset) + (x*side*2), (yPos - side/4) + (y*side), side);
+            drawHexagon((xPos - side/2 + oddfset) + (x*side*2), (yPos - side/2) + (y*side/2), side);
          }
      }
    }
