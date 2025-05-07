@@ -71,11 +71,11 @@ function drawBoard(xPos, yPos, side) {
          if (tile != undefined && tile.type != TileType.INVALID) {
             console.log(tile.type);
             if (tile.type === TileType.HOME) {
-               ctx.fillStyle = "#0000ff";
+               ctx.fillStyle = "yellow";
             } else if (tile.type === TileType.RESOURCE) {
-               ctx.fillStyle = "#00ffff";
+               ctx.fillStyle = "purple";
             } else {
-               ctx.fillStyle = "#000000";
+               ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : side/2;
             drawHexagon((xPos - side/2 + oddfset) + (x*side), (yPos - side/2) + (y*side), side);
