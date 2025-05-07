@@ -84,7 +84,7 @@ function drawBoard(xPos, yPos, side) {
 }
 
 function drawHexagon(x, y, radius) {
-   console.log("Drawing Hexagon @: " + x + "," + y + " w/ Radius: " + radius);
+   //console.log("Drawing Hexagon @: " + x + "," + y + " w/ Radius: " + radius);
    ctx.beginPath();
    ctx.moveTo(x + radius/2, y);
    ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);
