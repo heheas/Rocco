@@ -1,5 +1,5 @@
 class Game {
-  homeLocations = [{x:4, y:0},{x:1, y:5},{x:6, y:5}, {x:2, y:15},{x:6, y:15},{x:4, y:20}];
+  homeLocations = [{x:4, y:0},{x:0, y:5},{x:7, y:5}, {x:0, y:15},{x:7, y:15},{x:4, y:20}];
   resourceLocations = [{x:2, y:1},{x:5, y:1},{x:2, y:19},{x:5, y:19},{x:1, y:10},{x:7, y:10}];
   tileLocations = [
     {x:3, y:1},{x:4, y:1},
