@@ -1,6 +1,6 @@
 class Game {
-  homeLocations = [{x:4, y:0},{x:0, y:4},{x:7, y:4}, {x:0, y:8},{x:7, y:8},{x:4, y:12}];
-  resourceLocations = [{x:2, y:1},{x:5, y:1},{x:2, y:12},{x:5, y:12},{x:1, y:6},{x:7, y:6}];
+  homeLocations = [{x:4, y:0},{x:1, y:4},{x:7, y:4}, {x:1, y:8},{x:7, y:8},{x:4, y:12}];
+  resourceLocations = [{x:2, y:1},{x:5, y:1},{x:2, y:11},{x:5, y:11},{x:1, y:6},{x:7, y:6}];
   tileLocations = [
     {x:3, y:1},{x:4, y:1},
     {x:3, y:2},{x:4, y:2},{x:5, y:2},
