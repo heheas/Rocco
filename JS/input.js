@@ -69,7 +69,7 @@ function drawBoard(xPos, yPos, side) {
      for (let x = 0; x < 7; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
-            let oddfset = y % 2 == 0 ? 0 : side/2;
+            let oddfset = y % 2 == 0 ? 0 : 0;
             drawHexagon((xPos - side/2) + (x*side), (yPos - side/2 - oddfset) + (y*side), side);
          }
      }
