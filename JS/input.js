@@ -70,11 +70,11 @@ function drawBoard(xPos, yPos, side) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
             if (tile.Type === TileType.HOME) {
-               ctx.fillStyle = "yellow";
+               ctx.fillStyle = "#0000FF";
             } else if (tile.Type === TileType.RESOURCE) {
-               ctx.fillStyle = "purple";
+               ctx.fillStyle = "#00FFFF";
             } else {
-               ctx.fillStyle = "black";
+               ctx.fillStyle = "#FFFFFF";
             }
             let oddfset = y % 2 == 0 ? 0 : side/2;
             drawHexagon((xPos - side/2 + oddfset) + (x*side), (yPos - side/2) + (y*side), side);
