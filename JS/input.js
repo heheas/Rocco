@@ -34,7 +34,7 @@ $(document).ready(function() {
 });
 
 //Testing Function
-let testingVal = 0.8;
+let testingVal = 1;
 let testingVal2 = 10;
 function initTesting() {
    var val = $('#testVal').val(testingVal);
@@ -121,7 +121,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon(xPos-(totalSize/2) + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, yPos-(totalSize/2) + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
+            drawHexagon(xPos + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, yPos + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
          }
      }
    }
