@@ -1,11 +1,21 @@
+//Rendering Variables
 var xPos = 0;
 var yPos = 0;
 var scale = 1;
-var isRunning = false;
-var lastTimestamp = 0;
+
 var canvas;
 var ctx;
+
+//Game Variables
+var isRunning = false;
+var lastTimestamp = 0;
 var game;
+
+//Image Variables
+var gameboardIMG;
+var straightIMG,splitIMG,tridentIMG,uturnIMG,sixwayIMG;
+var robot1HomeIMG,robot2HomeIMG,robot3HomeIMG,robot4HomeIMG,robot5HomeIMG,robot6HomeIMG;
+var crystalIMG,nebulaCrystalIMG,faunaIMG,nutrientPodsIMG,plasmaNodeIMG,magneticOreIMG;
 
 $(document).ready(function() {
    canvas = document.getElementById('myCanvas');
@@ -65,7 +75,14 @@ function update(deltaTime) {
   ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
 }
 
+
+/*
+* RENDERING FUNCTIONS
+*/
 function drawBoard(xPos, yPos, hexRadius) {
+   //drawbackground
+   this.drawBackground(xPos, yPos, hexRadius);
+   
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
@@ -97,4 +114,16 @@ function drawHexagon(x, y, radius) {
    ctx.lineTo(x + radius/2, y);
    ctx.closePath();
    ctx.fill();
+}
+
+function drawBackground(x,y, hexSize) {
+   var boardSize = hexSize * 10;
+   ctx.drawImage(gameboardIMG, xPos-boardSize/2, yPos-boardSize/2, boardSize, boardSize);
+}
+
+function loadImages() {
+   gameboardIMG = new Image();
+   straightIMG.src = "/Art/Gameboard.png";
+   straightIMG = new Image();
+   straightIMG.src = "/Art/Tiles/Straight.png";
 }
