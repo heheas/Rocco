@@ -121,7 +121,7 @@ function drawHexagon(x, y, radius) {
 
 function drawBackground(x,y, hexSize) {
    var boardSize = hexSize * 10;
-   ctx.drawImage(gameboardIMG, xPos-boardSize/2, yPos-boardSize/2, boardSize, boardSize);
+   ctx.drawImage(gameboardIMG, x-boardSize/2, y-boardSize/2, boardSize, boardSize);
 }
 
 function loadImages() {
