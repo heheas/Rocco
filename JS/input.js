@@ -96,7 +96,7 @@ function update(deltaTime) {
 */
 function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
-   this.drawBackground(xPos, yPos, hexRadius);
+   //this.drawBackground(xPos, yPos, hexRadius);
 
    var totalSize = (2*hexRadius * 6)*testingVal;
    ctx.strokeStyle = "black";
