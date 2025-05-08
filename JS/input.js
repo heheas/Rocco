@@ -107,7 +107,8 @@ function drawBoard(xPos, yPos, hexRadius) {
             ctx.arc(xPos, yPos, hexRadius/2, 0, 2 * Math.PI);
             ctx.stroke();
 
-   var totalSize = (testingVal2*hexRadius*Math.sqrt(3)*testingVal);   
+   var totalSize = hexRadius * 10;
+   //var totalSize = (testingVal2*hexRadius*Math.sqrt(3)*testingVal);   
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
@@ -120,7 +121,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon(xPos-(totalSize*Math.sqrt(3)/4) + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, yPos-(totalSize/2) + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
+            drawHexagon(xPos-(totalSize/2) + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, yPos-(totalSize/2) + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
          }
      }
    }
