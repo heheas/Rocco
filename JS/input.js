@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 //Testing Function
 let testingVal = 0.8;
-let testingVal2 = 9;
+let testingVal2 = 10;
 function initTesting() {
    var val = $('#testVal').val(testingVal);
    var val = $('#testVal2').val(testingVal2);
@@ -107,7 +107,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             ctx.arc(xPos, yPos, hexRadius/2, 0, 2 * Math.PI);
             ctx.stroke();
 
-   var totalSize = hexRadius * 10;
+   var totalSize = hexRadius * testingVal2;
    //var totalSize = (testingVal2*hexRadius*Math.sqrt(3)*testingVal);   
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
