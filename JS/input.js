@@ -17,11 +17,14 @@ var straightIMG,splitIMG,tridentIMG,uturnIMG,sixwayIMG;
 var robot1HomeIMG,robot2HomeIMG,robot3HomeIMG,robot4HomeIMG,robot5HomeIMG,robot6HomeIMG;
 var crystalIMG,nebulaCrystalIMG,faunaIMG,nutrientPodsIMG,plasmaNodeIMG,magneticOreIMG;
 
+//Initialize the Game
 $(document).ready(function() {
    canvas = document.getElementById('myCanvas');
    ctx = canvas.getContext('2d');
+   loadImages();
+   
    // Start the game loop
-  start();
+   start();
       
    $( "#myCanvas" ).on( "mousemove", function( event ) {
       xPos = event.pageX - $('#myCanvas').offset().left;
