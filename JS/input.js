@@ -111,7 +111,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon((xPos + (oddfset*Math.sqrt(3)/2) + (x*hexRadius*Math.sqrt(3)) + hexRadius*spacingRatio, (yPos) + (y*hexRadius/2) + hexRadius, hexRadius);
+            drawHexagon((xPos + (oddfset*Math.sqrt(3)/2) + (x*(hexRadius-spacingRatio)*Math.sqrt(3)) + hexRadius, (yPos) + (y*hexRadius/2) + hexRadius, hexRadius);
          }
      }
    }
