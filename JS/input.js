@@ -97,7 +97,13 @@ function update(deltaTime) {
 function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
    this.drawBackground(xPos, yPos, hexRadius);
-   
+
+   var totalSize = (hexRadius * 6.5)*testingVal;
+   ctx.beginPath();
+   ctx.moveTo(xPos, yPos);
+   ctx.lineTo(xPos + totalSize, yPos);
+   ctx.closePath();
+   ctx.fill();
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
