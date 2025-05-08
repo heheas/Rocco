@@ -98,7 +98,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
    this.drawBackground(xPos, yPos, hexRadius);
 
-   var totalSize = (2*hexRadius * 6)*testingVal + hexRadius*2;
+   var totalSize = (2*hexRadius * 6)*testingVal + hexRadius;
    ctx.strokeStyle = "black";
    ctx.lineWidth = 2;
    ctx.beginPath();
