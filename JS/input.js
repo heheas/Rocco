@@ -98,8 +98,9 @@ function drawBoard(xPos, yPos, hexRadius) {
             } else {
                ctx.fillStyle = "black";
             }
+            let oddfsetScale = 0.8;
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon((xPos + oddfset*Math.sqrt(3)/2) + (x*hexRadius*Math.sqrt(3)) + hexRadius, (yPos) + (y*hexRadius/2) + hexRadius, hexRadius);
+            drawHexagon((xPos + oddfset*Math.sqrt(3)/2) + (x*hexRadius*Math.sqrt(3)*oddfsetScale) + hexRadius, (yPos) + (y*hexRadius*oddfsetScale/2) + hexRadius, hexRadius);
          }
      }
    }
