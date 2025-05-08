@@ -122,8 +122,8 @@ function drawBoard(xPos, yPos, hexRadius) {
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius/2;
             drawHexagon(
-               xPos + (x*hexRadius) + oddfset,
-               yPos + (y*hexRadius*Math.sqrt(3)/2),
+               xPos + (x*hexRadius*2) + oddfset,
+               yPos + (y*hexRadius/2*Math.sqrt(3)/2),
                hexRadius
             );
          }
