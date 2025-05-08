@@ -107,7 +107,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             ctx.arc(xPos, yPos, hexRadius/2, 0, 2 * Math.PI);
             ctx.stroke();
 
-   var totalSize = (11.5*hexRadius*Math.sqrt(3)*testingVal) + hexRadius;   
+   var totalSize = (testingVal2*hexRadius*Math.sqrt(3)*testingVal);   
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
