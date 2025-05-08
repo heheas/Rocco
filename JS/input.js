@@ -34,14 +34,14 @@ $(document).ready(function() {
 });
 
 //Testing Function
-let spacingRatio = 0.8;
+let testingVal = 0.8;
 function initTesting() {
-   var val = $('#testVal').val(spacingRatio);
+   var val = $('#testVal').val(testingVal);
 }
 
 function testFunc() {
    var val = $('#testVal').val();
-   spacingRatio = val;
+   testingVal = val;
 }
 
 // Start the game loop
@@ -111,7 +111,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon(xPos + (oddfset*Math.sqrt(3)/2) + (x*(hexRadius*spacingRatio)*Math.sqrt(3)) + hexRadius, (yPos) + (y*hexRadius/2) + hexRadius, hexRadius);
+            drawHexagon(xPos + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, (yPos) + (y*hexRadius/2) + hexRadius, hexRadius);
          }
      }
    }
