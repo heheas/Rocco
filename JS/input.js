@@ -102,23 +102,13 @@ function update(deltaTime) {
 */
 function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
-   //this.drawBackground(xPos, yPos, hexRadius);
+   this.drawBackground(xPos, yPos, hexRadius);
 
-   //var totalSize = (hexRadius * testingVal2)*testingVal;
-   var totalSize = (testingVal2*hexRadius*Math.sqrt(3)*testingVal) + hexRadius;
-   ctx.strokeStyle = "black";
-   ctx.lineWidth = 2;
-   ctx.beginPath();
-   ctx.moveTo(xPos + hexRadius/2, yPos);
-   ctx.lineTo(xPos + hexRadius/2 + totalSize, yPos);
-   ctx.closePath();
-   ctx.stroke();
-   
+   var totalSize = (11.5*hexRadius*Math.sqrt(3)*testingVal) + hexRadius;   
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
-            //console.log(tile.type);
             if (tile.type === TileType.HOME) {
                ctx.fillStyle = "yellow";
             } else if (tile.type === TileType.RESOURCE) {
@@ -127,14 +117,13 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon(xPos + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, (yPos) + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
+            drawHexagon(xPos - totalSize/2 + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, yPos - totalSize/2 + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
          }
      }
    }
 }
 
 function drawHexagon(x, y, radius) {
-   //console.log("Drawing Hexagon @: " + x + "," + y + " w/ Radius: " + radius);
    ctx.beginPath();
    ctx.moveTo(x + radius/2, y);
    ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);
