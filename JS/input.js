@@ -98,7 +98,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
    this.drawBackground(xPos, yPos, hexRadius);
 
-   var totalSize = (2*hexRadius * 6.5)*testingVal;
+   var totalSize = (2*hexRadius * 6)*testingVal;
    ctx.strokeStyle = "black";
    ctx.lineWidth = 2;
    ctx.beginPath();
@@ -106,6 +106,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    ctx.lineTo(xPos + totalSize, yPos);
    ctx.closePath();
    ctx.stroke();
+   
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
