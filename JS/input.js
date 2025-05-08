@@ -22,6 +22,7 @@ $(document).ready(function() {
    canvas = document.getElementById('myCanvas');
    ctx = canvas.getContext('2d');
    loadImages();
+   initTesting();
    
    // Start the game loop
    start();
@@ -31,6 +32,17 @@ $(document).ready(function() {
       yPos = event.pageY - $('#myCanvas').offset().top;
    });
 });
+
+//Testing Function
+let spacingRatio = 0.8;
+function initTesting() {
+   var val = $('#testVal').val(spacingRatio);
+}
+
+function testFunc() {
+   var val = $('#testVal').val();
+   spacingRadio = val;
+}
 
 // Start the game loop
 function start() {
@@ -98,7 +110,6 @@ function drawBoard(xPos, yPos, hexRadius) {
             } else {
                ctx.fillStyle = "black";
             }
-            let spacingRatio = 0.8;
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
             drawHexagon((xPos + oddfset*Math.sqrt(3)/2) + (x*hexRadius*Math.sqrt(3)*spacingRatio) + hexRadius, (yPos) + (y*hexRadius/2) + hexRadius, hexRadius);
          }
