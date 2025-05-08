@@ -126,7 +126,7 @@ function drawBackground(x,y, hexSize) {
 
 function loadImages() {
    gameboardIMG = new Image();
-   straightIMG.src = "/Art/Gameboard.png";
+   gameboardIMG.src = "/Art/Gameboard.png";
    straightIMG = new Image();
    straightIMG.src = "/Art/Tiles/Straight.png";
 }
