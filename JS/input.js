@@ -105,7 +105,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    ctx.moveTo(xPos, yPos);
    ctx.lineTo(xPos + totalSize, yPos);
    ctx.closePath();
-   ctx.fill();
+   ctx.stoke();
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
