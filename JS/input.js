@@ -71,7 +71,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-  drawBoard(canvas.width/4, canvas.height/4, 40);
+  drawBoard(canvas.width/4, canvas.height/4, 45);
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
@@ -121,7 +121,7 @@ function drawHexagon(x, y, radius) {
 
 function drawBackground(x,y, hexSize) {
    var boardSize = hexSize * 12;
-   ctx.drawImage(gameboardIMG, x, y, boardSize, boardSize);
+   ctx.drawImage(gameboardIMG, x + hexSize/2, y - hexSize/2, boardSize, boardSize);
 }
 
 function loadImages() {
