@@ -41,7 +41,7 @@ function initTesting() {
 
 function testFunc() {
    var val = $('#testVal').val();
-   spacingRadio = val;
+   spacingRatio = val;
 }
 
 // Start the game loop
