@@ -104,7 +104,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
    this.drawBackground(xPos, yPos, hexRadius);
             ctx.beginPath();
-            ctx.arc(xPos, yPos, hexRadius, 0, 2 * Math.PI);
+            ctx.arc(xPos, yPos, hexRadius/2, 0, 2 * Math.PI);
             ctx.stroke();
 
    var totalSize = (11.5*hexRadius*Math.sqrt(3)*testingVal) + hexRadius;   
@@ -120,7 +120,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon(xPos + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, yPos + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
+            drawHexagon(xPos-(totalSize/2) + (oddfset*Math.sqrt(3)/2)*testingVal + (x*hexRadius*Math.sqrt(3)*testingVal) + hexRadius, yPos-(totalSize/2) + (y*hexRadius/2)*testingVal + hexRadius, hexRadius);
          }
      }
    }
