@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 //Testing Function
 let testingVal = 1;
-let testingVal2 = 1.5;
+let testingVal2 = 1;
 function initTesting() {
    var val = $('#testVal').val(testingVal);
    var val = $('#testVal2').val(testingVal2);
@@ -122,7 +122,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius/2;
             drawHexagon(
-               xPos + (x*hexRadius*2) + oddfset,
+               xPos + (x*hexRadius*testingVal2) + oddfset,
                yPos + (y*hexRadius/2*Math.sqrt(3)/2),
                hexRadius
             );
