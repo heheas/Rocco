@@ -35,20 +35,16 @@ $(document).ready(function() {
 
 //Testing Function
 let testingVal = 0.8;
+let testingVal2 = 9;
 function initTesting() {
    var val = $('#testVal').val(testingVal);
+   var val = $('#testVal2').val(testingVal2);
 }
 
 function testFunc() {
    var val = $('#testVal').val();
    testingVal = val;
 }
-
-let testingVal2 = 9;
-function initTesting() {
-   var val = $('#testVal2').val(testingVal2);
-}
-
 function test2Func() {
    var val = $('#testVal2').val();
    testingVal2 = val;
