@@ -44,6 +44,16 @@ function testFunc() {
    testingVal = val;
 }
 
+let testingVal2 = 9;
+function initTesting() {
+   var val = $('#testVal2').val(testingVal2);
+}
+
+function test2Func() {
+   var val = $('#testVal2').val();
+   testingVal2 = val;
+}
+
 // Start the game loop
 function start() {
  if (!this.isRunning) {
@@ -98,7 +108,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
    //this.drawBackground(xPos, yPos, hexRadius);
 
-   var totalSize = (hexRadius * 9)*testingVal;
+   var totalSize = (hexRadius * testingVal2)*testingVal;
    ctx.strokeStyle = "black";
    ctx.lineWidth = 2;
    ctx.beginPath();
