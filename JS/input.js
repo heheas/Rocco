@@ -122,7 +122,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius/2;
             drawHexagon(
-               xPos + (x*hexRadius*testingVal2) + oddfset*testingVal2,
+               xPos + (x*hexRadius*1.5) + oddfset*1.5,
                yPos + (y*hexRadius/2*Math.sqrt(3)/2),
                hexRadius
             );
