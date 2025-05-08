@@ -99,7 +99,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius;
-            drawHexagon((xPos + oddfset*Math.sqrt(3)/2) + (x*hexRadius*Math.sqrt(3)), (yPos) + (y*hexRadius/2), hexRadius);
+            drawHexagon((xPos + oddfset*Math.sqrt(3)/2) + (x*hexRadius*Math.sqrt(3)) + hexRadius, (yPos) + (y*hexRadius/2), hexRadius + hexRadius);
          }
      }
    }
@@ -121,7 +121,7 @@ function drawHexagon(x, y, radius) {
 
 function drawBackground(x,y, hexSize) {
    var boardSize = hexSize * 12;
-   ctx.drawImage(gameboardIMG, x + hexSize/2, y - hexSize/2, boardSize, boardSize);
+   ctx.drawImage(gameboardIMG, x, y, boardSize, boardSize);
 }
 
 function loadImages() {
