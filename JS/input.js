@@ -102,10 +102,8 @@ function update(deltaTime) {
 */
 function drawBoard(xPos, yPos, hexRadius) {
    //drawbackground
-   this.drawBackground(xPos, yPos, hexRadius);
-            ctx.beginPath();
-            ctx.arc(xPos, yPos, hexRadius/2, 0, 2 * Math.PI);
-            ctx.stroke();
+   //this.drawBackground(xPos, yPos, hexRadius);
+   drawHexagon(xPos, yPos, hexRadius/2);
 
    var totalSize = hexRadius * testingVal2;
    //var totalSize = (testingVal2*hexRadius*Math.sqrt(3)*testingVal);   
