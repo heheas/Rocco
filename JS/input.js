@@ -198,7 +198,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.save();
                ctx.clip();
                ctx.translate(hexX, hexY);
-               ctx.rotate(-35*Math.PI/180*tile.direction);
+               ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
                ctx.drawImage(straightIMG,-hexRadius/2, -hexRadius/2, hexRadius, hexRadius);
                ctx.restore();
             } else {
@@ -239,7 +239,7 @@ function drawSelectedItem() {
          ctx.save();
          ctx.clip();
          ctx.translate(canvas.width - selectedBoxSize/2 + 50, selectedBoxSize/2);
-         ctx.rotate(-35*Math.PI/180*tile.direction);
+         ctx.rotate((-35+(game.selectedItem.direction*60))*Math.PI/180);
          ctx.drawImage(straightIMG,-hexRadius/2, -hexRadius/2, hexRadius, hexRadius);
          ctx.restore();
       } else {
