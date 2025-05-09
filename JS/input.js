@@ -59,8 +59,8 @@ function initListeners() {
       xPos = event.pageX - $('#myCanvas').offset().left;
       yPos = event.pageY - $('#myCanvas').offset().top;
 
-      console.log("Ctrl: " + this.ctrlDown + ", MouseDown: " + this.mouseDown);
-      if (this.ctrlDown == true && this.mouseDown == true) {
+      console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
+      if (ctrlDown == true && mouseDown == true) {
          console.log("dragging");
          gameX += xPos - dragXStart;
          gameY += yPos - dragYStart;
@@ -69,27 +69,27 @@ function initListeners() {
 
    $("body").on("keydown", function ( event ) {
       console.log("Keydown");
-      this.ctrlDown = true;
-      if (this.mouseDown) {
+      ctrlDown = true;
+      if (mouseDown) {
          dragXStart = xPos;
          dragYStart = yPos;
       }
    });
    $("body").on("keyup", function (event) {
       console.log("Keyup");
-      this.ctrlDown = false;
+      ctrlDown = false;
    });
    $("body").on("mousedown", function ( event ) {
       console.log("mousedown");
-      this.mouseDown = true;
-      if (this.ctrlDown) {
+      mouseDown = true;
+      if (ctrlDown) {
          dragXStart = xPos;
          dragYStart = yPos;
       }
    });
    $("body").on("mouseup", function (event) {
       console.log("mouseup");
-      this.mouseDown = false;
+      mouseDown = false;
    });
 }
 
