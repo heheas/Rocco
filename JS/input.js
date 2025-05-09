@@ -3,6 +3,7 @@ var xPos = 0;
 var yPos = 0;
 var scale = 1;
 
+var dragging = false;
 var ctrlDown = false;
 var mouseDown = false;
 var dragXStart = 0;
@@ -60,7 +61,7 @@ function initListeners() {
       yPos = event.pageY - $('#myCanvas').offset().top;
 
       console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
-      if (ctrlDown == true && mouseDown == true) {
+      if (dragging) {
          console.log("dragging");
          gameX += (xPos - dragXStart)/2;
          gameY += (yPos - dragYStart)/2;
@@ -69,27 +70,31 @@ function initListeners() {
 
    $("body").on("keydown", function ( event ) {
       console.log("Keydown");
-      if (mouseDown && !ctrlDown) {
-         ctrlDown = true;
+      ctrlDown = true;
+      if (mouseDown) {
          dragXStart = xPos;
          dragYStart = yPos;
+         dragging = true;
       }
    });
    $("body").on("keyup", function (event) {
       console.log("Keyup");
       ctrlDown = false;
+      dragging = false;
    });
    $("body").on("mousedown", function ( event ) {
       console.log("mousedown");
-      if (ctrlDown && !mouseDown) {
-         mouseDown = true;
+      mouseDown = true;
+      if (ctrlDown) {
          dragXStart = xPos;
          dragYStart = yPos;
+         dragging = true;
       }
    });
    $("body").on("mouseup", function (event) {
       console.log("mouseup");
       mouseDown = false;
+      dragging = false;
    });
 }
 
