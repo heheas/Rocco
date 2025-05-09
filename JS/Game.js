@@ -54,6 +54,6 @@ class Game {
         }
       }
     }
-    this.selectedItem = getTile( Math.floor(Math.random() * 9),  Math.floor(Math.random() * 22));
+    this.selectedItem = this.getTile( Math.floor(Math.random() * 9),  Math.floor(Math.random() * 22));
   }
 }
