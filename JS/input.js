@@ -3,10 +3,17 @@ var xPos = 0;
 var yPos = 0;
 var scale = 1;
 
+var ctrlDown = false;
+var mouseDown = false;
+var dragXStart = 0;
+var dragYStart = 0;
+
 var canvas;
 var ctx;
 
 //Game Variables
+var gameX = 0;
+var gameY = 0;
 var isRunning = false;
 var lastTimestamp = 0;
 var game;
@@ -23,14 +30,10 @@ $(document).ready(function() {
    ctx = canvas.getContext('2d');
    loadImages();
    initTesting();
+   initListeners();
    
    // Start the game loop
    start();
-      
-   $( "#myCanvas" ).on( "mousemove", function( event ) {
-      xPos = event.pageX - $('#myCanvas').offset().left;
-      yPos = event.pageY - $('#myCanvas').offset().top;
-   });
 });
 
 //Testing Function
@@ -48,6 +51,36 @@ function testFunc() {
 function test2Func() {
    var val = $('#testVal2').val();
    testingVal2 = val;
+}
+
+function initListeners() {
+
+   $( "#myCanvas" ).on( "mousemove", function( event ) {
+      xPos = event.pageX - $('#myCanvas').offset().left;
+      yPos = event.pageY - $('#myCanvas').offset().top;
+
+      if (this.ctrlDown == true && this.mousedown == true) {
+         gameX += xPos - dragXStart;
+         gameY += yPos - dragYStart;
+      }
+   });
+
+   $("body").on("keydown", function ( event ) {
+      this.ctrlDown = true;
+   });
+   $("body").on("keyup", function (event) {
+      this.ctrlDown = false;
+   }
+   $("body").on("mousedown", function ( event ) {
+      this.mouseDown = true;
+      if (ctrlDown) {
+         dragXStart = xPos;
+         dragYStart = yPos;
+      }
+   });
+   $("body").on("mouseup", function (event) {
+      this.mouseDown = false;
+   }
 }
 
 // Start the game loop
@@ -89,7 +122,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-  drawBoard(canvas.width/2, canvas.height/2, 45*testingVal);
+  drawBoard(gameX + canvas.width/2,gameY + canvas.height/2, 45*testingVal);
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
