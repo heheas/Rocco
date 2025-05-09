@@ -238,7 +238,7 @@ function drawSelectedItem() {
          drawHexagon(canvas.width - selectedBoxSize/2 + 50, selectedBoxSize/2, 100);
          ctx.save();
          ctx.clip();
-         ctx.translate(canvas.width - selectedBoxSize/2 + 50, selectedBoxSize/2);
+         ctx.translate(canvas.width - selectedBoxSize/2, selectedBoxSize/2);
          ctx.rotate((-35+(game.selectedItem.direction*60))*Math.PI/180);
          ctx.drawImage(straightIMG,-100/2, -100/2, 100, 100);
          ctx.restore();
