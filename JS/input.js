@@ -177,39 +177,21 @@ function drawBoard(xPos, yPos, hexRadius) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
-            let hexIMG;
-            if (tile.type === TileType.HOME) {
-               ctx.fillStyle = "yellow";
-            } else if (tile.type === TileType.RESOURCE) {
-               ctx.fillStyle = "purple";
-            } else {
-               hexIMG = straightIMG;
-               ctx.fillStyle = "black";
-            }
             let oddfset = y % 2 == 0 ? 0 : hexRadius/2;
             let hexX = xPos + (x*hexRadius*(1.5+spacing)) + oddfset*(1.5+spacing) - totalSizeW/2;
             let hexY = yPos + (y*hexRadius*(1+spacing)/2*Math.sqrt(3)/2) - totalSizeH/2;
             drawHexagon(
                hexX,
                hexY,
-               hexRadius
+               hexRadius,
+               tile
             );
-            if (hexIMG) {
-               ctx.save();
-               ctx.clip();
-               ctx.translate(hexX, hexY);
-               ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
-               ctx.drawImage(straightIMG,-hexRadius/2, -hexRadius/2, hexRadius, hexRadius);
-               ctx.restore();
-            } else {
-               ctx.fill();
-            }
          }
      }
    }
 }
 
-function drawHexagon(x, y, radius) {
+function drawHexagon(x, y, radius, tile) {
    ctx.beginPath();
    ctx.moveTo(x + radius/2, y);
    ctx.lineTo(x + radius/4, y - (radius/2)*Math.sqrt(3)/2);
@@ -219,10 +201,32 @@ function drawHexagon(x, y, radius) {
    ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
    ctx.lineTo(x + radius/2, y);
    ctx.closePath();
+   renderHexagon(tile);
+}
+
+function renderHexagon(x, y, radius, tile) {
+      let hexIMG;
+      if (tile.type === TileType.HOME) {
+         ctx.fillStyle = "yellow";
+      } else if (tile.type === TileType.RESOURCE) {
+         ctx.fillStyle = "purple";
+      } else {
+         hexIMG = straightIMG;
+         ctx.fillStyle = "black";
+      }
+      if (hexIMG) {
+         ctx.save();
+         ctx.clip();
+         ctx.translate(x, y);
+         ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
+         ctx.drawImage(straightIMG,-radius/2, -radius/2, radius, radius);
+         ctx.restore();
+      } else {
+         ctx.fill();
+      }
 }
 
 function drawSelectedItem() {
-   console.log(JSON.stringify(game.selectedItem));
    if (game.selectedItem) {
       //box outline
       ctx.beginPath();
@@ -234,16 +238,9 @@ function drawSelectedItem() {
       ctx.stroke();
       
       if (game.selectedItem instanceof Tile) {
-         console.log("IS DEF- Tile");
-         drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100);
-         ctx.save();
-         ctx.clip();
-         ctx.translate(canvas.width - selectedBoxSize/2, selectedBoxSize/2);
-         ctx.rotate((-35+(game.selectedItem.direction*60))*Math.PI/180);
-         ctx.drawImage(straightIMG,-100/2, -100/2, 100, 100);
-         ctx.restore();
+         drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100, tile);
       } else {
-         console.log("Totally Not Tile");
+         
       }
    }
 }
