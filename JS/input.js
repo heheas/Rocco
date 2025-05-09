@@ -137,6 +137,9 @@ function update(deltaTime) {
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
+
+   ctx.beginStroke();
+   ctx.drawArc(xPos, yPos, 5, 0, 2*Math.PI);
 }
 
 
