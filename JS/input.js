@@ -238,7 +238,7 @@ function drawSelectedItem() {
       ctx.stroke();
       
       if (game.selectedItem instanceof Tile) {
-         drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100, tile);
+         drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100, game.selectedItem);
       } else {
          
       }
