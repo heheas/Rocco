@@ -83,7 +83,6 @@ function initListeners() {
    });
 
    $("body").on("keydown", function ( event ) {
-      console.log("Keydown");
       ctrlDown = true;
       if (!dragging && mouseDown) {
          dragXStart = xPos;
@@ -94,12 +93,10 @@ function initListeners() {
       }
    });
    $("body").on("keyup", function (event) {
-      console.log("Keyup");
       ctrlDown = false;
       dragging = false;
    });
    $("body").on("mousedown", function ( event ) {
-      console.log("mousedown");
       mouseDown = true;
       if (!dragging && ctrlDown) {
          dragXStart = xPos;
@@ -110,7 +107,6 @@ function initListeners() {
       }
    });
    $("body").on("mouseup", function (event) {
-      console.log("mouseup");
       mouseDown = false;
       dragging = false;
    });
