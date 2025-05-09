@@ -235,7 +235,7 @@ function drawSelectedItem() {
       
       if (game.selectedItem instanceof Tile) {
          console.log("IS DEF- Tile");
-         drawHexagon(canvas.width - selectedBoxSize/2 + 50, selectedBoxSize/2, 100);
+         drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100);
          ctx.save();
          ctx.clip();
          ctx.translate(canvas.width - selectedBoxSize/2, selectedBoxSize/2);
