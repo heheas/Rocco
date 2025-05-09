@@ -69,8 +69,9 @@ function initListeners() {
          gameY = itemOrigY + (yPos - dragYStart);
       }
    });
+   
   this.canvas.addEventListener('wheel', function(event){
-      console.log("Scroll");
+      console.log(event.deltaY);
        event.preventDefault();
    }, false);
 
