@@ -240,7 +240,7 @@ function drawSelectedItem() {
          ctx.clip();
          ctx.translate(canvas.width - selectedBoxSize/2 + 50, selectedBoxSize/2);
          ctx.rotate((-35+(game.selectedItem.direction*60))*Math.PI/180);
-         ctx.drawImage(straightIMG,-hexRadius/2, -hexRadius/2, hexRadius, hexRadius);
+         ctx.drawImage(straightIMG,-100/2, -100/2, 100, 100);
          ctx.restore();
       } else {
          console.log("Totally Not Tile");
