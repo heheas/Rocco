@@ -69,6 +69,10 @@ function initListeners() {
          gameY = itemOrigY + (yPos - dragYStart);
       }
    });
+   $("#myCanvas").on('wheel', function(event){
+      console.log("Scroll");
+       event.preventDefault();
+   }, false);
 
    $("body").on("keydown", function ( event ) {
       console.log("Keydown");
@@ -148,11 +152,6 @@ function update(deltaTime) {
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
-
-   ctx.beginPath();
-   ctx.moveTo(dragXStart, dragYStart, 5, 0, 2*Math.PI);
-   ctx.lineTo(xPos, yPos, 5, 0, 2*Math.PI);
-   ctx.stroke();
 }
 
 
