@@ -8,6 +8,8 @@ var ctrlDown = false;
 var mouseDown = false;
 var dragXStart = 0;
 var dragYStart = 0;
+var itemOrigX = 0;
+var itemOrigY = 0;
 
 var canvas;
 var ctx;
@@ -63,8 +65,8 @@ function initListeners() {
       console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
       if (dragging) {
          console.log("dragging");
-         gameX = gameX + (xPos - dragXStart);
-         gameY = gameY + (yPos - dragYStart);
+         gameX = itemOrigX + (xPos - dragXStart);
+         gameY = itemOrigY + (yPos - dragYStart);
       }
    });
 
@@ -74,6 +76,8 @@ function initListeners() {
       if (!dragging && mouseDown) {
          dragXStart = xPos;
          dragYStart = yPos;
+         itemOrigX = gameX;
+         itemOrigY = gameY;
          dragging = true;
       }
    });
