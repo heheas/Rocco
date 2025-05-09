@@ -63,8 +63,8 @@ function initListeners() {
       console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
       if (dragging) {
          console.log("dragging");
-         gameX += (xPos - dragXStart)/2;
-         gameY += (yPos - dragYStart)/2;
+         gameX = gameX + (xPos - dragXStart);
+         gameY = gameY + (yPos - dragYStart);
       }
    });
 
