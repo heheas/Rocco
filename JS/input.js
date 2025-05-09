@@ -71,9 +71,13 @@ function initListeners() {
    });
    
   this.canvas.addEventListener('wheel', function(event){
-      console.log(event.deltaY);
+      if (event.deltaY < 0) {
+         scale += 0.1;
+      } else if (event.deltaY > 0) {
+         scale -= 0.1;
+      }
        event.preventDefault();
-   }, false);
+   });
 
    $("body").on("keydown", function ( event ) {
       console.log("Keydown");
