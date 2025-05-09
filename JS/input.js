@@ -227,8 +227,8 @@ function drawSelectedItem() {
       if (game.selectedItem instanceof Tile) {
          console.log("IS DEF- Tile");
          ctx.beginPath();
-         ctx.fillStyle("white");
-         ctx.strokeStyle("black");
+         ctx.fillStyle = "white";
+         ctx.strokeStyle = "black";
          ctx.drawRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
          ctx.fill();
          ctx.stroke();
