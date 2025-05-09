@@ -69,8 +69,8 @@ function initListeners() {
 
    $("body").on("keydown", function ( event ) {
       console.log("Keydown");
-      ctrlDown = true;
-      if (mouseDown) {
+      if (mouseDown && !ctrlDown) {
+         ctrlDown = true;
          dragXStart = xPos;
          dragYStart = yPos;
       }
@@ -81,8 +81,8 @@ function initListeners() {
    });
    $("body").on("mousedown", function ( event ) {
       console.log("mousedown");
-      mouseDown = true;
-      if (ctrlDown) {
+      if (ctrlDown && !mouseDown) {
+         mouseDown = true;
          dragXStart = xPos;
          dragYStart = yPos;
       }
