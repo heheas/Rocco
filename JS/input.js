@@ -229,7 +229,7 @@ function drawSelectedItem() {
          ctx.beginPath();
          ctx.fillStyle = "white";
          ctx.strokeStyle = "black";
-         ctx.drawRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
+         ctx.fillRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
          ctx.fill();
          ctx.stroke();
       } else {
