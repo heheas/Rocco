@@ -228,9 +228,10 @@ function drawSelectedItem() {
          console.log("IS DEF- Tile");
          ctx.beginPath();
          ctx.fillStyle = "white";
-         ctx.strokeStyle = "black";
          ctx.fillRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
+         ctx.strokeStyle = "black";
          ctx.fill();
+         ctx.strokeRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
          ctx.stroke();
       } else {
          console.log("Totally Not Tile");
