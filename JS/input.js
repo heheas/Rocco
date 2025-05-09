@@ -140,7 +140,7 @@ function update(deltaTime) {
 
    ctx.beginPath();
    ctx.moveTo(dragXStart, dragYStart, 5, 0, 2*Math.PI);
-   ctx.pathTo(xPos, yPos, 5, 0, 2*Math.PI);
+   ctx.lineTo(xPos, yPos, 5, 0, 2*Math.PI);
    ctx.stroke();
 }
 
