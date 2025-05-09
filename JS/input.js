@@ -14,6 +14,9 @@ var itemOrigY = 0;
 var canvas;
 var ctx;
 
+//selected item variables
+var boxSize = 50;
+
 //Game Variables
 var gameX = 0;
 var gameY = 0;
@@ -153,6 +156,7 @@ function update(deltaTime) {
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
   drawBoard(gameX + canvas.width/2,gameY + canvas.height/2, 45*scale);
+  drawSelectedItem();
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
@@ -219,6 +223,16 @@ function drawHexagon(x, y, radius) {
    ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
    ctx.lineTo(x + radius/2, y);
    ctx.closePath();
+}
+
+function drawSelectedItem() {
+   if (game.selectedItem) {
+      if (game.selectedItem typeof Tile) {
+         console.log("IS DEF- Tile");
+      } else {
+         console.log("Totally Not Tile");
+      }
+   }
 }
 
 function loadImages() {
