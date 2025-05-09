@@ -24,6 +24,7 @@ class Game {
   ];
 
   board;
+  selectedItem;
 
   constructor() {
     this.initGame();
@@ -53,5 +54,6 @@ class Game {
         }
       }
     }
+    this.selectedItem = getTile( Math.floor(Math.random() * 9),  Math.floor(Math.random() * 22));
   }
 }
