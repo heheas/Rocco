@@ -15,7 +15,7 @@ var canvas;
 var ctx;
 
 //selected item variables
-var boxSize = 50;
+var selectedBoxSize = 50;
 
 //Game Variables
 var gameX = 0;
