@@ -59,7 +59,7 @@ function initListeners() {
       xPos = event.pageX - $('#myCanvas').offset().left;
       yPos = event.pageY - $('#myCanvas').offset().top;
 
-      if (this.ctrlDown == true && this.mousedown == true) {
+      if (this.ctrlDown == true && this.mouseDown == true) {
          console.log("dragging");
          gameX += xPos - dragXStart;
          gameY += yPos - dragYStart;
