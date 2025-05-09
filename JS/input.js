@@ -224,7 +224,7 @@ function drawHexagon(x, y, radius) {
 function drawSelectedItem() {
    console.log(JSON.stringify(game.selectedItem));
    if (game.selectedItem) {
-      if (typeof game.selectedItem == Tile) {
+      if (game.selectedItem instanceof Tile) {
          console.log("IS DEF- Tile");
          ctx.beginPath();
          ctx.fillStyle("white");
