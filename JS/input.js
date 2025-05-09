@@ -201,7 +201,7 @@ function drawHexagon(x, y, radius, tile) {
    ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
    ctx.lineTo(x + radius/2, y);
    ctx.closePath();
-   renderHexagon(tile);
+   renderHexagon(x, y, radius, tile);
 }
 
 function renderHexagon(x, y, radius, tile) {
