@@ -229,6 +229,12 @@ function drawSelectedItem() {
    if (game.selectedItem) {
       if (game.selectedItem typeof Tile) {
          console.log("IS DEF- Tile");
+         ctx.beginPath();
+         ctx.fillStyle("white");
+         ctx.strokeStyle("black");
+         ctx.drawRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
+         ctx.fill();
+         ctx.stroke();
       } else {
          console.log("Totally Not Tile");
       }
