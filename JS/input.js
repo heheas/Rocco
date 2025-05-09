@@ -92,6 +92,8 @@ function initListeners() {
       if (!dragging && ctrlDown) {
          dragXStart = xPos;
          dragYStart = yPos;
+         itemOrigX = gameX;
+         itemOrigY = gameY;
          dragging = true;
       }
    });
