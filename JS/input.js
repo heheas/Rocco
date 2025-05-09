@@ -12,7 +12,7 @@ var lastTimestamp = 0;
 var game;
 
 //Image Variables
-var gameboardIMG;
+var gameboardIMG, labIMG;
 var straightIMG,splitIMG,tridentIMG,uturnIMG,sixwayIMG;
 var robot1HomeIMG,robot2HomeIMG,robot3HomeIMG,robot4HomeIMG,robot5HomeIMG,robot6HomeIMG;
 var crystalIMG,nebulaCrystalIMG,faunaIMG,nutrientPodsIMG,plasmaNodeIMG,magneticOreIMG;
@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 //Testing Function
 let testingVal = 1;
-let testingVal2 = 1;
+let testingVal2 = 0;
 function initTesting() {
    var val = $('#testVal').val(testingVal);
    var val = $('#testVal2').val(testingVal2);
@@ -89,7 +89,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-  drawBoard(canvas.width/4, canvas.height/4, 45*testingVal);
+  drawBoard(canvas.width/2, canvas.height/2, 45*testingVal);
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
@@ -101,31 +101,46 @@ function update(deltaTime) {
 * RENDERING FUNCTIONS
 */
 function drawBoard(xPos, yPos, hexRadius) {
-   //drawbackground
-   //this.drawBackground(xPos, yPos, hexRadius);
-   ctx.beginPath();
-   ctx.arc(xPos, yPos, 5, 0, 2 * Math.PI);
-   ctx.stroke();
 
-   var totalSize = hexRadius * testingVal2;
-   //var totalSize = (testingVal2*hexRadius*Math.sqrt(3)*testingVal);   
+   var spacing = hexRadius*0.05/45;
+   var totalSizeW = (6*hexRadius*(1.5+spacing));
+   var totalSizeH = (20*hexRadius*(1+spacing)/2*Math.sqrt(3)/2);
+   
+   //drawbackground
+   var labSize = hexRadius/1.5;
+   ctx.drawImage(labIMG, xPos - labSize/2, yPos - labSize/2, labSize, labSize);
+     
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
+            let hexIMG;
             if (tile.type === TileType.HOME) {
                ctx.fillStyle = "yellow";
             } else if (tile.type === TileType.RESOURCE) {
                ctx.fillStyle = "purple";
             } else {
+               hexIMG = straightIMG;
                ctx.fillStyle = "black";
             }
             let oddfset = y % 2 == 0 ? 0 : hexRadius/2;
+            let hexX = xPos + (x*hexRadius*(1.5+spacing)) + oddfset*(1.5+spacing) - totalSizeW/2;
+            let hexY = yPos + (y*hexRadius*(1+spacing)/2*Math.sqrt(3)/2) - totalSizeH/2;
             drawHexagon(
-               xPos + (x*hexRadius*1.5) + oddfset*1.5,
-               yPos + (y*hexRadius/2*Math.sqrt(3)/2),
+               hexX,
+               hexY,
                hexRadius
             );
+            if (hexIMG) {
+               ctx.save();
+               ctx.clip();
+               ctx.translate(hexX, hexY);
+               ctx.rotate(-35*Math.PI/180*tile.direction);
+               ctx.drawImage(straightIMG,-hexRadius/2, -hexRadius/2, hexRadius, hexRadius);
+               ctx.restore();
+            } else {
+               ctx.fill();
+            }
          }
      }
    }
@@ -141,12 +156,6 @@ function drawHexagon(x, y, radius) {
    ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
    ctx.lineTo(x + radius/2, y);
    ctx.closePath();
-   ctx.fill();
-}
-
-function drawBackground(x,y, hexSize) {
-   var boardSize = hexSize * 12;
-   ctx.drawImage(gameboardIMG, x, y, boardSize, boardSize);
 }
 
 function loadImages() {
@@ -154,4 +163,6 @@ function loadImages() {
    gameboardIMG.src = "./Art/Gameboard.png";
    straightIMG = new Image();
    straightIMG.src = "./Art/Tiles/Straight.png";
+   labIMG = new Image();
+   labIMG.src = "./Art/Tiles/cog.png";
 }
