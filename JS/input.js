@@ -70,7 +70,7 @@ function initListeners() {
    });
    $("body").on("keyup", function (event) {
       this.ctrlDown = false;
-   }
+   });
    $("body").on("mousedown", function ( event ) {
       this.mouseDown = true;
       if (ctrlDown) {
@@ -80,7 +80,7 @@ function initListeners() {
    });
    $("body").on("mouseup", function (event) {
       this.mouseDown = false;
-   }
+   });
 }
 
 // Start the game loop
