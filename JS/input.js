@@ -15,7 +15,7 @@ var canvas;
 var ctx;
 
 //selected item variables
-var selectedBoxSize = 50;
+var selectedBoxSize = 150;
 
 //Game Variables
 var gameX = 0;
@@ -224,15 +224,24 @@ function drawHexagon(x, y, radius) {
 function drawSelectedItem() {
    console.log(JSON.stringify(game.selectedItem));
    if (game.selectedItem) {
+      //box outline
+      ctx.beginPath();
+      ctx.fillStyle = "white";
+      ctx.fillRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
+      ctx.strokeStyle = "black";
+      ctx.fill();
+      ctx.strokeRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
+      ctx.stroke();
+      
       if (game.selectedItem instanceof Tile) {
          console.log("IS DEF- Tile");
-         ctx.beginPath();
-         ctx.fillStyle = "white";
-         ctx.fillRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
-         ctx.strokeStyle = "black";
-         ctx.fill();
-         ctx.strokeRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
-         ctx.stroke();
+         drawHexagon(canvas.width - selectedBoxSize/2 + 50, selectedBoxSize/2, 100);
+         ctx.save();
+         ctx.clip();
+         ctx.translate(hexX, hexY);
+         ctx.rotate(-35*Math.PI/180*tile.direction);
+         ctx.drawImage(straightIMG,-hexRadius/2, -hexRadius/2, hexRadius, hexRadius);
+         ctx.restore();
       } else {
          console.log("Totally Not Tile");
       }
