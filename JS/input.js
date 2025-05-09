@@ -139,10 +139,8 @@ function update(deltaTime) {
   ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
 
    ctx.beginPath();
-   ctx.arc(dragXStart, dragYStart, 5, 0, 2*Math.PI);
-   ctx.stroke();
-   ctx.beginPath();
-   ctx.arc(xPos, yPos, 5, 0, 2*Math.PI);
+   ctx.moveTo(dragXStart, dragYStart, 5, 0, 2*Math.PI);
+   ctx.pathTo(xPos, yPos, 5, 0, 2*Math.PI);
    ctx.stroke();
 }
 
