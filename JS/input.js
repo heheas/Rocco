@@ -62,8 +62,8 @@ function initListeners() {
       console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
       if (ctrlDown == true && mouseDown == true) {
          console.log("dragging");
-         gameX += xPos - dragXStart;
-         gameY += yPos - dragYStart;
+         gameX += (xPos - dragXStart)/2;
+         gameY += (yPos - dragYStart)/2;
       }
    });
 
