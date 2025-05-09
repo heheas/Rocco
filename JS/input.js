@@ -69,7 +69,7 @@ function initListeners() {
          gameY = itemOrigY + (yPos - dragYStart);
       }
    });
-   $("#myCanvas").on('mousewheel', function(event){
+  this.canvas.addEventListener('wheel', function(event){
       console.log("Scroll");
        event.preventDefault();
    }, false);
