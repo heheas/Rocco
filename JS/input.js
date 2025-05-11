@@ -25,7 +25,7 @@ var gameY = 0;
 var isRunning = false;
 var lastTimestamp = 0;
 var game;
-var boardSize = 45;
+var boardHexSize = 45;
 var totalBoardWidth = 0;
 var totalBoardHeight = 0;
 
@@ -164,12 +164,12 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-  drawBoard(gameX,gameY, boardSize*scale);
+  drawBoard(gameX,gameY, boardHexSize*scale);
   drawSelectedItem();
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
-  ctx.fillText(Math.floor(currentClickX - (gameX - totalBoardWidth/2)) + ", " + Math.floor(currentClickY - (gameY - totalBoardHeight/2)), currentClickX, currentClickY);
+  ctx.fillText(Math.floor(currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2) + ", " + Math.floor(currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2), currentClickX, currentClickY);
 }
 
 
