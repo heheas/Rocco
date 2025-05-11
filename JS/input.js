@@ -74,6 +74,12 @@ function initListeners() {
          gameY = itemOrigY + (yPos - dragYStart);
       }
    });
+
+   $("#myCanvas").on("mouseup", function( event) {
+      
+      currentClickX = event.pageX - $('#myCanvas').offset().left;
+      currentClickY = event.pageY - $('#myCanvas').offset().top;
+   });
    
   this.canvas.addEventListener('wheel', function(event){
       if (event.deltaY < 0) {
