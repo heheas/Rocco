@@ -25,6 +25,7 @@ var gameY = 0;
 var isRunning = false;
 var lastTimestamp = 0;
 var game;
+var boardSize = 45;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -161,12 +162,12 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-  drawBoard(gameX,gameY, 45*scale);
+  drawBoard(gameX,gameY, boardSize*scale);
   drawSelectedItem();
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
-  ctx.fillText((currentClickX - gameX) + ", " + (currentClickY - gameY), currentClickX, currentClickY);
+  ctx.fillText((currentClickX - gameX + (boardSize*scale)/2) + ", " + (currentClickY - gameY + (boardSize*scale)/2), currentClickX, currentClickY);
 }
 
 
