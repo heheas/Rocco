@@ -36,6 +36,8 @@ var crystalIMG,nebulaCrystalIMG,faunaIMG,nutrientPodsIMG,plasmaNodeIMG,magneticO
 $(document).ready(function() {
    canvas = document.getElementById('myCanvas');
    ctx = canvas.getContext('2d');
+   gameX = canvas.width/2;
+   gameY = canvas.height/2;
    loadImages();
    initTesting();
    initListeners();
@@ -159,7 +161,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-  drawBoard(gameX + canvas.width/2,gameY + canvas.height/2, 45*scale);
+  drawBoard(gameX,gameY, 45*scale);
   drawSelectedItem();
    
   ctx.font = Math.floor(16 * scale) + "px serif";
