@@ -169,7 +169,7 @@ function update(deltaTime) {
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
-  ctx.fillText((currentClickX - gameX + Math.floor(totalBoardWidth)) + ", " + (currentClickY - gameY + Math.floor(totalBoardHeight)), currentClickX, currentClickY);
+  ctx.fillText(Math.floor(currentClickX - gameX + (totalBoardWidth)) + ", " + Math.floor(currentClickY - gameY + (totalBoardHeight)), currentClickX, currentClickY);
 }
 
 
