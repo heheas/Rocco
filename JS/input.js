@@ -84,6 +84,10 @@ function initListeners() {
       
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
+
+      var selectedBoardX = (Math.floor((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)*11/totalBoardWidth)+1);
+      var selectedBoardY = (Math.floor((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)*4.5/totalBoardHeight)+1);
+      game.selectTile(selectedBoardX, selectBoardY);
    });
    
   this.canvas.addEventListener('wheel', function(event){
