@@ -164,7 +164,7 @@ function update(deltaTime) {
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
-  ctx.fillText(currentClickX - gameX + ", " + currentClickY - gameY, currentClickX, currentClickY);
+  ctx.fillText((currentClickX - gameX) + ", " + (currentClickY - gameY), currentClickX, currentClickY);
 }
 
 
