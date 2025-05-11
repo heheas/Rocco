@@ -10,6 +10,8 @@ var dragXStart = 0;
 var dragYStart = 0;
 var itemOrigX = 0;
 var itemOrigY = 0;
+var currentClickX = 0;
+var currentClickY = 0;
 
 var canvas;
 var ctx;
@@ -156,7 +158,7 @@ function update(deltaTime) {
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
-  ctx.fillText(xPos + ", " + yPos, xPos + 16, yPos);
+  ctx.fillText(currentClickX + ", " + currentClickY, currentClickX, currentClickY);
 }
 
 
