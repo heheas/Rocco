@@ -26,6 +26,8 @@ var isRunning = false;
 var lastTimestamp = 0;
 var game;
 var boardSize = 45;
+var totalBoardWidth = 0;
+var totalBoardHeight = 0;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -167,7 +169,7 @@ function update(deltaTime) {
    
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
-  ctx.fillText((currentClickX - gameX + (boardSize*scale)/2) + ", " + (currentClickY - gameY + (boardSize*scale)/2), currentClickX, currentClickY);
+  ctx.fillText((currentClickX - gameX + (totalBoardWidth)/2) + ", " + (currentClickY - gameY + (totalBoardHeight*scale)/2), currentClickX, currentClickY);
 }
 
 
@@ -177,8 +179,8 @@ function update(deltaTime) {
 function drawBoard(xPos, yPos, hexRadius) {
 
    var spacing = hexRadius*0.05/45;
-   var totalSizeW = (6*hexRadius*(1.5+spacing));
-   var totalSizeH = (20*hexRadius*(1+spacing)/2*Math.sqrt(3)/2);
+   totalBoardWidth = (6*hexRadius*(1.5+spacing));
+   totalBoardHeight = (20*hexRadius*(1+spacing)/2*Math.sqrt(3)/2);
    
    //drawbackground
    var labSize = hexRadius/1.5;
@@ -189,8 +191,8 @@ function drawBoard(xPos, yPos, hexRadius) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
             let oddfset = y % 2 == 0 ? 0 : hexRadius/2;
-            let hexX = xPos + (x*hexRadius*(1.5+spacing)) + oddfset*(1.5+spacing) - totalSizeW/2;
-            let hexY = yPos + (y*hexRadius*(1+spacing)/2*Math.sqrt(3)/2) - totalSizeH/2;
+            let hexX = xPos + (x*hexRadius*(1.5+spacing)) + oddfset*(1.5+spacing) - totalBoardWidth/2;
+            let hexY = yPos + (y*hexRadius*(1+spacing)/2*Math.sqrt(3)/2) - totalBoardHeight/2;
             drawHexagon(
                hexX,
                hexY,
