@@ -210,7 +210,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    for (let y = 0; y < 22; y++) {
          ctx.beginPath();
          ctx.strokeStyle = "black";
-         ctx.arc( xPos, yPos, y*hexRadius , 0, 2*Math.PI);
+         ctx.arc( xPos, yPos, y*hexRadius/2 , 0, 2*Math.PI);
          ctx.stroke();
    }
 }
