@@ -209,6 +209,10 @@ function drawBoard(xPos, yPos, hexRadius) {
                hexRadius,
                tile
             );
+            
+           ctx.font = Math.floor(5 * scale) + "px serif";
+            ctx.fillStyle = "white";
+           ctx.fillText(x + "," + y, hexX, hexY);
          }
      }
    }
