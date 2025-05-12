@@ -188,6 +188,7 @@ function update(deltaTime) {
    ctx.lineTo(xPos + 5, yPos - 10);
    ctx.lineTo(xPos + 55, yPos - 10);
    ctx.closePath();
+   ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 15, yPos - 15);
@@ -200,26 +201,29 @@ function update(deltaTime) {
    ctx.lineTo(xPos + 25, yPos - 15);
    ctx.lineTo(xPos + 25, yPos - 5);
    ctx.closePath();
+   ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 35, yPos - 15);
    ctx.lineTo(xPos + 35, yPos - 15);
    ctx.lineTo(xPos + 35, yPos - 5);
    ctx.closePath();
+   ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 45, yPos - 15);
    ctx.lineTo(xPos + 45, yPos - 15);
    ctx.lineTo(xPos + 45, yPos - 5);
    ctx.closePath();
+   ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 55, yPos - 15);
    ctx.lineTo(xPos + 55, yPos - 15);
    ctx.lineTo(xPos + 55, yPos - 5);
    ctx.closePath();
-
    ctx.stroke();
+
    
    ctx.font = Math.floor(9) + "px serif";
    ctx.fillText("10", xPos + 15, yPos - 18);
