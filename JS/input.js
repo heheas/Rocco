@@ -181,6 +181,7 @@ function update(deltaTime) {
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
 
    //draw ruler
+   ctx.fillStyle = "black";
    ctx.strokeStyle = "black";
    ctx.beginPath();
    ctx.moveTo(xPos + 5, yPos - 10);
@@ -218,7 +219,7 @@ function update(deltaTime) {
    ctx.lineTo(xPos + 55, yPos - 5);
    ctx.closePath();
    
-   ctx.font = Math.floor(10) + "px serif";
+   ctx.font = Math.floor(9) + "px serif";
    ctx.fillText("10", xPos + 15, yPos - 18);
    ctx.fillText("20", xPos + 25, yPos - 18);
    ctx.fillText("30", xPos + 35, yPos - 18);
