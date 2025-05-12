@@ -88,8 +88,9 @@ function initListeners() {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
-      var rowSpacing = scale*(boardHexSize+spacing)*1.5;
-      var colSpacing = scale*(boardHexSize+spacing);
+      var rowSpacing = (scale*boardHexSize*(1.5+spacing))/2;
+      var colSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
+      
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
       selectedBoardX = currentClickX - gameX + (totalBoardWidth/2);
