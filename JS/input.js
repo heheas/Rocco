@@ -85,8 +85,8 @@ function initListeners() {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
-      var selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth));
-      var selectedBoardY = (((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)/totalBoardHeight));
+      var selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
+      var selectedBoardY = ((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)/totalBoardHeight);
       game.selectTile(selectedBoardX, selectBoardY);
    });
    
