@@ -85,8 +85,8 @@ function initListeners() {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
-      var selectedBoardX = (Math.floor((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)*11/totalBoardWidth)+1);
-      var selectedBoardY = (Math.floor((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)*11/totalBoardHeight)+1);
+      var selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth));
+      var selectedBoardY = (((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)/totalBoardHeight));
       game.selectTile(selectedBoardX, selectBoardY);
    });
    
@@ -205,13 +205,6 @@ function drawBoard(xPos, yPos, hexRadius) {
             );
          }
      }
-   }
-   //draw square overlay
-   for (let y = 0; y <7; y++) {
-         ctx.beginPath();
-         ctx.strokeStyle = "black";
-         ctx.arc( xPos, yPos, y*hexRadius + spacing/2*y , 0, 2*Math.PI);
-         ctx.stroke();
    }
 }
 
