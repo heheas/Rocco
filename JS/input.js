@@ -88,6 +88,8 @@ function initListeners() {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
+      var rowSpacing = scale*(boardHexSize+spacing)*1.5;
+      var colSpacing = scale*(boardHexSize+spacing);
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
       selectedBoardX = currentClickX - gameX + (totalBoardWidth/2);
@@ -235,7 +237,7 @@ function update(deltaTime) {
    
    ctx.beginPath();
    ctx.moveTo(xPos, yPos);
-   ctx.lineTo(xPos + scale*(boardHexSize+spacing)*1.5, yPos);
+   ctx.lineTo(xPos, yPos + scale*(boardHexSize+spacing));
    ctx.closePath();
    ctx.stroke();
 
