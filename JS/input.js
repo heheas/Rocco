@@ -211,7 +211,7 @@ function drawBoard(xPos, yPos, hexRadius) {
      for (let x = 0; x < 9; x++) {
          ctx.beginPath();
          ctx.strokeStyle = "black";
-         ctx.strokeRect(xPos + ((totalBoardWidth/9)*x) - totalBoardWidth/2, yPos + ((totalBoardHeight/22)*y) - totalBoardHeight/2, totalBoardWidth/9, totalBoardHeight/22);
+         ctx.strokeRect(xPos + ((totalBoardWidth/10)*x) - totalBoardWidth/2 - (totalBoardWidth/20), yPos + ((totalBoardHeight/11.5)*y) - totalBoardHeight/2 - (totalBoardHeight/23), totalBoardWidth/9, totalBoardHeight/11.5);
          ctx.stroke();
      }
    }
