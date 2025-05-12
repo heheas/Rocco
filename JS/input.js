@@ -182,12 +182,12 @@ function update(deltaTime) {
 
    //draw ruler
    ctx.strokeStyle = "black";
-   /*
    ctx.beginPath();
    ctx.moveTo(xPos + 5, yPos - 10);
    ctx.lineTo(xPos + 55, yPos - 10);
    ctx.closePath();
    
+   /*
    ctx.beginPath();
    ctx.moveTo(xPos + 15, yPos - 15);
    ctx.lineTo(xPos + 15, yPos - 5);
