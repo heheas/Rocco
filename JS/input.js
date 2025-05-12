@@ -89,7 +89,7 @@ function initListeners() {
 
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       selectedBoardX = Math.floor(((currentClickX - gameX - boardHexSize*scale/2)/(boardHexSize*scale)))+1;
-      selectedBoardY = ((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)/totalBoardHeight);
+      selectedBoardY = Math.floor(((currentClickY - gameY - Math.sqrt(3)/2)*boardHexSize*scale/2)/(Math.sqrt(3)/2)*boardHexSize*scale)))+1;
       //game.selectTile(selectedBoardX, selectBoardY);
    });
    
