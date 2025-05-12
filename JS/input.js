@@ -210,7 +210,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                tile
             );
             
-           ctx.font = Math.floor(5 * scale) + "px serif";
+           ctx.font = Math.floor(10 * scale) + "px serif";
             ctx.fillStyle = "white";
            ctx.fillText(x + "," + y, hexX, hexY);
          }
