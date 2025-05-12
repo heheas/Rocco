@@ -179,7 +179,7 @@ function update(deltaTime) {
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
-
+   /*
    //draw ruler
    ctx.strokeStyle = "black";
    ctx.beginPath();
@@ -225,19 +225,21 @@ function update(deltaTime) {
    ctx.closePath();
    ctx.stroke();
 
-   ctx.beginPath();
-   ctx.moveTo(xPos, yPos);
-   ctx.lineTo(xPos + totalBoardWidth, yPos);
-   ctx.closePath();
-   ctx.stroke();
-
-   
    ctx.font = Math.floor(9) + "px serif";
    ctx.fillText("10", xPos + 15, yPos - 18);
    ctx.fillText("20", xPos + 25, yPos - 18);
    ctx.fillText("30", xPos + 35, yPos - 18);
    ctx.fillText("40", xPos + 45, yPos - 18);
    ctx.fillText("50", xPos + 55, yPos - 18);
+   */
+   
+   ctx.beginPath();
+   ctx.moveTo(xPos, yPos);
+   ctx.lineTo(xPos + boardHexSize, yPos);
+   ctx.closePath();
+   ctx.stroke();
+
+   
 }
 
 
