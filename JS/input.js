@@ -208,12 +208,10 @@ function drawBoard(xPos, yPos, hexRadius) {
    }
    //draw square overlay
    for (let y = 0; y < 22; y++) {
-     for (let x = 0; x < 9; x++) {
          ctx.beginPath();
          ctx.strokeStyle = "black";
-         ctx.strokeRect(xPos + ((totalBoardWidth/10)*x) - totalBoardWidth/2 - (totalBoardWidth/20), yPos + ((totalBoardHeight/11.5)*y) - totalBoardHeight/2 - (totalBoardHeight/23), totalBoardWidth/9, totalBoardHeight/11.5);
+         ctx.arc( xPos, yPos, y*hexRadius , 0, 2*Math.PI);
          ctx.stroke();
-     }
    }
 }
 
