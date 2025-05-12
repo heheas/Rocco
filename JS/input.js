@@ -181,20 +181,31 @@ function update(deltaTime) {
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
 
    //draw ruler
-   ctx.beginPath();
    ctx.strokeStyle = "black";
+   ctx.beginPath();
    ctx.moveTo(xPos + 5, yPos - 10);
    ctx.pathTo(xPos + 55, yPos - 10);
+   ctx.closePath();
+   ctx.beginPath();
    ctx.moveTo(xPos + 15, yPos - 15);
    ctx.pathTo(xPos + 15, yPos - 5);
+   ctx.closePath();
+   ctx.beginPath();
    ctx.moveTo(xPos + 25, yPos - 15);
    ctx.pathTo(xPos + 25, yPos - 5);
+   ctx.closePath();
+   ctx.beginPath();
    ctx.moveTo(xPos + 35, yPos - 15);
    ctx.pathTo(xPos + 35, yPos - 5);
+   ctx.closePath();
+   ctx.beginPath();
    ctx.moveTo(xPos + 45, yPos - 15);
    ctx.pathTo(xPos + 45, yPos - 5);
+   ctx.closePath();
+   ctx.beginPath();
    ctx.moveTo(xPos + 55, yPos - 15);
    ctx.pathTo(xPos + 55, yPos - 5);
+   ctx.closePath();
    ctx.font = Math.floor(8 * scale) + "px serif";
    ctx.fillText("10", xPos + 15, yPos - 18);
    ctx.fillText("20", xPos + 25, yPos - 18);
