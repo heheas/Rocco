@@ -218,6 +218,8 @@ function update(deltaTime) {
    ctx.lineTo(xPos + 55, yPos - 15);
    ctx.lineTo(xPos + 55, yPos - 5);
    ctx.closePath();
+
+   ctx.stroke();
    
    ctx.font = Math.floor(9) + "px serif";
    ctx.fillText("10", xPos + 15, yPos - 18);
