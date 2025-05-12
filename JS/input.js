@@ -182,30 +182,37 @@ function update(deltaTime) {
 
    //draw ruler
    ctx.strokeStyle = "black";
+   /*
    ctx.beginPath();
    ctx.moveTo(xPos + 5, yPos - 10);
    ctx.lineTo(xPos + 55, yPos - 10);
    ctx.closePath();
+   
    ctx.beginPath();
    ctx.moveTo(xPos + 15, yPos - 15);
    ctx.lineTo(xPos + 15, yPos - 5);
    ctx.closePath();
+   
    ctx.beginPath();
    ctx.moveTo(xPos + 25, yPos - 15);
    ctx.lineTo(xPos + 25, yPos - 5);
    ctx.closePath();
+   
    ctx.beginPath();
    ctx.moveTo(xPos + 35, yPos - 15);
    ctx.lineTo(xPos + 35, yPos - 5);
    ctx.closePath();
+   
    ctx.beginPath();
    ctx.moveTo(xPos + 45, yPos - 15);
    ctx.lineTo(xPos + 45, yPos - 5);
    ctx.closePath();
+   
    ctx.beginPath();
    ctx.moveTo(xPos + 55, yPos - 15);
    ctx.lineTo(xPos + 55, yPos - 5);
    ctx.closePath();
+   */
    ctx.font = Math.floor(8 * scale) + "px serif";
    ctx.fillText("10", xPos + 15, yPos - 18);
    ctx.fillText("20", xPos + 25, yPos - 18);
