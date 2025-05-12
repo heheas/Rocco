@@ -88,7 +88,7 @@ function initListeners() {
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
-      selectedBoardX = currentClickX - (gameX - totalBoardWidth/2) - (scale*(boardHexSize/2));
+      selectedBoardX = currentClickX - (gameX - totalBoardWidth/2);
       selectedBoardY = ((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)/totalBoardHeight);
       //game.selectTile(selectedBoardX, selectBoardY);
    });
@@ -175,7 +175,9 @@ function update(deltaTime) {
   drawSelectedItem();
    
   ctx.font = Math.floor(16 * scale) + "px serif";
-   ctx.fillStyle = "rgb(200, 0, 225)";
+   ctx.fillStyle = "white";
+   ctx.fillRect(currentClickX, currentClickY, 100, 100;
+   ctx.fillStyle = "black";
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, currentClickX, currentClickY);
 }
 
