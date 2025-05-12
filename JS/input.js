@@ -28,6 +28,7 @@ var isRunning = false;
 var lastTimestamp = 0;
 var game;
 var boardHexSize = 45;
+var spacing = 10;
 var totalBoardWidth = 0;
 var totalBoardHeight = 0;
 
@@ -187,7 +188,7 @@ function update(deltaTime) {
 */
 function drawBoard(xPos, yPos, hexRadius) {
 
-   var spacing = hexRadius*0.05/45;
+   spacing = hexRadius*0.05/45;
    totalBoardWidth = (6*hexRadius*(1.5+spacing));
    totalBoardHeight = (20*hexRadius*(1+spacing)/2*Math.sqrt(3)/2);
    
