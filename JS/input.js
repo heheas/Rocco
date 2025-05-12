@@ -191,35 +191,37 @@ function update(deltaTime) {
    ctx.stroke();
    
    ctx.beginPath();
+   ctx.moveTo(xPos + 5, yPos - 15);
+   ctx.lineTo(xPos + 5, yPos - 5);
+   ctx.closePath();
+   ctx.stroke();
+   
+   ctx.beginPath();
    ctx.moveTo(xPos + 15, yPos - 15);
-   ctx.lineTo(xPos + 15, yPos - 15);
    ctx.lineTo(xPos + 15, yPos - 5);
    ctx.closePath();
+   ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 25, yPos - 15);
-   ctx.lineTo(xPos + 25, yPos - 15);
    ctx.lineTo(xPos + 25, yPos - 5);
    ctx.closePath();
    ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 35, yPos - 15);
-   ctx.lineTo(xPos + 35, yPos - 15);
    ctx.lineTo(xPos + 35, yPos - 5);
    ctx.closePath();
    ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 45, yPos - 15);
-   ctx.lineTo(xPos + 45, yPos - 15);
    ctx.lineTo(xPos + 45, yPos - 5);
    ctx.closePath();
    ctx.stroke();
    
    ctx.beginPath();
    ctx.moveTo(xPos + 55, yPos - 15);
-   ctx.lineTo(xPos + 55, yPos - 15);
    ctx.lineTo(xPos + 55, yPos - 5);
    ctx.closePath();
    ctx.stroke();
