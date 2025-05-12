@@ -18,6 +18,8 @@ var ctx;
 
 //selected item variables
 var selectedBoxSize = 150;
+var selectedBoardX = 0;
+var selectedBoardY = 0;
 
 //Game Variables
 var gameX = 0;
@@ -85,9 +87,9 @@ function initListeners() {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
-      var selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
-      var selectedBoardY = ((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)/totalBoardHeight);
-      game.selectTile(selectedBoardX, selectBoardY);
+      selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
+      selectedBoardY = ((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)/totalBoardHeight);
+      //game.selectTile(selectedBoardX, selectBoardY);
    });
    
   this.canvas.addEventListener('wheel', function(event){
@@ -172,8 +174,8 @@ function update(deltaTime) {
   drawSelectedItem();
    
   ctx.font = Math.floor(16 * scale) + "px serif";
-   ctx.fillStyle = "black";
-  ctx.fillText((Math.floor((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)*11/totalBoardWidth)+1) + ", " + (Math.floor((currentClickY - (gameY - totalBoardHeight/2) - boardHexSize*scale/2)*4.5/totalBoardHeight)+1), currentClickX, currentClickY);
+   ctx.fillStyle = "blue";
+  ctx.fillText(selectedBoardX + ", " + selectedBoardY, currentClickX, currentClickY);
 }
 
 
