@@ -18,7 +18,7 @@ var ctx;
 
 //selected item variables
 var selectedBoxSize = 150;
-var selectedBoardX = 0;
+var selectedBoardX = 45 * Math.sqrt(3)/2;
 var selectedBoardY = 0;
 
 //Game Variables
