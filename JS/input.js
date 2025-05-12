@@ -237,7 +237,7 @@ function update(deltaTime) {
    
    ctx.beginPath();
    ctx.moveTo(xPos, yPos);
-   ctx.lineTo(xPos, yPos + (boardHexSize*(1+spacing)/2*Math.sqrt(3)/2));
+   ctx.lineTo(xPos, yPos + (boardHexSize*(1+spacing)/2*Math.sqrt(3)/2))*scale;
    ctx.closePath();
    ctx.stroke();
 
