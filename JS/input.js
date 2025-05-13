@@ -89,7 +89,7 @@ function initListeners() {
    });
 
    $("#myCanvas").on("mouseup", clickFunc);
-      $("#myCanvas").on("touchup", clickFunc);
+      $("#myCanvas").on("touchend", clickFunc);
    
   this.canvas.addEventListener('wheel', function(event){
       if (event.deltaY < 0) {
