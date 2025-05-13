@@ -96,7 +96,7 @@ function initListeners() {
       var horizontalSpacing = (scale*boardHexSize*(1.5+spacing))/2;
       var verticalSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
       
-      var clickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
+      var clickX = currentClickX - gameX + (totalBoardWidth/2);
       var clickY = currentClickY - gameY + (totalBoardHeight/2);
 
       var leftX = Math.floor(clickX / horizontalSpacing);
@@ -108,6 +108,7 @@ function initListeners() {
       var isLeft = posX > horizontalSpacing/2;
       var oddRow =  Math.floor(topY/2)%2 == 0;
 
+      
       otherX = posX;
       otherY = horizontalSpacing/2;
       
@@ -115,13 +116,12 @@ function initListeners() {
       var checkWidth = horizontalSpacing;
       var checkTop = gameY - (totalBoardHeight/2) + topY * verticalSpacing;
       var checkHeight = verticalSpacing;
-      
-      if (isLeft && oddRow) {
-         selectedBoardX = posX;
-         selectedBoardY = posY;
-      } else {
 
-      }
+      blahX = checkLeft;
+      blahWidth = checkWidth;
+      blahY = checkTop;
+      blahHeight = checkHeight;
+      
       //game.selectTile(selectedBoardX, selectBoardY);
    });
    
