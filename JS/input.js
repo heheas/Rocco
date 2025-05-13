@@ -107,8 +107,8 @@ function initListeners() {
 
       blahX = gameX - (totalBoardWidth/2) + (leftX * horizontalSpacing);
       blahWidth = horizontalSpacing;
-      blahY = gameY - (totalBoardHeight/2) + (topY * verticalSpacing) - verticalSpacing/2;
-      blahHeight = verticalSpacing * 2;
+      blahY = gameY - (totalBoardHeight/2) + (topY * verticalSpacing);
+      blahHeight = verticalSpacing;
       
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
