@@ -323,7 +323,7 @@ function renderHexagon(x, y, radius, tile) {
       } else {
          ctx.fill();
       }
-      //if (tile == game.selectedItem) {
+      if (tile == game.selectedItem) {
          var prevStyle = ctx.fillStyle;
           ctx.beginPath();
           ctx.fillStyle = "red";
@@ -331,7 +331,7 @@ function renderHexagon(x, y, radius, tile) {
          ctx.fillRect(x, y, radius/4, radius/4);
           ctx.fill();
          ctx.fillStyle = prevStyle;
-      //}
+      }
 }
 
 function drawSelectedItem() {
