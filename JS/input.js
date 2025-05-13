@@ -109,7 +109,7 @@ function initListeners() {
       var oddRow =  Math.floor(topY/2)%2 == 0;
 
       
-      otherX = posX + " | " + leftX + " - " + (leftX + horizontalSpacing);
+      otherX = isLeft;
       otherY = oddRow;
       
       var checkLeft = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
