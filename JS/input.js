@@ -96,7 +96,7 @@ function initListeners() {
       var horizontalSpacing = (scale*boardHexSize*(1.5+spacing))/2;
       var verticalSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
       
-      var clickX = currentClickX - gameX + (totalBoardWidth/2);
+      var clickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
       var clickY = currentClickY - gameY + (totalBoardHeight/2);
 
       var leftX = Math.floor(clickX / horizontalSpacing);
