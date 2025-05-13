@@ -18,8 +18,10 @@ var ctx;
 
 //selected item variables
 var selectedBoxSize = 150;
-var selectedBoardX = 45 * Math.sqrt(3)/2;
-var selectedBoardY = 0;
+var selectedBoardX;
+var selectedBoardY;
+var otherX;
+var otherY;
 
 //Game Variables
 var gameX = 0;
@@ -31,6 +33,9 @@ var boardHexSize = 45;
 var spacing = 10;
 var totalBoardWidth = 0;
 var totalBoardHeight = 0;
+
+//blah
+var blahX, blahY, blahWidth, blahHeight;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -99,6 +104,11 @@ function initListeners() {
 
       var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
+
+      blahX = leftX * horizontalSpacing;
+      blahWidth = blahX + horizontalSpacing;
+      blahY = topY * verticalSpacing;
+      blahHeight = blahY + verticalSpacing;
       
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
@@ -288,6 +298,10 @@ function drawBoard(xPos, yPos, hexRadius) {
             ctx.fillStyle = "white";
            ctx.fillText(x + "," + y, hexX, hexY);
             ctx.fillStyle = "black";
+
+            ctx.beginPath();
+            ctx.fillRect(blahX, blahY, blahWidth, blahHeight);
+            ctx.fill();
          }
      }
    }
@@ -330,7 +344,6 @@ function renderHexagon(x, y, radius, tile) {
          var prevStyle = ctx.fillStyle;
           ctx.beginPath();
           ctx.fillStyle = "red";
-         ctx.fillRect(20, 20, radius/4, radius/4);
          ctx.fillRect(x, y, radius/4, radius/4);
           ctx.fill();
          ctx.fillStyle = prevStyle;
