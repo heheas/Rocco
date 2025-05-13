@@ -108,19 +108,20 @@ function initListeners() {
       var isLeft = posX > horizontalSpacing/2;
       var oddRow =  Math.floor(topY/2)%2 == 0;
 
+      otherX = posX;
+      otherY = horizontalSpacing/2;
       
-      blahX = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
-      blahWidth = horizontalSpacing;
-      blahY = gameY - (totalBoardHeight/2) + topY * verticalSpacing;
-      blahHeight = verticalSpacing;
+      var checkLeft = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
+      var checkWidth = horizontalSpacing;
+      var checkTop = gameY - (totalBoardHeight/2) + topY * verticalSpacing;
+      var checkHeight = verticalSpacing;
+      
+      if (isLeft && oddRow) {
+         selectedBoardX = posX;
+         selectedBoardY = posY;
+      } else {
 
-      otherX = isLeft;
-      otherY = oddRow;
-      
-      //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
-      //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
-      selectedBoardX = posX;
-      selectedBoardY = posY;
+      }
       //game.selectTile(selectedBoardX, selectBoardY);
    });
    
@@ -274,6 +275,9 @@ function update(deltaTime) {
    
 }
 
+function distance(x1,x2,y1,y) {
+    return Math.sqrt(Math.pow((x2 - x1),2) + Math.pow((y2 - y1),2));
+}
 
 /*
 * RENDERING FUNCTIONS
