@@ -109,8 +109,8 @@ function initListeners() {
       var oddRow =  Math.floor(topY/2)%2 == 0;
 
       
-      otherX = posX;
-      otherY = horizontalSpacing/2;
+      otherX = isLeft;
+      otherY = oddRow;
       
       var checkLeft = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
       var checkWidth = horizontalSpacing;
