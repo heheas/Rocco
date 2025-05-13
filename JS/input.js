@@ -102,10 +102,10 @@ function initListeners() {
       var leftX = Math.floor(clickX / horizontalSpacing);
       var topY = Math.floor(clickY / verticalSpacing);
 
-      var posX = (clickX % horizontalSpacing) + horizontalSpacing/2;
+      var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
 
-      var isLeft = posX > horizontalSpacing;
+      var isLeft = posX < leftX + (horizontalSpacing/2);
       var oddRow =  Math.floor(topY/2)%2 == 0;
 
       
