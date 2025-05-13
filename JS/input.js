@@ -88,17 +88,19 @@ function initListeners() {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
-      var rowSpacing = (scale*boardHexSize*(1.5+spacing))/2;
-      var colSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
+      var horizontalSpacing = (scale*boardHexSize*(1.5+spacing))/2;
+      var verticalSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
       
       var clickX = currentClickX - gameX + (totalBoardWidth/2);
+      var clickY = currentClickY - gameY + (totalBoardHeight/2);
 
-      var leftX = Math.floor(clickX / rowSpacing);
+      var leftX = Math.floor(clickX / horizontalSpacing);
+      var topY = Math.floor(clickY / verticalSpacing);
       
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
       selectedBoardX = leftX;
-      selectedBoardY = Math.floor(((currentClickY - gameY - (Math.sqrt(3)/2)*(boardHexSize + spacing)*scale/2)/((Math.sqrt(3)/2)*boardHexSize*scale)))+6;
+      selectedBoardY = topY;
       //game.selectTile(selectedBoardX, selectBoardY);
    });
    
@@ -324,7 +326,9 @@ function renderHexagon(x, y, radius, tile) {
       //if (tile == game.selectedItem) {
          var prevStyle = ctx.fillStyle;
           ctx.fillStyle = "purple";
+          ctx.beginPath();
           ctx.arc(x, y, radius/4, 0, Math.Pi*2);
+          ctx.fill();
          ctx.fillStyle = prevStyle;
       //}
 }
