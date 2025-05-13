@@ -88,36 +88,8 @@ function initListeners() {
       }
    });
 
-   $("#myCanvas").on(["mouseup", "touchup"], function( event) {
-      
-      currentClickX = event.pageX - $('#myCanvas').offset().left;
-      currentClickY = event.pageY - $('#myCanvas').offset().top;
-
-      var horizontalSpacing = (scale*boardHexSize*(1.5+spacing))/2;
-      var verticalSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
-      
-      var clickX = currentClickX - gameX + (totalBoardWidth/2);
-      var clickY = currentClickY - gameY + (totalBoardHeight/2);
-
-      var leftX = Math.floor(clickX / horizontalSpacing);
-      var topY = Math.floor(clickY / verticalSpacing);
-
-      var posX = clickX % horizontalSpacing;
-      var posY = clickY % verticalSpacing;
-
-      var isTop = topY%2 != 0;
-      var isLeft = leftX%2 != 0;
-
-      if (isLeft && isTop) {
-         //check top left and bottom right
-            otherX = this.calcDistance(0, 0, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, verticalSpacing) ? "right1" : "left1";
-      } else {
-         //check bottom left and rop right
-         otherX = this.calcDistance(0, verticalSpacing, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, 0) ? "left2" : "right2";
-      }
-      
-      //game.selectTile(selectedBoardX, selectBoardY);
-   });
+   $("#myCanvas").on("mouseup", clickFunc);
+      $("#myCanvas").on("touchup", clickFunc);
    
   this.canvas.addEventListener('wheel', function(event){
       if (event.deltaY < 0) {
@@ -157,6 +129,37 @@ function initListeners() {
       dragging = false;
    });
 }
+
+function clickFunc( event) {
+      
+      currentClickX = event.pageX - $('#myCanvas').offset().left;
+      currentClickY = event.pageY - $('#myCanvas').offset().top;
+
+      var horizontalSpacing = (scale*boardHexSize*(1.5+spacing))/2;
+      var verticalSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
+      
+      var clickX = currentClickX - gameX + (totalBoardWidth/2);
+      var clickY = currentClickY - gameY + (totalBoardHeight/2);
+
+      var leftX = Math.floor(clickX / horizontalSpacing);
+      var topY = Math.floor(clickY / verticalSpacing);
+
+      var posX = clickX % horizontalSpacing;
+      var posY = clickY % verticalSpacing;
+
+      var isTop = topY%2 != 0;
+      var isLeft = leftX%2 != 0;
+
+      if (isLeft && isTop) {
+         //check top left and bottom right
+            otherX = this.calcDistance(0, 0, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, verticalSpacing) ? "right1" : "left1";
+      } else {
+         //check bottom left and rop right
+         otherX = this.calcDistance(0, verticalSpacing, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, 0) ? "left2" : "right2";
+      }
+      
+      //game.selectTile(selectedBoardX, selectBoardY);
+   }
 
 // Start the game loop
 function start() {
