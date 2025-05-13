@@ -105,22 +105,16 @@ function initListeners() {
       var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
 
-      var isBottom = topY%2 == 0;
-      var isLeft = leftX%2 == 0;
+      var isTop = topY%2 != 0;
+      var isLeft = leftX%2 != 0;
 
-      
-      otherX = isLeft;
-      otherY = isBottom;
-      
-      var checkLeft = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
-      var checkWidth = horizontalSpacing;
-      var checkTop = gameY - (totalBoardHeight/2) + (topY * verticalSpacing);
-      var checkHeight = verticalSpacing;
-
-      blahX = checkLeft;
-      blahWidth = checkWidth;
-      blahY = checkTop;
-      blahHeight = checkHeight;
+      if (isLeft && isTop) {
+         //check top left and bottom right
+            otherX = this.calcDistance(0, 0, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, verticalSpacing) ? "right1" : "left1";
+      } else {
+         //check bottom left and rop right
+         otherX = this.calcDistance(0, verticalSpacing, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, 0) ? "left2" : "right2";
+      }
       
       //game.selectTile(selectedBoardX, selectBoardY);
    });
@@ -209,7 +203,7 @@ function update(deltaTime) {
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
-  ctx.fillText("LR: " + otherX + " | isBottom: " + otherY, canvas.width/2, 80);
+  ctx.fillText(otherX, canvas.width/2, 80);
    
    /*
    //draw ruler
@@ -275,8 +269,8 @@ function update(deltaTime) {
    
 }
 
-function distance(x1,x2,y1,y) {
-    return Math.sqrt(Math.pow((x2 - x1),2) + Math.pow((y2 - y1),2));
+function calcDistance(x1,y1,x2,y2) {
+    return Math.sqrt(Math.abs(Math.pow((x2 - x1),2) + Math.pow((y2 - y1),2)));
 }
 
 /*
@@ -310,10 +304,6 @@ function drawBoard(xPos, yPos, hexRadius) {
             ctx.fillStyle = "white";
            ctx.fillText(x + "," + y, hexX, hexY);
             ctx.fillStyle = "black";
-
-            ctx.beginPath();
-            ctx.fillRect(blahX, blahY, blahWidth, blahHeight);
-            ctx.fill();
          }
      }
    }
