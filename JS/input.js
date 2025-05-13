@@ -100,7 +100,7 @@ function initListeners() {
       var clickY = currentClickY - gameY + (totalBoardHeight/2);
 
       var leftX = Math.floor(clickX / horizontalSpacing);
-      var topY = Math.floor(clickY / verticalSpacing) + 1;
+      var topY = Math.floor(clickY / verticalSpacing);
 
       var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
