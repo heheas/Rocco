@@ -88,7 +88,7 @@ function initListeners() {
       }
    });
 
-   $("#myCanvas").on("mouseup", function( event) {
+   $("#myCanvas").on(["mouseup", "touchup"], function( event) {
       
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
