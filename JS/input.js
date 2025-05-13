@@ -105,11 +105,11 @@ function initListeners() {
       var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
 
-      var isLeft = posX > horizontalSpacing/2;
+      var isLeft = posX > horizontalSpacing;
       var oddRow =  Math.floor(topY/2)%2 == 0;
 
       
-      otherX = isLeft;
+      otherX = posX + " | " + leftX + " - " + (leftX + horizontalSpacing);
       otherY = oddRow;
       
       var checkLeft = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
