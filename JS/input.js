@@ -77,7 +77,7 @@ function initListeners() {
 
       //console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
       if (dragging) {
-         console.log("dragging");
+         //console.log("dragging");
          gameX = itemOrigX + (xPos - dragXStart);
          gameY = itemOrigY + (yPos - dragYStart);
       }
@@ -282,6 +282,7 @@ function drawBoard(xPos, yPos, hexRadius) {
            ctx.font = Math.floor(10 * scale) + "px serif";
             ctx.fillStyle = "white";
            ctx.fillText(x + "," + y, hexX, hexY);
+            ctx.fillStyle = "black";
          }
      }
    }
