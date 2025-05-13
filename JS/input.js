@@ -114,7 +114,7 @@ function initListeners() {
       
       var checkLeft = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
       var checkWidth = horizontalSpacing;
-      var checkTop = gameY - (totalBoardHeight/2) + topY * verticalSpacing;
+      var checkTop = gameY - (totalBoardHeight/2) + (topY * verticalSpacing) - verticalSpacing/2;
       var checkHeight = verticalSpacing;
 
       blahX = checkLeft;
