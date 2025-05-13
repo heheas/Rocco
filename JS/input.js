@@ -75,7 +75,7 @@ function initListeners() {
       xPos = event.pageX - $('#myCanvas').offset().left;
       yPos = event.pageY - $('#myCanvas').offset().top;
 
-      console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
+      //console.log("Ctrl: " + ctrlDown + ", MouseDown: " + mouseDown);
       if (dragging) {
          console.log("dragging");
          gameX = itemOrigX + (xPos - dragXStart);
@@ -93,7 +93,7 @@ function initListeners() {
       
       var clickX = currentClickX - gameX + (totalBoardWidth/2);
 
-      var leftX = clickX / rowSpacing;
+      var leftX = Math.floor(clickX / rowSpacing);
       
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
@@ -320,6 +320,11 @@ function renderHexagon(x, y, radius, tile) {
       } else {
          ctx.fill();
       }
+      //if (tile == game.selectedItem) {
+          ctx.fillStyle = "purple";
+          ctx.arc(x, y, radius/4, 0, Math.Pi*2);
+         ctx.fill();
+      //}
 }
 
 function drawSelectedItem() {
