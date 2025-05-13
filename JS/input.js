@@ -204,7 +204,7 @@ function update(deltaTime) {
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
-  ctx.fillText(otherY, canvas.width/2, 80);
+  ctx.fillText(otherX, canvas.width/2, 80);
    
    /*
    //draw ruler
