@@ -326,9 +326,9 @@ function renderHexagon(x, y, radius, tile) {
       //if (tile == game.selectedItem) {
          var prevStyle = ctx.fillStyle;
           ctx.beginPath();
-         ctx.fillRect(20, 20, radius/4, radius/4);
-         ctx.fillRect(x + radius/2, y + radius/2, radius/4, radius/4);
           ctx.fillStyle = "red";
+         ctx.fillRect(20, 20, radius/4, radius/4);
+         ctx.fillRect(x, y, radius/4, radius/4);
           ctx.fill();
          ctx.fillStyle = prevStyle;
       //}
