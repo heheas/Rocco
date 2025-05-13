@@ -106,11 +106,11 @@ function initListeners() {
       var posY = clickY % verticalSpacing;
 
       var isBottom = topY%2 == 0;
-      var isLeft = clickX%horizontalSpacing < leftX + (horizontalSpacing/2);
+      var isLeft = leftX%2 == 0;
 
       
       otherX = isLeft;
-      otherY = oddRow;
+      otherY = isBottom;
       
       var checkLeft = gameX - (totalBoardWidth/2) + leftX * horizontalSpacing;
       var checkWidth = horizontalSpacing;
@@ -209,7 +209,7 @@ function update(deltaTime) {
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
-  ctx.fillText("LR: " + otherX + " | oddRow: " + otherY, canvas.width/2, 80);
+  ctx.fillText("LR: " + otherX + " | isBottom: " + otherY, canvas.width/2, 80);
    
    /*
    //draw ruler
