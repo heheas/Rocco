@@ -322,7 +322,7 @@ function renderHexagon(x, y, radius, tile) {
          ctx.fill();
       }
       //if (tile == game.selectedItem) {
-         var prevFill = ctx.fillStyle;
+         var prevStyle = ctx.fillStyle;
           ctx.fillStyle = "purple";
           ctx.arc(x, y, radius/4, 0, Math.Pi*2);
          ctx.fillStyle = prevStyle;
