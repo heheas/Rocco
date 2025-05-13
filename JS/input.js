@@ -96,11 +96,14 @@ function initListeners() {
 
       var leftX = Math.floor(clickX / horizontalSpacing);
       var topY = Math.floor(clickY / verticalSpacing);
+
+      var posX = clickX % horizontalSpacing;
+      var posY = clickY % verticalSpacing;
       
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
-      selectedBoardX = leftX;
-      selectedBoardY = topY;
+      selectedBoardX = posX;
+      selectedBoardY = posY;
       //game.selectTile(selectedBoardX, selectBoardY);
    });
    
