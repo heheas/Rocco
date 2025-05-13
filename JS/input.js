@@ -91,9 +91,13 @@ function initListeners() {
       var rowSpacing = (scale*boardHexSize*(1.5+spacing))/2;
       var colSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
       
+      var clickX = currentClickX - gameX + (totalBoardWidth/2);
+
+      var leftX = clickX / rowSpacing;
+      
       //selectedBoardX = ((currentClickX - (gameX - totalBoardWidth/2) - boardHexSize*scale/2)/totalBoardWidth);
       //selectedBoardX = Math.floor(((currentClickX - gameX - (boardHexSize + spacing)*scale/2)/(boardHexSize*scale*2)))+3;
-      selectedBoardX = currentClickX - gameX + (totalBoardWidth/2);
+      selectedBoardX = leftX;
       selectedBoardY = Math.floor(((currentClickY - gameY - (Math.sqrt(3)/2)*(boardHexSize + spacing)*scale/2)/((Math.sqrt(3)/2)*boardHexSize*scale)))+6;
       //game.selectTile(selectedBoardX, selectBoardY);
    });
@@ -182,6 +186,7 @@ function update(deltaTime) {
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
+   
    /*
    //draw ruler
    ctx.strokeStyle = "black";
@@ -236,12 +241,13 @@ function update(deltaTime) {
    ctx.fillText("50", xPos + 55, yPos - 18);
    */
    
+   /* diagonal between hexes
    ctx.beginPath();
    ctx.moveTo(xPos, yPos);
    ctx.lineTo(xPos + (scale*boardHexSize*(1.5+spacing))/2, yPos + (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4));
    ctx.closePath();
    ctx.stroke();
-
+   */
    
 }
 
