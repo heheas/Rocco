@@ -327,7 +327,7 @@ function renderHexagon(x, y, radius, tile) {
          var prevStyle = ctx.fillStyle;
           ctx.beginPath();
           ctx.arc(x + radius/2, y + radius/2, radius/4, 0, Math.Pi*2);
-         ctx.drawRect(20,20,20,20);
+         ctx.fillRect(20,20,20,20);
           ctx.fillStyle = "red";
           ctx.fill();
          ctx.fillStyle = prevStyle;
