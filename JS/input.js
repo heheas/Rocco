@@ -150,6 +150,7 @@ function clickFunc( event) {
       var isTop = topY%2 != 0;
       var isLeft = leftX%2 != 0;
 
+      otherX = "Top: " + isTop + " | " + isLeft;
       if (isLeft && isTop || !isLeft && !isTop) {
          //check top left and bottom right
             if (calcDistance(0, 0, posX, posY) < calcDistance(posX, posY, horizontalSpacing, verticalSpacing)) {
