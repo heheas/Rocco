@@ -152,10 +152,10 @@ function clickFunc( event) {
 
       if (isLeft && isTop) {
          //check top left and bottom right
-            otherX = this.calcDistance(0, 0, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, verticalSpacing) ? "right1" : "left1";
+            otherX = calcDistance(0, 0, posX, posY) < calcDistance(posX, posY, horizontalSpacing, verticalSpacing) ? "right1" : "left1";
       } else {
          //check bottom left and rop right
-         otherX = this.calcDistance(0, verticalSpacing, posX, posY) < this.calcDistance(posX, posY, horizontalSpacing, 0) ? "left2" : "right2";
+         otherX = calcDistance(0, verticalSpacing, posX, posY) < calcDistance(posX, posY, horizontalSpacing, 0) ? "left2" : "right2";
       }
       
       //game.selectTile(selectedBoardX, selectBoardY);
