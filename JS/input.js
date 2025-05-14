@@ -154,20 +154,20 @@ function clickFunc( event) {
       if (isLeft && isTop || !isLeft && !isTop) {
          //check top left and bottom right
             if (calcDistance(0, 0, posX, posY) < calcDistance(posX, posY, horizontalSpacing, verticalSpacing)) {
-               selectedX = posX;
-               selectedY = posY;
+               selectedBoardX = posX;
+               selectedBoardY = posY;
             } else {
-               selectedX = posX+1;
-               selectedY = posY+1;
+               selectedBoardX = posX+1;
+               selectedBoardY = posY+1;
             }
       } else {
          //check bottom left and rop right
          if (calcDistance(0, verticalSpacing, posX, posY) < calcDistance(posX, posY, horizontalSpacing, 0)) {
-            selectedX = posX+1;
-            selectedY = posY+1;
+            selectedBoardX = posX+1;
+            selectedBoardY = posY+1;
          } else {
-            selectedX = posX;
-            selectedY = posY;
+            selectedBoardX = posX;
+            selectedBoardY = posY;
          }
       }
       
