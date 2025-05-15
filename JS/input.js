@@ -135,43 +135,84 @@ function clickFunc( event) {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
-      var horizontalSpacing = (scale*boardHexSize*(1.5+spacing))/2;
-      var verticalSpacing = (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4);
+      /*
+            let hexX = xPos + (x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
+            let hexY = yPos + (y*(((radius+spacing)/2)*(Math.sqrt(3)/2))) - totalBoardHeight/2;
+      */
       
-      var clickX = currentClickX - gameX + (totalBoardWidth/2);
-      var clickY = currentClickY - gameY + (totalBoardHeight/2);
+      var clickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
+      var clickY = currentClickY - gameY + (totalBoardHeight/2) + boardHexSize/2;
+
+      var horizontalSpacing = (scale*(1.5*radius+2*spacing))/2;
+      var verticalSpacing = (scale*(((radius+spacing)/2)*(Math.sqrt(3)/2)));
 
       var leftX = Math.floor(clickX / horizontalSpacing);
       var topY = Math.floor(clickY / verticalSpacing);
 
       var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
+      var checkLeft = posX < horizontalSpacing/2;
 
-      var isTop = topY%2 != 0;
-      var isLeft = leftX%2 != 0;
-
-      otherX = "Top: " + isTop + " | " + isLeft;
-      if (isLeft && isTop || !isLeft && !isTop) {
-         //check top left and bottom right
-            if (calcDistance(0, 0, posX, posY) < calcDistance(posX, posY, horizontalSpacing, verticalSpacing)) {
-               selectedBoardX = leftX;
-               selectedBoardY = topY;
-            } else {
-               selectedBoardX = leftX+1;
-               selectedBoardY = topY+1;
-            }
-      } else {
-         //check bottom left and rop right
-         if (calcDistance(0, verticalSpacing, posX, posY) < calcDistance(posX, posY, horizontalSpacing, 0)) {
-            selectedBoardX = leftX+1;
-            selectedBoardY = topY+1;
-         } else {
-            selectedBoardX = leftX;
-            selectedBoardY = topY;
+      var checkMiddle;
+      if (leftX % 2 == 0) { //even col
+         if (topY%2 == 0) { //even row
+            //check corners;
+            otherX = "corners";
+            checkMiddle = true;
+         } else { //odd row
+            //check middles
+            otherX = "middles";
+            checkMiddle = true;
+         }
+      } else { //odd col
+         if (topY%2 == 0) { //even row
+            //check middles
+            otherX = "middles";
+            checkMiddle = true;
+         } else { //odd row
+            //check corners;
+            otherX = "corners";
+            checkMiddle = false;
          }
       }
+
+
+      blahX = gameX + (horizontalSpacing * leftX) - totalBoardWidth/2 ;
+      blahY = gameY + (verticalSpacing * topY) - totalBoardHeight/2;
+      blahWidth = horizontalSpacing;
+      blahHeight = verticalSpacing;
+      
+      //var isLeftTile = checkingLeft ? calcDistance()
+      var tileCoords = findTileCoords(posX, posY, leftX, topY, horizontalSpacing, verticalSpacing, checkLeft, checkMiddle);
+      selectedBoardX = Math.floor(tileCoords.x/2);
+      selectedBoardY = tileCoords.x%2 == 0 && tileCoords.y%2 == 0 ? Math.floor(tileCoords.y/2)*2 : Math.floor(0.5 + (tileCoords.y/2))*2;
+      /*if (isLeft && isTop || !isLeft && !isTop) {//check top left and bottom right
+            if (calcDistance(0, 0, posX, posY) < calcDistance(posX, posY, horizontalSpacing, verticalSpacing)) { //Closer to the Left
+               selectedBoardX = isTop ? leftX + 1 : leftX;
+               selectedBoardY = isTop ? topY : topY;
+            } else { //closer to the Right
+               selectedBoardX = isTop ? leftX+1 : leftX;
+               selectedBoardY = topY + 1;
+            }
+      } else { //check bottom left and top right
+         if (calcDistance(0, verticalSpacing, posX, posY) < calcDistance(posX, posY, horizontalSpacing, 0)) { //closer to the left
+            selectedBoardX = isTop ? leftX : leftX+1;
+            selectedBoardY = isTop ? topY + 1 : topY;
+         } else { //closer to the right
+            selectedBoardX = isTop ? leftX : leftX - 2;
+            selectedBoardY = topY;
+         }
+      }*/
       
       //game.selectTile(selectedBoardX, selectBoardY);
+   }
+
+   function findTileCoords(cX, cY, leftX, topY, w, h, checkLeft, checkMiddle) {
+      if (checkLeft) {
+         return calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0) ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
+      } else {
+         return calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY) ? {x: leftX + w, y: topY - h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
+      }
    }
 
 // Start the game loop
@@ -213,7 +254,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-  drawBoard(gameX,gameY, boardHexSize*scale);
+  drawBoard(gameX,gameY, boardHexSize);
   drawSelectedItem();
    
   ctx.font = Math.floor(16 * scale) + "px serif";
@@ -221,6 +262,9 @@ function update(deltaTime) {
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
   ctx.fillText(otherX, canvas.width/2, 80);
    
+  ctx.beginPath();
+  ctx.fillRect(blahX, blahY, blahWidth, blahHeight);
+  ctx.fill();
    /*
    //draw ruler
    ctx.strokeStyle = "black";
@@ -294,25 +338,28 @@ function calcDistance(x1,y1,x2,y2) {
 */
 function drawBoard(xPos, yPos, hexRadius) {
 
-   spacing = hexRadius*0.05/45;
-   totalBoardWidth = (6*hexRadius*(1.5+spacing));
-   totalBoardHeight = (20*hexRadius*(1+spacing)/2*Math.sqrt(3)/2);
+   radius = scale*hexRadius;
+   spacing = scale*hexRadius*5/45;
    
-   //drawbackground
-   var labSize = hexRadius/1.5;
+   totalBoardWidth = (6*(1.5*radius+2*spacing));
+   totalBoardHeight = (20*(radius/2+spacing/2)*(Math.sqrt(3)/2));
+   
+   //draw lab
+   var labSize = radius/1.5;
    ctx.drawImage(labIMG, xPos - labSize/2, yPos - labSize/2, labSize, labSize);
-     
+   
+   //draw tiles
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
          if (tile != undefined && tile.type != TileType.INVALID) {
-            let oddfset = y % 2 == 0 ? 0 : hexRadius/2;
-            let hexX = xPos + (x*hexRadius*(1.5+spacing)) + oddfset*(1.5+spacing) - totalBoardWidth/2;
-            let hexY = yPos + (y*hexRadius*(1+spacing)/2*Math.sqrt(3)/2) - totalBoardHeight/2;
+            let oddfset = y % 2 == 0 ? 0 : 0.75*radius + spacing;
+            let hexX = xPos + (x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
+            let hexY = yPos + (y*(((radius+spacing)/2)*(Math.sqrt(3)/2))) - totalBoardHeight/2;
             drawHexagon(
                hexX,
                hexY,
-               hexRadius,
+               radius,
                tile
             );
             
