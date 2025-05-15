@@ -178,8 +178,8 @@ function clickFunc( event) {
       }
 
 
-      blahX = gameX - (totalBoardWidth/2) + ((horizontalSpacing-1) * leftX)  ;
-      blahY = gameY - (totalBoardHeight/2) + ((verticalSpacing-1) * topY);
+      blahX = gameX - (totalBoardWidth/2) + ((horizontalSpacing) * leftX-1);
+      blahY = gameY - (totalBoardHeight/2) + ((verticalSpacing) * topY-1);
       blahWidth = horizontalSpacing;
       blahHeight = verticalSpacing;
       
