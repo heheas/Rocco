@@ -37,6 +37,7 @@ var totalBoardHeight = 0;
 //blah
 var blahX, blahY, blahWidth, blahHeight;
 var inX1, inY1, inX2, inY2, mX, mY, clX, clY;
+var toPrint;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -135,6 +136,7 @@ function clickFunc( event) {
       
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
+      toPrint += "X,Y: " + currentClickX + "," + currentClickY + "<br/>";
 
       /*
             let hexX = xPos + (x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
@@ -143,15 +145,20 @@ function clickFunc( event) {
       
       var clickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
       var clickY = currentClickY - gameY + (totalBoardHeight/2) + boardHexSize/2;
+      toPrint += "click game X,Y: " + clickX + "," + clickY + "<br/>";
 
       var horizontalSpacing = (scale*(1.5*radius+2*spacing))/2;
       var verticalSpacing = (scale*(((radius+spacing)/2)*(Math.sqrt(3)/2)));
+      toPrint += "horzSpace, vertSpace: " + horizontalSpacing + "," + verticalSpacing + "<br/>";
 
       var leftX = Math.floor(clickX / horizontalSpacing);
       var topY = Math.floor(clickY / verticalSpacing);
+      toPrint += "leftX,topY: " + leftX + "," + topY + "<br/>";
 
       var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
+      toPrint += "posX,posY: " + posX + "," + posY + "<br/>";
+   
       var checkLeft = posX < horizontalSpacing/2;
 
       var checkMiddle;
@@ -185,8 +192,8 @@ function clickFunc( event) {
       
       //var isLeftTile = checkingLeft ? calcDistance()
       var tileCoords = findTileCoords(posX, posY, leftX, topY, horizontalSpacing, verticalSpacing, checkLeft, checkMiddle);
-      selectedBoardX = Math.floor(tileCoords.x/2);
-      selectedBoardY = tileCoords.x%2 == 0 && tileCoords.y%2 == 0 ? Math.floor(tileCoords.y/2)*2 : Math.floor(0.5 + (tileCoords.y/2))*2;
+      //selectedBoardX = Math.floor(tileCoords.x/2);
+      //selectedBoardY = tileCoords.x%2 == 0 && tileCoords.y%2 == 0 ? Math.floor(tileCoords.y/2)*2 : Math.floor(0.5 + (tileCoords.y/2))*2;
       /*if (isLeft && isTop || !isLeft && !isTop) {//check top left and bottom right
             if (calcDistance(0, 0, posX, posY) < calcDistance(posX, posY, horizontalSpacing, verticalSpacing)) { //Closer to the Left
                selectedBoardX = isTop ? leftX + 1 : leftX;
@@ -269,6 +276,8 @@ function loop(timestamp) {
 
 // Update game state - override this method in your implementation
 function update(deltaTime) {
+   $('#toPrint').text(toPrint);
+   toPrint = "";
    //clear canvas
    ctx.clearRect(0, 0, canvas.width, canvas.height);
    
