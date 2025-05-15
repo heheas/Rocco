@@ -36,7 +36,7 @@ var totalBoardHeight = 0;
 
 //blah
 var blahX, blahY, blahWidth, blahHeight;
-var inX1, inY1, inX2, inY2, mX, mY;
+var inX1, inY1, inX2, inY2, mX, mY, cX, cY;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -216,7 +216,8 @@ function clickFunc( event) {
          inY2 = gameY - totalBoardHeight/2 + topY;
          mX = gameX - totalBoardWidth/2 + cX - w/2;
          mY = gameY - totalBoardHeight/2 + cY;
-         return calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0) ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
+         var closer2Left = calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0);
+         return closer2Left ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       } else {
          inX1 =  gameX - totalBoardWidth/2 + leftX + w;
          inY1 = gameY - totalBoardHeight/2 + topY + h;
@@ -224,7 +225,8 @@ function clickFunc( event) {
          inY2 = gameY - totalBoardHeight/2 + topY;
          mX = gameX - totalBoardWidth/2 + cX - w/2;
          mY = gameY - totalBoardHeight/2 + cY;
-         return calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY) ? {x: leftX + w, y: topY - h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
+         var closer2Left = calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY);
+         return closer2Left ? {x: leftX + w, y: topY - h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       }
    }
 
@@ -293,6 +295,12 @@ function update(deltaTime) {
    ctx.fillStyle = "black";
    ctx.arc(mX -1.5, mY -1.5, 3, 0, 2*Math.PI);
    ctx.fill();
+
+   ctx.beginPath();
+   ctx.strokeStyle = "black";
+   ctx.moveTo(mX, mY);
+   ctx.lineTo(cX, cY);
+   ctx.stroke();
    /*
    //draw ruler
    ctx.strokeStyle = "black";
