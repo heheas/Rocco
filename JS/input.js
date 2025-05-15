@@ -36,7 +36,7 @@ var totalBoardHeight = 0;
 
 //blah
 var blahX, blahY, blahWidth, blahHeight;
-var inX1, inY1, inX2, inY2;
+var inX1, inY1, inX2, inY2, mX, mY;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -214,12 +214,16 @@ function clickFunc( event) {
          inY1 =  gameY - totalBoardHeight/2 + topY-h;
          inX2 =  gameX - totalBoardWidth/2 + leftX;
          inY2 = gameY - totalBoardHeight/2 + topY;
+         mX = gameX - totalBoardWidth/2 + cX - w/2;
+         mY = gameY - totalBoardHeight/2 + cY;
          return calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0) ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       } else {
          inX1 =  gameX - totalBoardWidth/2 + leftX + w;
          inY1 = gameY - totalBoardHeight/2 + topY + h;
          inX2 =  gameX - totalBoardWidth/2 + leftX;
          inY2 = gameY - totalBoardHeight/2 + topY;
+         mX = gameX - totalBoardWidth/2 + cX - w/2;
+         mY = gameY - totalBoardHeight/2 + cY;
          return calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY) ? {x: leftX + w, y: topY - h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       }
    }
