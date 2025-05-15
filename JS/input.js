@@ -136,7 +136,7 @@ function clickFunc( event) {
       toPrint = "";
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
-      toPrint += "X,Y: " + currentClickX + "," + currentClickY + "<br/>";
+      toPrint += "Click X,Y: " + currentClickX + "," + currentClickY + "<br/>";
 
       /*
             let hexX = xPos + (x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
@@ -145,11 +145,11 @@ function clickFunc( event) {
       
       var clickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
       var clickY = currentClickY - gameY + (totalBoardHeight/2) + boardHexSize/2;
-      toPrint += "click game X,Y: " + clickX + "," + clickY + "<br/>";
+      toPrint += "Board X,Y: " + clickX + "," + clickY + "<br/>";
 
       var horizontalSpacing = (scale*(1.5*radius+2*spacing))/2;
       var verticalSpacing = (scale*(((radius+spacing)/2)*(Math.sqrt(3)/2)));
-      toPrint += "horzSpace, vertSpace: " + horizontalSpacing + "," + verticalSpacing + "<br/>";
+      toPrint += "TileWidth(+Space),TileHeight(+Space): " + horizontalSpacing + "," + verticalSpacing + "<br/>";
 
       var leftX = Math.floor(clickX / horizontalSpacing);
       var topY = Math.floor(clickY / verticalSpacing);
@@ -157,7 +157,7 @@ function clickFunc( event) {
 
       var posX = clickX % horizontalSpacing;
       var posY = clickY % verticalSpacing;
-      toPrint += "posX,posY: " + posX + "," + posY + "<br/>";
+      toPrint += "Normed posX,Normed posY: " + posX + "," + posY + "<br/>";
    
       var checkLeft = posX < horizontalSpacing/2;
 
