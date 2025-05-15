@@ -216,7 +216,6 @@ function clickFunc( event) {
          inY2 = topY;
          return calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0) ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       } else {
-      if (checkLeft) {
          inX1 = leftX + w;
          inY1 = topY + h;
          inX2 = leftX;
