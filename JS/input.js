@@ -133,7 +133,7 @@ function initListeners() {
 }
 
 function clickFunc( event) {
-      
+      toPrint = "";
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
       toPrint += "X,Y: " + currentClickX + "," + currentClickY + "<br/>";
@@ -276,7 +276,6 @@ function loop(timestamp) {
 
 // Update game state - override this method in your implementation
 function update(deltaTime) {
-   toPrint = "";
    //clear canvas
    ctx.clearRect(0, 0, canvas.width, canvas.height);
    
