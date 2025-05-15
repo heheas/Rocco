@@ -10,8 +10,6 @@ var dragXStart = 0;
 var dragYStart = 0;
 var itemOrigX = 0;
 var itemOrigY = 0;
-var currentClickX = 0;
-var currentClickY = 0;
 
 var canvas;
 var ctx;
@@ -20,6 +18,16 @@ var ctx;
 var selectedBoxSize = 150;
 var selectedBoardX;
 var selectedBoardY;
+var currentClickX = 0;
+var currentClickY = 0;
+var horizontalSpacing = 0;
+var verticalSpacing = 0;
+var boardClickX = 0;
+var boardClickY = 0;
+var normPosX = 0;
+var normPosY = 0;
+var leftX = 0;
+var topY = 0;
 var otherX;
 var otherY;
 
@@ -136,50 +144,45 @@ function clickFunc( event) {
       toPrint = "";
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
-      toPrint += "Click X,Y: " + currentClickX + "," + currentClickY + "<br/>";
 
       /*
             let hexX = xPos + (x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
             let hexY = yPos + (y*(((radius+spacing)/2)*(Math.sqrt(3)/2))) - totalBoardHeight/2;
       */
       
-      var clickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
-      var clickY = currentClickY - gameY + (totalBoardHeight/2) + boardHexSize/2;
-      toPrint += "Board X,Y: " + clickX + "," + clickY + "<br/>";
+      boardClickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
+      boardClickY = currentClickY - gameY + (totalBoardHeight/2) + boardHexSize/2;
 
-      var horizontalSpacing = (scale*(1.5*radius+2*spacing))/2;
-      var verticalSpacing = (scale*(((radius+spacing)/2)*(Math.sqrt(3)/2)));
-      toPrint += "TileWidth(+Space),TileHeight(+Space): " + horizontalSpacing + "," + verticalSpacing + "<br/>";
+      horizontalSpacing = (scale*(1.5*radius+2*spacing))/2;
+      verticalSpacing = (scale*(((radius+spacing)/2)*(Math.sqrt(3)/2)));
 
-      var leftX = Math.floor(clickX / horizontalSpacing);
-      var topY = Math.floor(clickY / verticalSpacing);
-      toPrint += "leftX,topY: " + leftX + "," + topY + "<br/>";
+      leftX = Math.floor(boardClickX / horizontalSpacing);
+      topY = Math.floor(boardClickY / verticalSpacing);
 
-      var posX = clickX % horizontalSpacing;
-      var posY = clickY % verticalSpacing;
-      toPrint += "Normed posX,Normed posY: " + posX + "," + posY + "<br/>";
+      normPosX = boardClickX % horizontalSpacing;
+      normPosY = boardClickY % verticalSpacing;
    
-      var checkLeft = posX < horizontalSpacing/2;
+      var checkLeft = normPosX < horizontalSpacing/2;
 
       var checkMiddle;
       if (leftX % 2 == 0) { //even col
          if (topY%2 == 0) { //even row
             //check corners;
-            otherX = "corners";
+            //otherX = "corners";
             checkMiddle = true;
          } else { //odd row
             //check middles
-            otherX = "middles";
+            //otherX = "middles";
             checkMiddle = true;
          }
       } else { //odd col
          if (topY%2 == 0) { //even row
             //check middles
-            otherX = "middles";
+            //otherX = "middles";
             checkMiddle = true;
          } else { //odd row
             //check corners;
-            otherX = "corners";
+            //otherX = "corners";
             checkMiddle = false;
          }
       }
@@ -191,7 +194,7 @@ function clickFunc( event) {
       blahHeight = verticalSpacing;
       
       //var isLeftTile = checkingLeft ? calcDistance()
-      var tileCoords = findTileCoords(posX, posY, leftX, topY, horizontalSpacing, verticalSpacing, checkLeft, checkMiddle);
+      var tileCoords = findTileCoords(normPosX, normPosY, leftX, topY, horizontalSpacing, verticalSpacing, checkLeft, checkMiddle);
       //selectedBoardX = Math.floor(tileCoords.x/2);
       //selectedBoardY = tileCoords.x%2 == 0 && tileCoords.y%2 == 0 ? Math.floor(tileCoords.y/2)*2 : Math.floor(0.5 + (tileCoords.y/2))*2;
       /*if (isLeft && isTop || !isLeft && !isTop) {//check top left and bottom right
@@ -215,7 +218,7 @@ function clickFunc( event) {
       //game.selectTile(selectedBoardX, selectBoardY);
    }
 
-   function findTileCoords(cX, cY, leftX, topY, w, h, checkLeft, checkMiddle) {
+   function findTileCoords(cX, cY, axisX, axisY, w, h, checkLeft, checkMiddle) {
       var worldX = gameX - totalBoardWidth/2;
       var worldY = gameY - totalBoardHeight/2;
       
@@ -223,23 +226,25 @@ function clickFunc( event) {
       clY = worldY + cY;
       
       if (checkLeft) {
-         inX1 = gameX - totalBoardWidth/2 + leftX -w;
-         inY1 =  gameY - totalBoardHeight/2 + topY-h;
-         inX2 =  gameX - totalBoardWidth/2 + leftX;
-         inY2 = gameY - totalBoardHeight/2 + topY;
+         otherX = "left";
+         inX1 = worldX+ leftX -w;
+         inY1 =  worldY + topY-h;
+         inX2 =  worldX + leftX;
+         inY2 = worldY + topY;
          var closer2Left = calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0);
          mX = closer2Left ? worldX - w : worldX;
          mY = closer2Left ? worldY -h : worldY;
-         return closer2Left ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
+         return closer2Left ? {x: axisX -w, y: axisY -h + (checkMiddle ? 1:0)} : {x: axisX, y: axisY};
       } else {
-         inX1 =  gameX - totalBoardWidth/2 + leftX + w;
-         inY1 = gameY - totalBoardHeight/2 + topY + h;
-         inX2 =  gameX - totalBoardWidth/2 + leftX;
-         inY2 = gameY - totalBoardHeight/2 + topY;
+         otherX = "right";
+         inX1 =  worldX + leftX + w;
+         inY1 = worldY + topY + h;
+         inX2 =  worldX + leftX;
+         inY2 = worldY + topY;
          var closer2Left = calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY);
          mX = closer2Left ? worldX + w : worldX;
          mY = closer2Left ? worldY + h : worldY;
-         return closer2Left ? {x: leftX + w, y: topY - h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
+         return closer2Left ? {x: axisX + w, y: axisY - h + (checkMiddle ? 1:0)} : {x: axisX, y: axisY};
       }
    }
 
