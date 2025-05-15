@@ -276,7 +276,6 @@ function loop(timestamp) {
 
 // Update game state - override this method in your implementation
 function update(deltaTime) {
-   $('#toPrint').text(toPrint);
    toPrint = "";
    //clear canvas
    ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -378,6 +377,7 @@ function update(deltaTime) {
    ctx.stroke();
    */
    
+   $('#toPrint').text(toPrint);
 }
 
 function calcDistance(x1,y1,x2,y2) {
