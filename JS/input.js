@@ -284,10 +284,12 @@ function update(deltaTime) {
    ctx.arc(inX1 -1.5 -1.5, inY1, 3, 0, 2*Math.PI);
    ctx.fill();
    
+   ctx.beginPath();
    ctx.fillStyle = "green";
    ctx.arc(inX2 -1.5, inY2 -1.5, 3, 0, 2*Math.PI);
    ctx.fill();
    
+   ctx.beginPath();
    ctx.fillStyle = "black";
    ctx.arc(mX -1.5, mY -1.5, 3, 0, 2*Math.PI);
    ctx.fill();
