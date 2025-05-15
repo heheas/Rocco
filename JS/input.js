@@ -209,17 +209,18 @@ function clickFunc( event) {
    }
 
    function findTileCoords(cX, cY, leftX, topY, w, h, checkLeft, checkMiddle) {
+      gameX + (horizontalSpacing * leftX) - totalBoardWidth/2
       if (checkLeft) {
-         inX1 = leftX-w;
-         inY1 = topY-h;
-         inX2 = leftX;
-         inY2 = topY;
+         inX1 = gameX - totalBoardWidth/2 + leftX -w;
+         inY1 =  gameY - totalBoardHeight/2 + topY-h;
+         inX2 =  gameX - totalBoardWidth/2 + leftX;
+         inY2 = gameY - totalBoardHeight/2 + topY;
          return calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0) ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       } else {
-         inX1 = leftX + w;
-         inY1 = topY + h;
-         inX2 = leftX;
-         inY2 = topY;
+         inX1 =  gameX - totalBoardWidth/2 + leftX + w;
+         inY1 = gameY - totalBoardHeight/2 + topY + h;
+         inX2 =  gameX - totalBoardWidth/2 + leftX;
+         inY2 = gameY - totalBoardHeight/2 + topY;
          return calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY) ? {x: leftX + w, y: topY - h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       }
    }
@@ -278,6 +279,8 @@ function update(deltaTime) {
    ctx.beginPath();
    ctx.strokeStyle = "blue";
    ctx.arc(inX1, inY1, 5, 0, 2*Math.PI);
+   ctx.stroke();
+   
    ctx.strokeStyle = "green";
    ctx.arc(inX2, inY2, 5, 0, 2*Math.PI);
    ctx.stroke();
