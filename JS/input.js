@@ -281,6 +281,7 @@ function update(deltaTime) {
    ctx.arc(inX1, inY1, 5, 0, 2*Math.PI);
    ctx.strokeStyle = "green";
    ctx.arc(inX2, inY2, 5, 0, 2*Math.PI);
+   ctx.stroke();
    /*
    //draw ruler
    ctx.strokeStyle = "black";
