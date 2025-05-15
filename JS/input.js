@@ -216,18 +216,19 @@ function clickFunc( event) {
          inY1 =  gameY - totalBoardHeight/2 + topY-h;
          inX2 =  gameX - totalBoardWidth/2 + leftX;
          inY2 = gameY - totalBoardHeight/2 + topY;
-         mX = gameX - totalBoardWidth/2 + cX - w/2;
          mY = gameY - totalBoardHeight/2 + cY;
          var closer2Left = calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0);
+         mX = closer2Left ? gameX - totalBoardWidth/2 - w : gameX - totalBoardWidth/2;
+         mY = closer2Left ? gameY - totalBoardHeight/2 - h : gameY - totalBoardHeight/2;
          return closer2Left ? {x: leftX -w, y: topY -h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       } else {
          inX1 =  gameX - totalBoardWidth/2 + leftX + w;
          inY1 = gameY - totalBoardHeight/2 + topY + h;
          inX2 =  gameX - totalBoardWidth/2 + leftX;
          inY2 = gameY - totalBoardHeight/2 + topY;
-         mX = gameX - totalBoardWidth/2 + cX - w/2;
-         mY = gameY - totalBoardHeight/2 + cY;
          var closer2Left = calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY);
+         mX = closer2Left ? gameX - totalBoardWidth/2 + cX - w/2 : gameX - totalBoardWidth/2;
+         mY = closer2Left ? gameY - totalBoardHeight/2 + cY : gameY - totalBoardHeight/2;
          return closer2Left ? {x: leftX + w, y: topY - h + (checkMiddle ? 1:0)} : {x: leftX, y: topY};
       }
    }
