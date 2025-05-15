@@ -36,7 +36,7 @@ var totalBoardHeight = 0;
 
 //blah
 var blahX, blahY, blahWidth, blahHeight;
-var inX1, inY1, inX2, inY2, mX, mY, cX, cY;
+var inX1, inY1, inX2, inY2, mX, mY, clX, clY;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -209,6 +209,8 @@ function clickFunc( event) {
    }
 
    function findTileCoords(cX, cY, leftX, topY, w, h, checkLeft, checkMiddle) {
+      clX = cX;
+      clY = cY;
       if (checkLeft) {
          inX1 = gameX - totalBoardWidth/2 + leftX -w;
          inY1 =  gameY - totalBoardHeight/2 + topY-h;
@@ -299,7 +301,7 @@ function update(deltaTime) {
    ctx.beginPath();
    ctx.strokeStyle = "black";
    ctx.moveTo(mX, mY);
-   ctx.lineTo(cX, cY);
+   ctx.lineTo(clX, clY);
    ctx.stroke();
    /*
    //draw ruler
