@@ -36,6 +36,7 @@ var totalBoardHeight = 0;
 
 //blah
 var blahX, blahY, blahWidth, blahHeight;
+var inX1, inY1, inX2, inY2;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -265,6 +266,12 @@ function update(deltaTime) {
   ctx.beginPath();
   ctx.fillRect(blahX, blahY, blahWidth, blahHeight);
   ctx.fill();
+
+   ctx.beginPath();
+   ctx.strokeStyle = "blue";
+   ctx.arc(inX1, inY1, 5, 0, 2*Math.PI);
+   ctx.strokeStyle = "green";
+   ctx.arc(inX2, inY2, 5, 0, 2*Math.PI);
    /*
    //draw ruler
    ctx.strokeStyle = "black";
