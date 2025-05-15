@@ -376,7 +376,7 @@ function update(deltaTime) {
    ctx.stroke();
    */
    
-   $('#toPrint').text(toPrint);
+   $('#toPrint').html(toPrint);
 }
 
 function calcDistance(x1,y1,x2,y2) {
