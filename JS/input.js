@@ -209,7 +209,6 @@ function clickFunc( event) {
    }
 
    function findTileCoords(cX, cY, leftX, topY, w, h, checkLeft, checkMiddle) {
-      gameX + (horizontalSpacing * leftX) - totalBoardWidth/2
       if (checkLeft) {
          inX1 = gameX - totalBoardWidth/2 + leftX -w;
          inY1 =  gameY - totalBoardHeight/2 + topY-h;
