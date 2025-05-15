@@ -164,26 +164,26 @@ function clickFunc( event) {
    
       var checkLeft = normPosX < horizontalSpacing/2;
 
-      var checkMiddle;
+      var isFlipped;
       if (leftX % 2 == 0) { //even col
          if (topY%2 == 0) { //even row
             //check corners;
             //otherX = "corners";
-            checkMiddle = true;
+            isFlipped = true;
          } else { //odd row
             //check middles
             //otherX = "middles";
-            checkMiddle = true;
+            isFlipped = true;
          }
       } else { //odd col
          if (topY%2 == 0) { //even row
             //check middles
             //otherX = "middles";
-            checkMiddle = true;
+            isFlipped = true;
          } else { //odd row
             //check corners;
             //otherX = "corners";
-            checkMiddle = false;
+            isFlipped = false;
          }
       }
 
@@ -194,7 +194,7 @@ function clickFunc( event) {
       blahHeight = verticalSpacing;
       
       //var isLeftTile = checkingLeft ? calcDistance()
-      var tileCoords = findTileCoords(normPosX, normPosY, leftX, topY, horizontalSpacing, verticalSpacing, checkLeft, checkMiddle);
+      var tileCoords = findTileCoords(normPosX, normPosY, leftX, topY, horizontalSpacing, verticalSpacing, checkLeft, isFlipped);
       //selectedBoardX = Math.floor(tileCoords.x/2);
       //selectedBoardY = tileCoords.x%2 == 0 && tileCoords.y%2 == 0 ? Math.floor(tileCoords.y/2)*2 : Math.floor(0.5 + (tileCoords.y/2))*2;
       /*if (isLeft && isTop || !isLeft && !isTop) {//check top left and bottom right
@@ -218,7 +218,7 @@ function clickFunc( event) {
       //game.selectTile(selectedBoardX, selectBoardY);
    }
 
-   function findTileCoords(cX, cY, axisX, axisY, w, h, checkLeft, checkMiddle) {
+   function findTileCoords(cX, cY, axisX, axisY, w, h, checkLeft, isFlipped) {
       var worldX = gameX - totalBoardWidth/2;
       var worldY = gameY - totalBoardHeight/2;
       
@@ -226,6 +226,7 @@ function clickFunc( event) {
       clY = worldY + cY;
       
       if (checkLeft) {
+         //implement flip
          otherX = "left";
          inX1 = worldX+ leftX -w;
          inY1 =  worldY + topY-h;
@@ -234,8 +235,9 @@ function clickFunc( event) {
          var closer2Left = calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0);
          mX = closer2Left ? worldX - w : worldX;
          mY = closer2Left ? worldY -h : worldY;
-         return closer2Left ? {x: axisX -w, y: axisY -h + (checkMiddle ? 1:0)} : {x: axisX, y: axisY};
+         return closer2Left ? {x: axisX -w, y: axisY -h + (isFlipped ? 1:0)} : {x: axisX, y: axisY};
       } else {
+         //implement flip
          otherX = "right";
          inX1 =  worldX + leftX + w;
          inY1 = worldY + topY + h;
@@ -244,7 +246,7 @@ function clickFunc( event) {
          var closer2Left = calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY);
          mX = closer2Left ? worldX + w : worldX;
          mY = closer2Left ? worldY + h : worldY;
-         return closer2Left ? {x: axisX + w, y: axisY - h + (checkMiddle ? 1:0)} : {x: axisX, y: axisY};
+         return closer2Left ? {x: axisX + w, y: axisY - h + (isFlipped ? 1:0)} : {x: axisX, y: axisY};
       }
    }
 
