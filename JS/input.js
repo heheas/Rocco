@@ -276,12 +276,12 @@ function update(deltaTime) {
   ctx.fill();
 
    ctx.beginPath();
-   ctx.strokeStyle = "blue";
-   ctx.arc(inX1, inY1, 5, 0, 2*Math.PI);
+   ctx.strokeStyle = "red";
+   ctx.arc(inX1, inY1, 2, 0, 2*Math.PI);
    ctx.stroke();
    
    ctx.strokeStyle = "green";
-   ctx.arc(inX2, inY2, 5, 0, 2*Math.PI);
+   ctx.arc(inX2, inY2, 2, 0, 2*Math.PI);
    ctx.stroke();
    /*
    //draw ruler
