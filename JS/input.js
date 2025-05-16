@@ -130,12 +130,16 @@ function initListeners() {
    });
 }
 
+function getHexSize() {
+   return boardHexSize*scale;
+}
+
 function clickFunc( event) {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
-      horizontalSpacing = (scale*(1.5*radius+2*spacing))/2;
-      verticalSpacing = (scale*(((radius+spacing)/2)*(Math.sqrt(3)/2)));
+      horizontalSpacing = (scale*(1.5*getHexSize()+2*spacing))/2;
+      verticalSpacing = (scale*(((getHexSize()+spacing)/2)*(Math.sqrt(3)/2)));
 
       var boardClickX = currentClickX - gameX + (totalBoardWidth/2) + horizontalSpacing/2; //offset the hex being drawn from the center
       var boardClickY = currentClickY - gameY + (totalBoardHeight/2);
@@ -260,7 +264,7 @@ function calcDistance(x1,y1,x2,y2) {
 */
 function drawBoard(xPos, yPos, hexRadius) {
 
-   radius = scale*hexRadius;
+   radius = getHexSize();
    spacing = scale*hexRadius*5/45;
    
    totalBoardWidth = (6*(1.5*radius+2*spacing));
