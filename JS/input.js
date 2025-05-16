@@ -288,10 +288,20 @@ function drawBoard(xPos, yPos, hexRadius) {
            ctx.font = Math.floor(10 * scale) + "px serif";
             ctx.fillStyle = "white";
            ctx.fillText(x + "," + y, hexX, hexY);
-            ctx.fillStyle = "black";
+
+            //highlight if selected
+            if (tile == game.selectedItem) {
+                ctx.strokeStyle = "green";
+                ctx.lineWeight = 6;
+               drawHexagon(hexX, hexY, radius, null);
+                ctx.stroke();
+               
+               //ctx.fillStyle = "black";
+            }
          }
      }
    }
+
 }
 
 function drawHexagon(x, y, radius, tile) {
@@ -304,6 +314,7 @@ function drawHexagon(x, y, radius, tile) {
    ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
    ctx.lineTo(x + radius/2, y);
    ctx.closePath();
+   
    if (tile) {
       renderHexagon(x, y, radius, tile);
    }
@@ -328,19 +339,6 @@ function renderHexagon(x, y, radius, tile) {
          ctx.restore();
       } else {
          ctx.fill();
-      }
-
-      if (tile == game.selectedItem) {
-         let oddfset = tile.y % 2 == 0 ? 0 : 0.75*radius + spacing;
-         let hexX = gameX + (tile.x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
-         let hexY = gameY + (tile.y*(((radius+spacing)/2)*(Math.sqrt(3)/2))) - totalBoardHeight/2;
-
-         var prevStyle = ctx.fillStyle;
-          ctx.strokeStyle = "green";
-          ctx.lineWeight = 6;
-         drawHexagon(hexX, hexY, boardHexSize, null);
-          ctx.stroke();
-         ctx.fillStyle = prevStyle;
       }
 }
 
