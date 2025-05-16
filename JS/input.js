@@ -192,7 +192,7 @@ function update(deltaTime) {
    //drawBackground
    ctx.beginPath();
    ctx.fillStyle = "rgb(239, 104, 75)";
-   ctx.drawRect(0,0,canvas.width,canvas.height);
+   ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.fill();
    
  // This would be where you update your game state
