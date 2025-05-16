@@ -22,12 +22,7 @@ var currentClickX = 0;
 var currentClickY = 0;
 var horizontalSpacing = 0;
 var verticalSpacing = 0;
-var boardClickX = 0;
-var boardClickY = 0;
-var normPosX = 0;
-var normPosY = 0;
-var leftX = 0;
-var topY = 0;
+
 var otherX;
 var otherY;
 
@@ -41,11 +36,6 @@ var boardHexSize = 45;
 var spacing = 10;
 var totalBoardWidth = 0;
 var totalBoardHeight = 0;
-
-//blah
-var blahX, blahY, blahWidth, blahHeight;
-var inX1, inY1, inX2, inY2, mX, mY, clX, clY;
-var toPrint;
 
 //Image Variables
 var gameboardIMG, labIMG;
@@ -141,114 +131,23 @@ function initListeners() {
 }
 
 function clickFunc( event) {
-      toPrint = "";
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
-
-      /*
-            let hexX = xPos + (x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
-            let hexY = yPos + (y*(((radius+spacing)/2)*(Math.sqrt(3)/2))) - totalBoardHeight/2;
-      */
-      
-      boardClickX = currentClickX - gameX + (totalBoardWidth/2) + boardHexSize/2;
-      boardClickY = currentClickY - gameY + (totalBoardHeight/2) + boardHexSize/2;
 
       horizontalSpacing = (scale*(1.5*radius+2*spacing))/2;
       verticalSpacing = (scale*(((radius+spacing)/2)*(Math.sqrt(3)/2)));
 
-      leftX = Math.floor(boardClickX / horizontalSpacing);
-      topY = Math.floor(boardClickY / verticalSpacing);
+      var boardClickX = currentClickX - gameX + (totalBoardWidth/2) + horizontalSpacing/2; //offset the hex being drawn from the center
+      var boardClickY = currentClickY - gameY + (totalBoardHeight/2);
 
-      normPosX = boardClickX % horizontalSpacing;
-      normPosY = boardClickY % verticalSpacing;
-   
-      var checkLeft = normPosX < horizontalSpacing/2;
-
-      var isFlipped;
-      if (leftX % 2 == 0) { //even col
-         if (topY%2 == 0) { //even row
-            //check corners;
-            //otherX = "corners";
-            isFlipped = true;
-         } else { //odd row
-            //check middles
-            //otherX = "middles";
-            isFlipped = true;
-         }
-      } else { //odd col
-         if (topY%2 == 0) { //even row
-            //check middles
-            //otherX = "middles";
-            isFlipped = true;
-         } else { //odd row
-            //check corners;
-            //otherX = "corners";
-            isFlipped = false;
-         }
-      }
-
-
-      blahX = gameX - (totalBoardWidth/2) + ((horizontalSpacing) * leftX-1);
-      blahY = gameY - (totalBoardHeight/2) + ((verticalSpacing) * topY-1);
-      blahWidth = horizontalSpacing;
-      blahHeight = verticalSpacing;
-      
-      //var isLeftTile = checkingLeft ? calcDistance()
-      var tileCoords = findTileCoords(normPosX, normPosY, leftX, topY, horizontalSpacing, verticalSpacing, checkLeft, isFlipped);
-      //selectedBoardX = Math.floor(tileCoords.x/2);
-      //selectedBoardY = tileCoords.x%2 == 0 && tileCoords.y%2 == 0 ? Math.floor(tileCoords.y/2)*2 : Math.floor(0.5 + (tileCoords.y/2))*2;
-      /*if (isLeft && isTop || !isLeft && !isTop) {//check top left and bottom right
-            if (calcDistance(0, 0, posX, posY) < calcDistance(posX, posY, horizontalSpacing, verticalSpacing)) { //Closer to the Left
-               selectedBoardX = isTop ? leftX + 1 : leftX;
-               selectedBoardY = isTop ? topY : topY;
-            } else { //closer to the Right
-               selectedBoardX = isTop ? leftX+1 : leftX;
-               selectedBoardY = topY + 1;
-            }
-      } else { //check bottom left and top right
-         if (calcDistance(0, verticalSpacing, posX, posY) < calcDistance(posX, posY, horizontalSpacing, 0)) { //closer to the left
-            selectedBoardX = isTop ? leftX : leftX+1;
-            selectedBoardY = isTop ? topY + 1 : topY;
-         } else { //closer to the right
-            selectedBoardX = isTop ? leftX : leftX - 2;
-            selectedBoardY = topY;
-         }
-      }*/
-      
-      //game.selectTile(selectedBoardX, selectBoardY);
+      var leftX = Math.floor(boardClickX / horizontalSpacing);
+      var topY = Math.floor(boardClickY / verticalSpacing);
+      var isMirror = leftX % 2 == 0;
+      var isFlipped = topY % 2 == 0;
+      var modifier = isMirror ^ isFlipped ? 1 : 0;
+      game.selectTile(Math.floor(leftX/2),(topY + modifier));
    }
 
-   function findTileCoords(cX, cY, axisX, axisY, w, h, checkLeft, isFlipped) {
-      var worldX = gameX - totalBoardWidth/2;
-      var worldY = gameY - totalBoardHeight/2;
-      
-      clX = worldX + cX;
-      clY = worldY + cY;
-      
-      if (checkLeft) {
-         //implement flip
-         otherX = "left";
-         inX1 = worldX+ leftX -w;
-         inY1 =  worldY + topY-h;
-         inX2 =  worldX + leftX;
-         inY2 = worldY + topY;
-         var closer2Left = calcDistance(-w, -h, cX - w/2, cY) < calcDistance(cX-w/2, cY, 0, 0);
-         mX = closer2Left ? worldX - w : worldX;
-         mY = closer2Left ? worldY -h : worldY;
-         return closer2Left ? {x: axisX -w, y: axisY -h + (isFlipped ? 1:0)} : {x: axisX, y: axisY};
-      } else {
-         //implement flip
-         otherX = "right";
-         inX1 =  worldX + leftX + w;
-         inY1 = worldY + topY + h;
-         inX2 =  worldX + leftX;
-         inY2 = worldY + topY;
-         var closer2Left = calcDistance(cX - w/2, cY, w, h) < calcDistance(0, 0, cX-w/2, cY);
-         mX = closer2Left ? worldX + w : worldX;
-         mY = closer2Left ? worldY + h : worldY;
-         return closer2Left ? {x: axisX + w, y: axisY - h + (isFlipped ? 1:0)} : {x: axisX, y: axisY};
-      }
-   }
 
 // Start the game loop
 function start() {
@@ -297,30 +196,6 @@ function update(deltaTime) {
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
   ctx.fillText(otherX, canvas.width/2, 80);
    
-  ctx.beginPath();
-  ctx.fillRect(blahX, blahY, blahWidth, blahHeight);
-  ctx.fill();
-
-   ctx.beginPath();
-   ctx.fillStyle = "red";
-   ctx.arc(inX1 -1.5 -1.5, inY1, 3, 0, 2*Math.PI);
-   ctx.fill();
-   
-   ctx.beginPath();
-   ctx.fillStyle = "green";
-   ctx.arc(inX2 -1.5, inY2 -1.5, 3, 0, 2*Math.PI);
-   ctx.fill();
-   
-   ctx.beginPath();
-   ctx.fillStyle = "black";
-   ctx.arc(mX -1.5, mY -1.5, 3, 0, 2*Math.PI);
-   ctx.fill();
-
-   ctx.beginPath();
-   ctx.strokeStyle = "black";
-   ctx.moveTo(mX, mY);
-   ctx.lineTo(clX, clY);
-   ctx.stroke();
    /*
    //draw ruler
    ctx.strokeStyle = "black";
@@ -374,16 +249,6 @@ function update(deltaTime) {
    ctx.fillText("40", xPos + 45, yPos - 18);
    ctx.fillText("50", xPos + 55, yPos - 18);
    */
-   
-   /* diagonal between hexes
-   ctx.beginPath();
-   ctx.moveTo(xPos, yPos);
-   ctx.lineTo(xPos + (scale*boardHexSize*(1.5+spacing))/2, yPos + (scale*boardHexSize*(1+spacing)*Math.sqrt(3)/4));
-   ctx.closePath();
-   ctx.stroke();
-   */
-   
-   $('#toPrint').html(toPrint);
 }
 
 function calcDistance(x1,y1,x2,y2) {
@@ -439,7 +304,9 @@ function drawHexagon(x, y, radius, tile) {
    ctx.lineTo(x + radius/4, y + (radius/2)*Math.sqrt(3)/2);
    ctx.lineTo(x + radius/2, y);
    ctx.closePath();
-   renderHexagon(x, y, radius, tile);
+   if (tile) {
+      renderHexagon(x, y, radius, tile);
+   }
 }
 
 function renderHexagon(x, y, radius, tile) {
@@ -462,12 +329,18 @@ function renderHexagon(x, y, radius, tile) {
       } else {
          ctx.fill();
       }
+
       if (tile == game.selectedItem) {
+         let oddfset = tile.y % 2 == 0 ? 0 : 0.75*radius + spacing;
+         let hexX = gameX + (tile.x*(1.5*radius+2*spacing)) + oddfset - totalBoardWidth/2;
+         let hexY = gameY + (tile.y*(((radius+spacing)/2)*(Math.sqrt(3)/2))) - totalBoardHeight/2;
+
          var prevStyle = ctx.fillStyle;
           ctx.beginPath();
-          ctx.fillStyle = "red";
-         ctx.fillRect(x, y, radius/4, radius/4);
-          ctx.fill();
+          ctx.strokeStyle = "green";
+          ctx.lineWeight = 6;
+         drawHexagon(hexX, hexY, boardHexSize, null);
+          ctx.stroke();
          ctx.fillStyle = prevStyle;
       }
 }
