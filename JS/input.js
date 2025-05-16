@@ -149,6 +149,7 @@ function clickFunc( event) {
       var isMirror = leftX % 2 == 0;
       var isFlipped = topY % 2 == 0;
       var modifier = isMirror ^ isFlipped ? 1 : 0;
+   
       game.selectTile(Math.floor(leftX/2),(topY + modifier));
    }
 
