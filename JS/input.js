@@ -194,13 +194,13 @@ function update(deltaTime) {
 
   drawBoard(gameX,gameY, boardHexSize);
   drawSelectedItem();
-   
+  
+   /* 
   ctx.font = Math.floor(16 * scale) + "px serif";
    ctx.fillStyle = "black";
   ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
   ctx.fillText(otherX, canvas.width/2, 80);
    
-   /*
    //draw ruler
    ctx.strokeStyle = "black";
    ctx.beginPath();
