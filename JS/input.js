@@ -118,7 +118,6 @@ function getHexSize() {
 }
 
 function clickFunc(event) {
-      console.log("click");
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
@@ -134,7 +133,6 @@ function clickFunc(event) {
       var isFlipped = topY % 2 == 0;
       var modifier = isMirror ^ isFlipped ? 1 : 0;
       
-      console.log("click: selectTile");
       game.selectTile(Math.floor(leftX/2),(topY + modifier));
    }
 
@@ -313,6 +311,7 @@ function renderHexagon(x, y, radius, tile) {
 }
 
 function drawSelectedItem() {
+   console.log("Select Check");
    if (game.selectedItem) {
    console.log("item selected");
       //box outline
