@@ -57,13 +57,20 @@ class Game {
   }
 
   setSelectedItem(item) {
+    console.log("ITEM SELECTION CHECK");
     if (item != null) {
+      console.log("ITEM NOT NULL");
       if (item instanceof Tile) {
+        console.log("ITEM IS TILE");
         this.selectedItem = item.type != TileType.INVALID ? item : null;
+        console.log("ITEM CHOSEN");
       } else {
         this.selectedItem = item;
+        console.log("NON TILE");
       }
     } else {
+      console.log("Null");
+    
       this.selectedItem = null;
     }
   }
