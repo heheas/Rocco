@@ -1,4 +1,6 @@
 class Game {
+  board;
+  selectedItem;
   homeLocations = [{x:3, y:0},{x:0, y:5},{x:5, y:5}, {x:0, y:15},{x:5, y:15},{x:3, y:20}];
   resourceLocations = [{x:1, y:1},{x:4, y:1},{x:1, y:19},{x:4, y:19},{x:0, y:10},{x:6, y:10}];
   tileLocations = [
@@ -23,8 +25,6 @@ class Game {
     {x:2, y:19},{x:3, y:19},
   ];
 
-  board;
-  selectedItem;
 
   constructor() {
     this.initGame();
@@ -57,7 +57,15 @@ class Game {
   }
 
   setSelectedItem(item) {
-    this.selectedItem = item;
+    if (item != null) {
+      if (item instanceof Tile) {
+        this.selectedItem = item.type != TileType.INVALID ? item : null;
+      } else {
+        this.selectedItem = item;
+      }
+    } else {
+      this.selectedItem = null;
+    }
   }
 
   selectTile(x, y) {
