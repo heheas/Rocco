@@ -39,7 +39,7 @@ var totalBoardHeight = 0;
 
 //Image Variables
 var gameboardIMG, labIMG;
-var straightIMG,splitIMG,tridentIMG,uturnIMG,sixwayIMG;
+var straightIMG,splitIMG,tridentIMG,uturnIMG,sixwayIMG,cornerIMG;
 var robot1HomeIMG,robot2HomeIMG,robot3HomeIMG,robot4HomeIMG,robot5HomeIMG,robot6HomeIMG;
 var crystalIMG,nebulaCrystalIMG,faunaIMG,nutrientPodsIMG,plasmaNodeIMG,magneticOreIMG;
 
@@ -321,15 +321,39 @@ function drawHexagon(x, y, radius, tile) {
 }
 
 function renderHexagon(x, y, radius, tile) {
+      ctx.fillStyle = "black";
+   
       let hexIMG;
-      if (tile.type === TileType.HOME) {
-         ctx.fillStyle = "yellow";
-      } else if (tile.type === TileType.RESOURCE) {
-         ctx.fillStyle = "purple";
-      } else {
-         hexIMG = straightIMG;
-         ctx.fillStyle = "black";
+      switch(tile.type) {
+         case TileType.HOME:
+            ctx.fillStyle = "yellow";
+            break;
+         case TileType.RESOURCE:
+            ctx.fillStyle = "purple";
+            break;
+         case TileType.STRAIGHT:
+            hexIMG = straightIMG;
+            break;
+         case TileType.SPLIT:
+            hexIMG = splitIMG;
+            break;
+         case TileType.TRIDENT:
+            hexIMG = tridentIMG;
+            break;
+         case TileType.SIXWAY:
+            hexIMG = sixwayIMG;
+            break;
+         case TileType.UTURN:
+            hexIMG = uturnIMG;
+            break;
+         case TileType.CORNER:
+            hexIMG = cornerIMG;
+            break;
+         default:
+            hexIMG = null;
+            break;
       }
+   
       if (hexIMG) {
          ctx.save();
          ctx.clip();
@@ -366,6 +390,16 @@ function loadImages() {
    gameboardIMG.src = "./Art/Gameboard.png";
    straightIMG = new Image();
    straightIMG.src = "./Art/Tiles/Straight.png";
+   splitIMG = new Image();
+   splitIMG.src = "./Art/Tiles/Split.png";
+   tridentIMG = new Image();
+   tridentIMG.src = "./Art/Tiles/Trident.png";
+   sixwayIMG = new Image();
+   sixwayIMG.src = "./Art/Tiles/6Way.png";
+   uturnIMG = new Image();
+   uturnIMG.src = "./Art/Tiles/UTurn.png";
+   cornerIMG = new Image();
+   cornerIMG.src = "./Art/Tiles/Corner.png";
    labIMG = new Image();
    labIMG.src = "./Art/Tiles/cog.png";
 }
