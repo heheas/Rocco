@@ -336,7 +336,6 @@ function renderHexagon(x, y, radius, tile) {
          let hexY = gameY + (tile.y*(((radius+spacing)/2)*(Math.sqrt(3)/2))) - totalBoardHeight/2;
 
          var prevStyle = ctx.fillStyle;
-          ctx.beginPath();
           ctx.strokeStyle = "green";
           ctx.lineWeight = 6;
          drawHexagon(hexX, hexY, boardHexSize, null);
