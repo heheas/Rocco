@@ -89,7 +89,7 @@ function initListeners() {
    });
 
    $("#myCanvas").on("mouseup", clickFunc);
-      $("#myCanvas").on("touchend", clickFunc);
+   $("#myCanvas").on("touchend", clickFunc);
    
   this.canvas.addEventListener('wheel', function(event){
       if (event.deltaY < 0) {
@@ -294,7 +294,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             //highlight if selected
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
-                ctx.lineWeight = 15;
+                ctx.lineWidth = 5;
                drawHexagon(hexX, hexY, radius, null);
                 ctx.stroke();
                
