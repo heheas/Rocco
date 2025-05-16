@@ -302,11 +302,11 @@ function drawBoard(xPos, yPos, hexRadius) {
             } else {
                ctx.strokeStyle = "black";
             }
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 3;
             drawHexagon(hexX, hexY, radius, null);
             ctx.stroke();
             
-            ctx.fillStyle = "black";
+            //ctx.fillStyle = "black";
 
             //draw hex coords
            /*ctx.font = Math.floor(10 * scale) + "px serif";
@@ -391,8 +391,10 @@ function drawSelectedItem() {
       ctx.beginPath();
       ctx.fillStyle = "white";
       ctx.fillRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
-      ctx.strokeStyle = "black";
       ctx.fill();
+      
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
       ctx.strokeRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
       ctx.stroke();
       
