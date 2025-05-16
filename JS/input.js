@@ -141,8 +141,8 @@ function clickFunc( event) {
       horizontalSpacing = (scale*(1.5*getHexSize()+2*spacing))/2;
       verticalSpacing = (scale*(((getHexSize()+spacing)/2)*(Math.sqrt(3)/2)));
 
-      var boardClickX = currentClickX - gameX + (totalBoardWidth/2) + horizontalSpacing/2; //offset the hex being drawn from the center
-      var boardClickY = currentClickY - gameY + (totalBoardHeight/2);
+      var boardClickX = currentClickX - scale*(gameX + (totalBoardWidth/2) + horizontalSpacing/2); //offset the hex being drawn from the center
+      var boardClickY = currentClickY - scale*(gameY + (totalBoardHeight/2));
 
       var leftX = Math.floor(boardClickX / horizontalSpacing);
       var topY = Math.floor(boardClickY / verticalSpacing);
