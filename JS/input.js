@@ -189,6 +189,11 @@ function loop(timestamp) {
 function update(deltaTime) {
    //clear canvas
    ctx.clearRect(0, 0, canvas.width, canvas.height);
+   //drawBackground
+   ctx.beginPath();
+   ctx.fillStyle = "rgb(239, 104, 75)"
+   ctx.drawRect(0,0,canvas.width,canvas.height;
+   ctx.fill();
    
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
@@ -291,15 +296,17 @@ function drawBoard(xPos, yPos, hexRadius) {
             );
             
 
-            //highlight if selected
+            //border and highlight if selected
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
-                ctx.lineWidth = 5;
-               drawHexagon(hexX, hexY, radius, null);
-                ctx.stroke();
-               
-               ctx.fillStyle = "black";
+            } else {
+               ctx.strokeStyle = "black";
             }
+            ctx.lineWidth = 5;
+            drawHexagon(hexX, hexY, radius, null);
+            ctx.stroke();
+            
+            ctx.fillStyle = "black";
 
             //draw hex coords
            /*ctx.font = Math.floor(10 * scale) + "px serif";
