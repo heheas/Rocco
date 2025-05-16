@@ -53,28 +53,29 @@ class Tile extends GameObject {
     this.isDebris = isDebris;
     this.direction = Math.floor(Math.random()*6)+1; //TODO: Remove
     if (type != TileType.INVALID && type != TileType.HOME && type != TileType.RESOURCE) {
-   switch(Math.floor(Math.random()*6)+1) { //TODO: Remove
-       case 0:
-         this.type = TileType.EMPTY;
-         break;
-      case 1:
-        this.type = TileType.STRAIGHT;
-         break;
-      case 2:
-        this.type = TileType.SPLIT;
-         break;
-      case 3:
-        this.type = TileType.TRIDENT;
-         break;
-      case 4:
-        this.type = TileType.SIXWAY;
-         break;
-      case 5:
-        this.type = TileType.UTURN;
-         break;
-      case 6:
-        this.type = TileType.CORNER;
-         break;
+       switch(Math.floor(Math.random()*6)+1) { //TODO: Remove
+           case 0:
+             this.type = TileType.EMPTY;
+             break;
+          case 1:
+            this.type = TileType.STRAIGHT;
+             break;
+          case 2:
+            this.type = TileType.SPLIT;
+             break;
+          case 3:
+            this.type = TileType.TRIDENT;
+             break;
+          case 4:
+            this.type = TileType.SIXWAY;
+             break;
+          case 5:
+            this.type = TileType.UTURN;
+             break;
+          case 6:
+            this.type = TileType.CORNER;
+             break;
+        }
     }
   }
 }
