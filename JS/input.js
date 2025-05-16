@@ -57,25 +57,11 @@ $(document).ready(function() {
    start();
 });
 
-//Testing Function
-let testingVal = 1;
-let testingVal2 = 0;
-function initTesting() {
-   var val = $('#testVal').val(testingVal);
-   var val = $('#testVal2').val(testingVal2);
-}
-
-function testFunc() {
-   var val = $('#testVal').val();
-   testingVal = val;
-}
-function test2Func() {
-   var val = $('#testVal2').val();
-   testingVal2 = val;
-}
-
 function initListeners() {
 
+   $("#myCanvas").on("mouseup", clickFunc);
+   $("#myCanvas").on("touchend", clickFunc);
+   
    $( "#myCanvas" ).on( "mousemove", function( event ) {
       xPos = event.pageX - $('#myCanvas').offset().left;
       yPos = event.pageY - $('#myCanvas').offset().top;
@@ -88,8 +74,6 @@ function initListeners() {
       }
    });
 
-   $("#myCanvas").on("mouseup", clickFunc);
-   $("#myCanvas").on("touchend", clickFunc);
    
   this.canvas.addEventListener('wheel', function(event){
       if (event.deltaY < 0) {
@@ -134,7 +118,7 @@ function getHexSize() {
    return boardHexSize*scale;
 }
 
-function clickFunc( event) {
+function clickFunc(event) {
       console.log("click");
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
