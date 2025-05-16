@@ -52,8 +52,9 @@ class Tile extends GameObject {
     this.type = type;
     this.isDebris = isDebris;
     this.direction = Math.floor(Math.random()*6)+1; //TODO: Remove
-   switch(Math.floor(Math.random()*7)) { //TODO: Remove
-      case 0:
+    if (type != TileType.INVALID && type != TileType.HOME && type != TileType.RESOURCE) {
+   switch(Math.floor(Math.random()*6)+1) { //TODO: Remove
+       case 0:
          this.type = TileType.EMPTY;
          break;
       case 1:
