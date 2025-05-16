@@ -297,7 +297,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                drawHexagon(hexX, hexY, radius, null);
                 ctx.stroke();
                
-               //ctx.fillStyle = "black";
+               ctx.fillStyle = "black";
             }
 
             //draw hex coords
