@@ -323,7 +323,7 @@ function drawHexagon(x, y, radius, tile) {
 }
 
 function renderHexagon(x, y, radius, tile) {
-      ctx.fillStyle = "black";
+      ctx.strokeStyle = "black";
    
       let hexIMG;
       switch(tile.type) {
@@ -365,6 +365,7 @@ function renderHexagon(x, y, radius, tile) {
          ctx.restore();
       } else {
          ctx.fill();
+         ctx.stroke();
       }
 }
 
