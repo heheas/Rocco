@@ -285,9 +285,6 @@ function drawBoard(xPos, yPos, hexRadius) {
                tile
             );
             
-           ctx.font = Math.floor(10 * scale) + "px serif";
-            ctx.fillStyle = "white";
-           ctx.fillText(x + "," + y, hexX, hexY);
 
             //highlight if selected
             if (tile == game.selectedItem) {
@@ -298,6 +295,11 @@ function drawBoard(xPos, yPos, hexRadius) {
                
                //ctx.fillStyle = "black";
             }
+
+            //draw hex coords
+           /*ctx.font = Math.floor(10 * scale) + "px serif";
+            ctx.fillStyle = "white";
+           ctx.fillText(x + "," + y, hexX, hexY);*/
          }
      }
    }
