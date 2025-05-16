@@ -335,6 +335,7 @@ function drawHexagon(x, y, radius, tile) {
 }
 
 function renderHexagon(x, y, radius, tile) {
+      ctx.fillStyle = "rgba(0, 0, 0, 0)";
       let hexIMG;
       switch(tile.type) {
          case TileType.HOME:
