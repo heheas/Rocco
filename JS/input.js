@@ -149,7 +149,12 @@ function clickFunc( event) {
       var isMirror = leftX % 2 == 0;
       var isFlipped = topY % 2 == 0;
       var modifier = isMirror ^ isFlipped ? 1 : 0;
-   
+
+      console.log("currentClickX: " + currentClickX);
+      console.log("horizontalSpacing: " + horizontalSpacing);
+      console.log("boardClickX: " + boardClickX);
+      console.log("leftX: " + leftX);
+      
       game.selectTile(Math.floor(leftX/2),(topY + modifier));
    }
 
@@ -200,65 +205,6 @@ function update(deltaTime) {
 
   drawBoard(gameX,gameY, boardHexSize);
   drawSelectedItem();
-  
-   /* 
-  ctx.font = Math.floor(16 * scale) + "px serif";
-   ctx.fillStyle = "black";
-  ctx.fillText(selectedBoardX + ", " + selectedBoardY, canvas.width/2, 100);
-  ctx.fillText(otherX, canvas.width/2, 80);
-   
-   //draw ruler
-   ctx.strokeStyle = "black";
-   ctx.beginPath();
-   ctx.moveTo(xPos + 5, yPos - 10);
-   ctx.lineTo(xPos + 5, yPos - 10);
-   ctx.lineTo(xPos + 55, yPos - 10);
-   ctx.closePath();
-   ctx.stroke();
-   
-   ctx.beginPath();
-   ctx.moveTo(xPos + 5, yPos - 15);
-   ctx.lineTo(xPos + 5, yPos - 5);
-   ctx.closePath();
-   ctx.stroke();
-   
-   ctx.beginPath();
-   ctx.moveTo(xPos + 15, yPos - 15);
-   ctx.lineTo(xPos + 15, yPos - 5);
-   ctx.closePath();
-   ctx.stroke();
-   
-   ctx.beginPath();
-   ctx.moveTo(xPos + 25, yPos - 15);
-   ctx.lineTo(xPos + 25, yPos - 5);
-   ctx.closePath();
-   ctx.stroke();
-   
-   ctx.beginPath();
-   ctx.moveTo(xPos + 35, yPos - 15);
-   ctx.lineTo(xPos + 35, yPos - 5);
-   ctx.closePath();
-   ctx.stroke();
-   
-   ctx.beginPath();
-   ctx.moveTo(xPos + 45, yPos - 15);
-   ctx.lineTo(xPos + 45, yPos - 5);
-   ctx.closePath();
-   ctx.stroke();
-   
-   ctx.beginPath();
-   ctx.moveTo(xPos + 55, yPos - 15);
-   ctx.lineTo(xPos + 55, yPos - 5);
-   ctx.closePath();
-   ctx.stroke();
-
-   ctx.font = Math.floor(9) + "px serif";
-   ctx.fillText("10", xPos + 15, yPos - 18);
-   ctx.fillText("20", xPos + 25, yPos - 18);
-   ctx.fillText("30", xPos + 35, yPos - 18);
-   ctx.fillText("40", xPos + 45, yPos - 18);
-   ctx.fillText("50", xPos + 55, yPos - 18);
-   */
 }
 
 function calcDistance(x1,y1,x2,y2) {
