@@ -52,5 +52,25 @@ class Tile extends GameObject {
     this.type = type;
     this.isDebris = isDebris;
     this.direction = Math.floor(Math.random()*6)+1; //TODO: Remove
+    this.type = switch(Math.floor(Math.random()*6)+1) { //TODO: Remove
+      case 1:
+        this.type = TileType.STRAIGHT;
+        break;
+      case 2:
+        this.type = TileType.SPLIT;
+        break;
+      case 3:
+        this.type = TileType.TRIDENT;
+        break;
+      case 4:
+        this.type = TileType.SIXWAY;
+        break;
+      case 5:
+        this.type = TileType.UTURN;
+        break;
+      case 6:
+        this.type = TileType.CORNER;
+        break;
+    }
   }
 }
