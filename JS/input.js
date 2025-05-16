@@ -149,11 +149,6 @@ function clickFunc( event) {
       var isMirror = leftX % 2 == 0;
       var isFlipped = topY % 2 == 0;
       var modifier = isMirror ^ isFlipped ? 1 : 0;
-
-      console.log("currentClickX: " + currentClickX);
-      console.log("horizontalSpacing: " + horizontalSpacing);
-      console.log("boardClickX: " + boardClickX);
-      console.log("leftX: " + leftX);
       
       game.selectTile(Math.floor(leftX/2),(topY + modifier));
    }
@@ -334,6 +329,7 @@ function renderHexagon(x, y, radius, tile) {
 
 function drawSelectedItem() {
    if (game.selectedItem) {
+   console.log("item selected");
       //box outline
       ctx.beginPath();
       ctx.fillStyle = "white";
@@ -346,9 +342,10 @@ function drawSelectedItem() {
       ctx.stroke();
       
       if (game.selectedItem instanceof Tile) {
+         console.log("Tile, fo sho");
          drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100, game.selectedItem);
       } else {
-         
+         console.log("Something else, entirely");
       }
    }
 }
