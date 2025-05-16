@@ -50,7 +50,6 @@ $(document).ready(function() {
    gameX = canvas.width/2;
    gameY = canvas.height/2;
    loadImages();
-   initTesting();
    initListeners();
    
    // Start the game loop
