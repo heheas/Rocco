@@ -292,7 +292,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             //highlight if selected
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
-                ctx.lineWeight = 6;
+                ctx.lineWeight = 15;
                drawHexagon(hexX, hexY, radius, null);
                 ctx.stroke();
                
