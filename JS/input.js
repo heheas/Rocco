@@ -309,7 +309,6 @@ function renderHexagon(x, y, radius, tile) {
 }
 
 function drawSelectedItem() {
-   console.log("Select Check");
    if (game.selectedItem) {
    console.log("item selected");
       //box outline
