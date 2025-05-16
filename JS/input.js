@@ -73,7 +73,6 @@ function initListeners() {
       }
    });
 
-   
   this.canvas.addEventListener('wheel', function(event){
       if (event.deltaY < 0) {
          scale += 0.1;
@@ -82,7 +81,6 @@ function initListeners() {
       }
        event.preventDefault();
    });
-
    $("body").on("keydown", function ( event ) {
       ctrlDown = true;
       if (!dragging && mouseDown) {
@@ -124,8 +122,8 @@ function clickFunc(event) {
       horizontalSpacing = (scale*(1.5*getHexSize()+2*spacing))/2;
       verticalSpacing = (scale*(((getHexSize()+spacing)/2)*(Math.sqrt(3)/2)));
 
-      var boardClickX = currentClickX - (gameX + (totalBoardWidth/2) + horizontalSpacing/2); //offset the hex being drawn from the center
-      var boardClickY = currentClickY - (gameY + (totalBoardHeight/2));
+      var boardClickX = currentClickX - gameX + (totalBoardWidth/2) + horizontalSpacing/2; //offset the hex being drawn from the center
+      var boardClickY = currentClickY - gameY + (totalBoardHeight/2);
 
       var leftX = Math.floor(boardClickX / horizontalSpacing);
       var topY = Math.floor(boardClickY / verticalSpacing);
@@ -138,34 +136,34 @@ function clickFunc(event) {
 
 
 // Start the game loop
-function start() {
- if (!this.isRunning) {
-    game = new Game();
-   this.isRunning = true;
-   requestAnimationFrame(this.loop);
-   console.log('Game loop started');
- }
-}
+   function start() {
+      if (!this.isRunning) {
+         game = new Game();
+         this.isRunning = true;
+         requestAnimationFrame(this.loop);
+         console.log('Game loop started');
+      }
+   }
 
 // Stop the game loop
 function stop() {
- this.isRunning = false;
- console.log('Game loop stopped');
+    this.isRunning = false;
+    console.log('Game loop stopped');
 }
 
 // The main loop
 function loop(timestamp) {
- // Calculate delta time (time since last frame) in seconds
- const deltaTime = (timestamp - this.lastTimestamp) / 1000;
- this.lastTimestamp = timestamp;
- 
- if (this.isRunning) {
+   // Calculate delta time (time since last frame) in seconds
+   const deltaTime = (timestamp - this.lastTimestamp) / 1000;
+   this.lastTimestamp = timestamp;
+   
+   if (this.isRunning) {
    // Update game state
    this.update(deltaTime);
    
    // Request the next frame
    requestAnimationFrame(this.loop);
- }
+   }
 }
 
 // Update game state - override this method in your implementation
