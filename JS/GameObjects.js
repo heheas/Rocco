@@ -50,5 +50,6 @@ class Tile extends GameObject {
     super(x,y);
     this.type = type;
     this.isDebris = isDebris;
+    this.direction = Math.floor(Math.random()*6)+1; //TODO: Remove
   }
 }
