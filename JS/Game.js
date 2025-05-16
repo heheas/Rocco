@@ -54,7 +54,6 @@ class Game {
         }
       }
     }
-    this.selectedItem = this.getTile( Math.floor(Math.random() * 9),  Math.floor(Math.random() * 22));
   }
 
   setSelectedItem(item) {
