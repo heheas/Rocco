@@ -323,14 +323,14 @@ function drawHexagon(x, y, radius, tile) {
 }
 
 function renderHexagon(x, y, radius, tile) {
-      ctx.strokeStyle = "black";
-   
       let hexIMG;
       switch(tile.type) {
          case TileType.HOME:
+            ctx.fillStyle = "black";
             ctx.fillStyle = "yellow";
             break;
          case TileType.RESOURCE:
+            ctx.fillStyle = "black";
             ctx.fillStyle = "purple";
             break;
          case TileType.STRAIGHT:
@@ -351,8 +351,12 @@ function renderHexagon(x, y, radius, tile) {
          case TileType.CORNER:
             hexIMG = cornerIMG;
             break;
+         case TileType.EMPTY:
+            ctx.strokeStyle = "black";
+            break;
          default:
             hexIMG = null;
+            ctx.fillStyle = "black";
             break;
       }
    
