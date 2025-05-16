@@ -369,7 +369,7 @@ function renderHexagon(x, y, radius, tile) {
          ctx.clip();
          ctx.translate(x, y);
          ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
-         ctx.drawImage(straightIMG,-radius/2, -radius/2, radius, radius);
+         ctx.drawImage(hexIMG,-radius/2, -radius/2, radius, radius);
          ctx.restore();
       } else {
          ctx.fill();
