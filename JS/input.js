@@ -187,9 +187,18 @@ function calcDistance(x1,y1,x2,y2) {
     return Math.sqrt(Math.abs(Math.pow((x2 - x1),2) + Math.pow((y2 - y1),2)));
 }
 
-/*
+function pullNewTile() {
+
+}
+
+
+
+
+
+
+/* =====================================================================================================
 * RENDERING FUNCTIONS
-*/
+*/ =====================================================================================================
 function drawBoard(xPos, yPos, hexRadius) {
 
    radius = getHexSize();
