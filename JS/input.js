@@ -23,6 +23,7 @@ var currentClickY = 0;
 var horizontalSpacing = 0;
 var verticalSpacing = 0;
 var movingTile = 0;
+var borderOffset = 0;
 
 var otherX;
 var otherY;
@@ -181,6 +182,10 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
+if (movingTIle) {
+   borderOffset = borderOffset < 5 ? borderOffset + 1 : 0;
+}
+   
   drawBoard(gameX,gameY, boardHexSize);
   drawSelectedItem();
 }
@@ -244,7 +249,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
-                  ctx.setLineDash([5, 15]);
+                  ctx.setLineDash([5, borderOffset]);
                }
             } else {
                ctx.strokeStyle = "black";
