@@ -191,6 +191,9 @@ function pullNewTile() {
 
 }
 
+function rotateSelectedTile(rotateClockwise = true) {
+   game.rotateSelectedTile(rotateClockwise);
+}
 
 
 
