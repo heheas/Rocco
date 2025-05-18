@@ -252,7 +252,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             ctx.lineWidth = 3;
             drawHexagon(hexX, hexY, radius, null);
             ctx.stroke();
-            
+            ctx.setLineDash([]);
             //ctx.fillStyle = "black";
 
             //draw hex coords
