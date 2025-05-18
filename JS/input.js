@@ -22,6 +22,7 @@ var currentClickX = 0;
 var currentClickY = 0;
 var horizontalSpacing = 0;
 var verticalSpacing = 0;
+var movingTile = 0;
 
 var otherX;
 var otherY;
@@ -200,6 +201,10 @@ function flipSelectedTile() {
    game.flipSelectedTile();
 }
 
+function movingTile() {
+   movingTile = !movingTile;
+}
+
 
 
 
@@ -238,6 +243,9 @@ function drawBoard(xPos, yPos, hexRadius) {
             //border and highlight if selected
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
+               if (movingTile) {
+                  ctx.setLineDash([5, 15]);
+               }
             } else {
                ctx.strokeStyle = "black";
             }
