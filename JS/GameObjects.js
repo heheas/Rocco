@@ -42,13 +42,15 @@ const ResourceType = {
 
 class Tile extends GameObject {
   type = TileType.EMPTY;
+  flipped = false;
   isDebris = true;
   direction = 1; //1-6 directions
   homeType = -1; //1-6
   resourceType = -1; //1-6
 
-  constructor(x, y, type = TileType.EMPTY, isDebris = true) {
+  constructor(x, y, flipped = false, type = TileType.EMPTY, isDebris = true) {
     super(x,y);
+    this.flipped = flipped;
     this.type = type;
     this.isDebris = isDebris;
     this.direction = Math.floor(Math.random()*6)+1; //TODO: Remove
@@ -59,21 +61,33 @@ class Tile extends GameObject {
              break;
           case 1:
             this.type = TileType.STRAIGHT;
+            this.flipped = Math.random() < 0.5;
+            this.isDebris = Math.random() < 0.5;
              break;
           case 2:
             this.type = TileType.SPLIT;
+            this.flipped = Math.random() < 0.5;
+            this.isDebris = Math.random() < 0.5;
              break;
           case 3:
             this.type = TileType.TRIDENT;
+            this.flipped = Math.random() < 0.5;
+            this.isDebris = Math.random() < 0.5;
              break;
           case 4:
             this.type = TileType.SIXWAY;
+            this.flipped = Math.random() < 0.5;
+            this.isDebris = Math.random() < 0.5;
              break;
           case 5:
             this.type = TileType.UTURN;
+            this.flipped = Math.random() < 0.5;
+            this.isDebris = Math.random() < 0.5;
              break;
           case 6:
             this.type = TileType.CORNER;
+            this.flipped = Math.random() < 0.5;
+            this.isDebris = Math.random() < 0.5;
              break;
         }
     }

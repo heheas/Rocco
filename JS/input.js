@@ -39,8 +39,9 @@ var totalBoardHeight = 0;
 
 //Image Variables
 var gameboardIMG, labIMG;
-var straightIMG,splitIMG,tridentIMG,uturnIMG,sixwayIMG,cornerIMG;
-var robot1HomeIMG,robot2HomeIMG,robot3HomeIMG,robot4HomeIMG,robot5HomeIMG,robot6HomeIMG;
+var straightIMG,splitIMG,tridentIMG,uturnIMG,sixwayIMG,cornerIMG,debrisIMG,pitfallIMG;
+var c_straightIMG,c_splitIMG,c_tridentIMG,c_uturnIMG,c_sixwayIMG,c_cornerIMG;
+var robot1IMG,robot2IMG,robot3IMG,robot4HIMG,robot5IMG,robot6IMG;
 var crystalIMG,nebulaCrystalIMG,faunaIMG,nutrientPodsIMG,plasmaNodeIMG,magneticOreIMG;
 
 //Initialize the Game
@@ -122,8 +123,8 @@ function clickFunc(event) {
       horizontalSpacing = (scale*(1.5*getHexSize()+2*spacing))/2;
       verticalSpacing = (scale*(((getHexSize()+spacing)/2)*(Math.sqrt(3)/2)));
 
-      var boardClickX = currentClickX - gameX + (totalBoardWidth/2) + horizontalSpacing/2; //offset the hex being drawn from the center
-      var boardClickY = currentClickY - gameY + (totalBoardHeight/2);
+      var boardClickX = scale * (currentClickX - gameX + (totalBoardWidth/2)) + horizontalSpacing/2; //offset the hex being drawn from the center
+      var boardClickY = scale * (currentClickY - gameY + (totalBoardHeight/2));
 
       var leftX = Math.floor(boardClickX / horizontalSpacing);
       var topY = Math.floor(boardClickY / verticalSpacing);
@@ -193,6 +194,10 @@ function pullNewTile() {
 
 function rotateSelectedTile(rotateClockwise = true) {
    game.rotateSelectedTile(rotateClockwise);
+}
+
+function flipSelectedTile() {
+   game.flipSelectedTile();
 }
 
 
@@ -271,40 +276,48 @@ function drawHexagon(x, y, radius, tile) {
 function renderHexagon(x, y, radius, tile) {
       ctx.fillStyle = "rgba(0, 0, 0, 0)";
       let hexIMG;
-      switch(tile.type) {
-         case TileType.HOME:
-            ctx.fillStyle = "black";
-            ctx.fillStyle = "yellow";
-            break;
-         case TileType.RESOURCE:
-            ctx.fillStyle = "black";
-            ctx.fillStyle = "purple";
-            break;
-         case TileType.STRAIGHT:
-            hexIMG = straightIMG;
-            break;
-         case TileType.SPLIT:
-            hexIMG = splitIMG;
-            break;
-         case TileType.TRIDENT:
-            hexIMG = tridentIMG;
-            break;
-         case TileType.SIXWAY:
-            hexIMG = sixwayIMG;
-            break;
-         case TileType.UTURN:
-            hexIMG = uturnIMG;
-            break;
-         case TileType.CORNER:
-            hexIMG = cornerIMG;
-            break;
-         case TileType.EMPTY:
-            ctx.strokeStyle = "black";
-            break;
-         default:
-            hexIMG = null;
-            ctx.fillStyle = "black";
-            break;
+      if (tile.flipped) {
+         if (tile.isDebris) {
+            hexIMG = debrisIMG;
+         } else {
+            hexIMG = pitfallIMG;
+         }
+      } else {
+         switch(tile.type) {
+            case TileType.HOME:
+               ctx.fillStyle = "black";
+               ctx.fillStyle = "yellow";
+               break;
+            case TileType.RESOURCE:
+               ctx.fillStyle = "black";
+               ctx.fillStyle = "purple";
+               break;
+            case TileType.STRAIGHT:
+               hexIMG = tile.isDebris ? straightIMG : c_straightIMG;
+               break;
+            case TileType.SPLIT:
+               hexIMG = tile.isDebris ? splitIMG : c_splitIMG;
+               break;
+            case TileType.TRIDENT:
+               hexIMG = tile.isDebris ? tridentIMG : c_tridentIMG;
+               break;
+            case TileType.SIXWAY:
+               hexIMG = tile.isDebris ? sixwayIMG : c_sixwayIMG;
+               break;
+            case TileType.UTURN:
+               hexIMG = tile.isDebris ? uturnIMG : c_uturnIMG;
+               break;
+            case TileType.CORNER:
+               hexIMG = tile.isDebris ? cornerIMG : c_cornerIMG;
+               break;
+            case TileType.EMPTY:
+               ctx.strokeStyle = "black";
+               break;
+            default:
+               hexIMG = null;
+               ctx.fillStyle = "black";
+               break;
+         }
       }
    
       if (hexIMG) {
@@ -322,7 +335,6 @@ function renderHexagon(x, y, radius, tile) {
 
 function drawSelectedItem() {
    if (game.selectedItem) {
-   console.log("item selected");
       //box outline
       ctx.beginPath();
       ctx.fillStyle = "white";
@@ -335,16 +347,17 @@ function drawSelectedItem() {
       ctx.stroke();
       
       if (game.selectedItem instanceof Tile) {
-         console.log("Tile, fo sho");
          drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100, game.selectedItem);
       } else {
-         console.log("Something else, entirely");
+         
       }
    }
 }
 
 function loadImages() {
+   //tiles
    gameboardIMG = new Image();
+   gameboardIMG.loading = "lazy";
    gameboardIMG.src = "./Art/Gameboard.png";
    straightIMG = new Image();
    straightIMG.src = "./Art/Tiles/Straight.png";
@@ -360,4 +373,36 @@ function loadImages() {
    cornerIMG.src = "./Art/Tiles/Corner.png";
    labIMG = new Image();
    labIMG.src = "./Art/Tiles/cog.png";
+   //tile with crystal
+   c_straightIMG = new Image();
+   c_straightIMG.src = "./Art/Tiles/Straight_Crystal.png";
+   c_splitIMG = new Image();
+   c_splitIMG.src = "./Art/Tiles/Split_Crystal.png";
+   c_tridentIMG = new Image();
+   c_tridentIMG.src = "./Art/Tiles/Trident_Crystal.png";
+   c_sixwayIMG = new Image();
+   c_sixwayIMG.src = "./Art/Tiles/6Way_Crystal.png";
+   c_uturnIMG = new Image();
+   c_uturnIMG.src = "./Art/Tiles/UTurn_Crystal.png";
+   c_cornerIMG = new Image();
+   c_cornerIMG.src = "./Art/Tiles/Corner_Crystal.png";
+
+   debrisIMG = new Image();
+   debrisIMG.src = "./Art/Tiles/Debris.png";
+   pitfallIMG = new Image();
+   pitfallIMG.src = "./Art/Tiles/Pitfall.png";
+   
+   //home tiles
+   robot1IMG = new Image();
+   robot1IMG.src = "./Art/Robots/Robot1.png";
+   robot2IMG = new Image();
+   robot2IMG.src = "./Art/Robots/Robot2Blue.png";
+   robot3IMG = new Image();
+   robot3IMG.src = "./Art/Robots/Robot3.png";
+   robot4HIMG = new Image();
+   robot4HIMG.src = "./Art/Robots/Robot4.png";
+   robot5IMG = new Image();
+   robot5IMG.src = "./Art/Robots/Robot5.png";
+   robot6IMG = new Image();
+   robot6IMG.src = "./Art/Robots/Robot6.png";
 }

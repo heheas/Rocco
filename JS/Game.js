@@ -44,13 +44,13 @@ class Game {
     for (let y = 0; y < 22; y++) {
       for (let x = 0; x < 9; x++) {
         if (this.homeLocations.some(home => home.x == x && home.y == y)) {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.HOME));
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.HOME));
         } else if (this.resourceLocations.some(resource => resource.x == x && resource.y == y)) {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.RESOURCE));
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.RESOURCE));
         } else if (this.tileLocations.some(tile => tile.x == x && tile.y == y)) {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.EMPTY));
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.EMPTY));
         } else {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, TileType.INVALID));
+          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.INVALID));
         }
       }
     }
@@ -74,7 +74,15 @@ class Game {
 
   rotateSelectedTile(rotateClockwise = true) {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
-      this.selectedItem.direction += rotateClockwise ? 1 : -1;
+      if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN].includes(this.selectedItem.type)) {
+        this.selectedItem.direction += rotateClockwise ? 1 : -1;
+      }
+    }
+  }
+
+  flipSelectedTile() {
+    if (this.selectedItem && this.selectedItem instanceof Tile) {
+        this.selectedItem.flipped = !this.selectedItem.flipped;
     }
   }
 }
