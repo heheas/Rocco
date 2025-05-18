@@ -71,4 +71,10 @@ class Game {
   selectTile(x, y) {
     this.setSelectedItem(this.getTile(x,y)); 
   }
+
+  rotateSelectedTile(rotateClockwise = true) {
+    if (this.selectedItem && this.selectedItem instance of Tile) {
+      this.selectedItem.direction += rotateClockwise ? 1 : -1;
+    }
+  }
 }
