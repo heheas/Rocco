@@ -182,7 +182,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-if (movingTIle) {
+if (movingTile) {
    borderOffset = borderOffset < 5 ? borderOffset + 1 : 0;
 }
    
