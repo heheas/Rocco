@@ -22,7 +22,7 @@ var currentClickX = 0;
 var currentClickY = 0;
 var horizontalSpacing = 0;
 var verticalSpacing = 0;
-var movingTile = 0;
+var movingTile = false;
 var borderOffset = 0;
 
 var otherX;
