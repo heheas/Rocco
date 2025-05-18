@@ -201,7 +201,7 @@ function flipSelectedTile() {
    game.flipSelectedTile();
 }
 
-function movingTile() {
+function moveTile() {
    movingTile = !movingTile;
 }
 
