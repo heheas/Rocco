@@ -24,7 +24,7 @@ var horizontalSpacing = 0;
 var verticalSpacing = 0;
 var movingTile = false;
 var selectDash = 0;
-var selectDashSize = 5;
+var selectDashSize = 15;
 var updateTime = 0;
 
 var otherX;
