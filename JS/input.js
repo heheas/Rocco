@@ -256,11 +256,12 @@ function drawBoard(xPos, yPos, hexRadius) {
                   ctx.setLineDash([selectDash, 2*selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
-
+                  /*
                   ctx.lineDashOffset = selectDashSize;
                   ctx.setLineDash([selectDash, 2*selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
+                  */
                   ctx.setLineDash([]);
                } else {
                    ctx.strokeStyle = "green";
