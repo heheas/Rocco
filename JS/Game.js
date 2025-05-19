@@ -38,14 +38,14 @@ class Game {
     return this.board.get("[" + x + "," + y + "]");
   }
 
-  setTile(x, y, tile) {
-    tile.x = x;
-    tile.y = y;
-    this.board.set("[" + x + "," + y + "]", tile);
+  setTile(x, y, newTile) {
+    newTile.x = x;
+    newTile.y = y;
+    this.board.set("[" + x + "," + y + "]", newTile);
   }
 
-  copyTile(tile) {
-    var tileClone = new Tile(tile.x,tile.y,tile.flipped, tile.type, tile.isDebris);
+  copyTile(tile2Copy) {
+    var tileClone = new Tile(tile2Copy.x,tile2Copy.y,tile2Copy.flipped, tile2Copy.type, tile2Copy.isDebris);
     return tileClone;
   }
   
