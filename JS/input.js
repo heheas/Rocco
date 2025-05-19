@@ -251,7 +251,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
-                  ctx.setLineDash([3, borderOffset]);
+                  ctx.setLineDash([5 - borderOffset, borderOffset]);
                }
             } else {
                ctx.strokeStyle = "black";
