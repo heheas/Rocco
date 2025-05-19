@@ -38,7 +38,9 @@ class Game {
     return this.board.get("[" + x + "," + y + "]");
   }
 
-  setTile(tile, x, y) {
+  setTile(x, y, tile) {
+    tile.x = x;
+    tile.y = y;
     this.board.set("[" + x + "," + y + "]", tile);
   }
   
@@ -48,13 +50,13 @@ class Game {
     for (let y = 0; y < 22; y++) {
       for (let x = 0; x < 9; x++) {
         if (this.homeLocations.some(home => home.x == x && home.y == y)) {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.HOME));
+          setTile(x,y, new Tile(x,y, false, TileType.HOME));
         } else if (this.resourceLocations.some(resource => resource.x == x && resource.y == y)) {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.RESOURCE));
+          setTile(x,y, new Tile(x,y, false, TileType.RESOURCE));
         } else if (this.tileLocations.some(tile => tile.x == x && tile.y == y)) {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.EMPTY));
+          setTile(x,y, new Tile(x,y, false, TileType.EMPTY));
         } else {
-          this.board.set("[" + x + "," + y + "]", new Tile(x,y, false, TileType.INVALID));
+          setTile(x,y, new Tile(x,y, false, TileType.INVALID));
         }
       }
     }
@@ -83,7 +85,8 @@ class Game {
     var origTile = getTile(origX, origY);
     var newTile = getTile(newX, newY);
     var tempTile = newTile;
-    this.tileLocation
+    setTile(newX, newY, origTile);
+    setTile(oldX, oldY, tempTile);
   }
   
   rotateSelectedTile(rotateClockwise = true) {
