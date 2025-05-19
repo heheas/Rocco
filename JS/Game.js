@@ -71,14 +71,14 @@ class Game {
   selectTile(x, y) {
     var tile = this.getTile(x,y);
     console.log(JSON.stringify(tile));
-    if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN].includes(tile.type)) {
+    if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(tile.type)) {
       this.setSelectedItem(this.getTile(x,y)); 
     }
   }
 
   rotateSelectedTile(rotateClockwise = true) {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
-      if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN].includes(this.selectedItem.type)) {
+      if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(this.selectedItem.type)) {
         this.selectedItem.direction += rotateClockwise ? 1 : -1;
       }
     }
