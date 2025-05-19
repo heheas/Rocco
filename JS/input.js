@@ -185,7 +185,7 @@ function update(deltaTime) {
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
 if (movingTile && (this.lastTimestamp - updateTime > 125)) {
-   selectDash = selectDash <= selectDashSize ? selectDash + 1 : 0;
+   selectDash = selectDash < selectDashSize ? selectDash + 1 : 0;
    updateTime = this.lastTimestamp;
 }
    
