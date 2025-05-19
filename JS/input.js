@@ -184,7 +184,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-if (movingTile && (this.lastTimestamp - updateTime > 250)) {
+if (movingTile && (this.lastTimestamp - updateTime > 125)) {
    selectDash = selectDash < selectDashSize ? selectDash + 1 : 0;
    updateTime = this.lastTimestamp;
 }
@@ -261,7 +261,6 @@ function drawBoard(xPos, yPos, hexRadius) {
                   
                   
                   ctx.lineDashOffset = selectDashSize-selectDash;
-                  ctx.strokeStyle = "blue";
                   ctx.setLineDash([selectDashSize-selectDash, selectDash+selectDashSize]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
