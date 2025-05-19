@@ -24,6 +24,7 @@ var horizontalSpacing = 0;
 var verticalSpacing = 0;
 var movingTile = false;
 var selectDash = 0;
+var selectDashSize = 5;
 var updateTime = 0;
 
 var otherX;
@@ -184,7 +185,7 @@ function update(deltaTime) {
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
 if (movingTile && (this.lastTimestamp - updateTime > 250)) {
-   selectDash = selectDash < 5 ? selectDash + 1 : 0;
+   selectDash = selectDash < selectDashSize ? selectDash + 1 : 0;
    updateTime = this.lastTimestamp;
 }
    
@@ -253,13 +254,13 @@ function drawBoard(xPos, yPos, hexRadius) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
                   ctx.lineDashOffset = selectDash;
-                  ctx.setLineDash([10-selectDash, selectDash]);
+                  ctx.setLineDash([selectDashSize+ selectDash, selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                   ctx.beginPath();
                   ctx.strokeStyle = "red";
                   ctx.lineDashOffset = 0;
-                  ctx.setLineDash([selectDash, 10-selectDash]);
+                  ctx.setLineDash([selectDash, selectDashSize-selectDash]);
                }
             } else {
                ctx.strokeStyle = "black";
