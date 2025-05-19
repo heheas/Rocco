@@ -258,6 +258,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                   ctx.beginPath();
+                  ctx.lineDashOffset = 0;
                   ctx.setLineDash([5, 5]);
                }
             } else {
