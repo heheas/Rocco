@@ -248,17 +248,22 @@ function drawBoard(xPos, yPos, hexRadius) {
             
 
             //border and highlight if selected
+            ctx.lineWidth = 3;
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
-                  ctx.setLineDash([5 - borderOffset, borderOffset]);
+                  ctx.setLineDash([borderOffset, borderOffset]);
+                  drawHexagon(hexX, hexY, radius, null);
+                  ctx.stroke();
+                  ctx.beginPath();
+                  ctx.setLineDash([borderOffset + 5, borderOffset]);
                }
             } else {
                ctx.strokeStyle = "black";
             }
-            ctx.lineWidth = 3;
             drawHexagon(hexX, hexY, radius, null);
             ctx.stroke();
+            
             ctx.setLineDash([]);
             //ctx.fillStyle = "black";
 
