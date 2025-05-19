@@ -254,7 +254,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
                   ctx.lineDashOffset = selectDash;
-                  ctx.setLineDash([selectDash, selectDashSize-selectDash]);
+                  ctx.setLineDash([selectDash, 2*selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                }
