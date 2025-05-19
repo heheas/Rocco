@@ -252,7 +252,6 @@ function drawBoard(xPos, yPos, hexRadius) {
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
-                  ctx.strokeStyle = "red";
                   ctx.lineDashOffset = 5;
                   ctx.setLineDash([5, 5]);
                   drawHexagon(hexX, hexY, radius, null);
