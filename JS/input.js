@@ -255,16 +255,14 @@ function drawBoard(xPos, yPos, hexRadius) {
                if (movingTile) {
                   
                   ctx.lineDashOffset = 0;
-                  ctx.setLineDash([selectDash*2, 2*(selectDashSize-selectDash)]);
+                  ctx.setLineDash([selectDash, 2*selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                   
-                  /*
                   ctx.lineDashOffset = selectDashSize-selectDash;
-                  ctx.setLineDash([selectDashSize-selectDash, selectDash+selectDashSize]);
+                  ctx.setLineDash([selectDash, 2*selectDash+selectDashSize]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
-                  */
                   
                   ctx.setLineDash([]);
                } else {
