@@ -251,20 +251,20 @@ function drawBoard(xPos, yPos, hexRadius) {
             //border and highlight if selected
             ctx.lineWidth = 3;
             if (tile == game.selectedItem) {
+               ctx.strokeStyle = "green";
                if (movingTile) {
                   ctx.lineDashOffset = 0;
                   ctx.setLineDash([selectDash, 2*selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
-                  /*
-                  ctx.lineDashOffset = selectDashSize;
-                  ctx.setLineDash([selectDash, 2*selectDashSize-selectDash]);
+                  
+                  ctx.lineDashOffset = selectDashSize-selectDash;
+                  ctx.setLineDash([selectDashSize-selectDash, 2*selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
-                  */
+                  
                   ctx.setLineDash([]);
                } else {
-                   ctx.strokeStyle = "green";
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                }
