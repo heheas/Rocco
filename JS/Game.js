@@ -86,11 +86,12 @@ class Game {
   }
 
   moveTile(origX, origY, newX, newY) {
-    var origTile = this.getTile(origX, origY);
-    var newTile = this.getTile(newX, newY);
-    var tempTile = this.copyTile(newTile);
+    var origTile = this.copyTile(this.getTile(origX, origY));
+    var newTile = this.copyTile(this.getTile(newX, newY));
+    var tempTile = newTile;
     this.setTile(newX, newY, origTile);
     this.setTile(oldX, oldY, tempTile);
+    this.selectTile(newX, newY);
   }
   
   rotateSelectedTile(rotateClockwise = true) {
