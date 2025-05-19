@@ -214,6 +214,11 @@ function flipSelectedTile() {
 
 function moveTile() {
    movingTile = !movingTile;
+   if (movingTile) {
+      $('#btnMove').val("Cancel");
+   } else {
+      $('#btnMove').val("Move");
+   }
 }
 
 
