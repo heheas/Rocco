@@ -253,11 +253,12 @@ function drawBoard(xPos, yPos, hexRadius) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
                   ctx.lineDashOffset = 5;
-                  ctx.setLineDash([10-borderOffset, borderOffset]);
+                  ctx.lineStyle = "red";
+                  ctx.setLineDash([5, 5]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                   ctx.beginPath();
-                  ctx.setLineDash([borderOffset, 10-borderOffset]);
+                  ctx.setLineDash([5, 5]);
                }
             } else {
                ctx.strokeStyle = "black";
