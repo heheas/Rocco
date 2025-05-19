@@ -43,6 +43,10 @@ class Game {
     tile.y = y;
     this.board.set("[" + x + "," + y + "]", tile);
   }
+
+  copyTile(tile) {
+    return JSON.parse(JSON.stringify(tile));
+  }
   
   initGame() {
     console.log("Initialize Board");
@@ -84,7 +88,7 @@ class Game {
   moveTile(origX, origY, newX, newY) {
     var origTile = this.getTile(origX, origY);
     var newTile = this.getTile(newX, newY);
-    var tempTile = newTile;
+    var tempTile = this.copyTile(newTile);
     this.setTile(newX, newY, origTile);
     this.setTile(oldX, oldY, tempTile);
   }
