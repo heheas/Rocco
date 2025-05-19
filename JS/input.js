@@ -183,7 +183,7 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-if (movingTile && (this.lastTimestamp - updateTime > 500)) {
+if (movingTile && (this.lastTimestamp - updateTime > 250)) {
    borderOffset = borderOffset < 5 ? borderOffset + 1 : 0;
    updateTime = this.lastTimestamp;
 }
@@ -251,7 +251,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
-                  ctx.setLineDash([5, borderOffset]);
+                  ctx.setLineDash([3, borderOffset]);
                }
             } else {
                ctx.strokeStyle = "black";
