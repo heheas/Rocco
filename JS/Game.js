@@ -70,6 +70,7 @@ class Game {
 
   selectTile(x, y) {
     var tile = this.getTile(x,y);
+    console.log(JSON.stringify(tile));
     if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN].includes(tile.type)) {
       this.setSelectedItem(this.getTile(x,y)); 
     }
