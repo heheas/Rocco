@@ -86,12 +86,14 @@ class Game {
     }
   }
 
-  moveTile(origX, origY, newX, newY) {
-    var origTile = this.copyTile(this.getTile(origX, origY));
-    var newTile = this.copyTile(this.getTile(newX, newY));
-    this.setTile(newX, newY, origTile);
-    this.setTile(oldX, oldY, newTile);
-    this.selectTile(newX, newY);
+  moveSelectedTile(newX, newY) {
+    if (this.selectedItem && this.selectedItem instance of Tile) {
+      var origTile = this.copyTile(this.selectedItem);
+      var replacedTile = this.copyTile(this.getTile(newX, newY));
+      this.setTile(newX, newY, origTile);
+      this.setTile(this.selectedItem.x, this.selectedItem.y, replacedTile);
+      this.selectTile(newX, newY);
+    }
   }
   
   rotateSelectedTile(rotateClockwise = true) {
