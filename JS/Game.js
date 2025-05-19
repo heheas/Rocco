@@ -37,6 +37,10 @@ class Game {
   getTile(x,y) {
     return this.board.get("[" + x + "," + y + "]");
   }
+
+  setTile(tile, x, y) {
+    this.board.set("[" + x + "," + y + "]", tile);
+  }
   
   initGame() {
     console.log("Initialize Board");
