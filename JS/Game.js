@@ -70,12 +70,18 @@ class Game {
 
   selectTile(x, y) {
     var tile = this.getTile(x,y);
-    console.log(JSON.stringify(tile));
     if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(tile.type)) {
       this.setSelectedItem(this.getTile(x,y)); 
     }
   }
 
+  moveTile(origX, origY, newX, newY) {
+    var origTile = getTile(origX, origY);
+    var newTile = getTile(newX, newY);
+    var tempTile = newTile;
+    this.tileLocation
+  }
+  
   rotateSelectedTile(rotateClockwise = true) {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
       if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(this.selectedItem.type)) {
