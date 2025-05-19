@@ -1,7 +1,7 @@
 //Rendering Variables
 var xPos = 0;
 var yPos = 0;
-var scale = 1;
+var scale = 1.3;
 
 var dragging = false;
 var ctrlDown = false;
@@ -258,7 +258,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                   
-                  ctx.lineDashOffset = selectDashSize-selectDash;
+                  ctx.lineDashOffset = 0;
                   ctx.setLineDash([selectDashSize-selectDash, 2*selectDashSize-selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
