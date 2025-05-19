@@ -260,7 +260,8 @@ function drawBoard(xPos, yPos, hexRadius) {
                   ctx.stroke();
                   
                   
-                  ctx.lineDashOffset = selectDash;
+                  ctx.lineDashOffset = 2*selectDashSize-selectDash;
+                  ctx.strokeStyle = "blue";
                   ctx.setLineDash([2*selectDashSize-selectDash, selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
