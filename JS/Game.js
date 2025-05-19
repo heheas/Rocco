@@ -89,9 +89,8 @@ class Game {
   moveTile(origX, origY, newX, newY) {
     var origTile = this.copyTile(this.getTile(origX, origY));
     var newTile = this.copyTile(this.getTile(newX, newY));
-    var tempTile = newTile;
     this.setTile(newX, newY, origTile);
-    this.setTile(oldX, oldY, tempTile);
+    this.setTile(oldX, oldY, newTile);
     this.selectTile(newX, newY);
   }
   
