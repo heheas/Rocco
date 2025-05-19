@@ -253,7 +253,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
                   ctx.lineDashOffset = 5;
-                  ctx.lineStyle = "red";
+                  ctx.strokeStyle = "red";
                   ctx.setLineDash([5, 5]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
