@@ -23,7 +23,7 @@ var currentClickY = 0;
 var horizontalSpacing = 0;
 var verticalSpacing = 0;
 var movingTile = false;
-var borderOffset = 0;
+var selectDash = 0;
 var updateTime = 0;
 
 var otherX;
@@ -184,7 +184,7 @@ function update(deltaTime) {
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
 if (movingTile && (this.lastTimestamp - updateTime > 250)) {
-   borderOffset = borderOffset < 5 ? borderOffset + 1 : 0;
+   selectDash = selectDash < 5 ? selectDash + 1 : 0;
    updateTime = this.lastTimestamp;
 }
    
@@ -252,8 +252,8 @@ function drawBoard(xPos, yPos, hexRadius) {
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
-                  ctx.lineDashOffset = 5;
-                  ctx.setLineDash([5, 5]);
+                  ctx.lineDashOffset = selectDash;
+                  ctx.setLineDash([10-selectDash, selectDash]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                   ctx.beginPath();
