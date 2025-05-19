@@ -45,7 +45,8 @@ class Game {
   }
 
   copyTile(tile) {
-    return JSON.parse(JSON.stringify(tile));
+    var tileClone = new Tile(tile.x,tile.y,tile.flipped, tile.type, tile.isDebris);
+    return tileClone;
   }
   
   initGame() {
