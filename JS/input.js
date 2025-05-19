@@ -252,11 +252,11 @@ function drawBoard(xPos, yPos, hexRadius) {
             if (tile == game.selectedItem) {
                 ctx.strokeStyle = "green";
                if (movingTile) {
-                  ctx.setLineDash([borderOffset, 5-borderOffset]);
+                  ctx.setLineDash([borderOffset, (5-borderOffset)]);
                   drawHexagon(hexX, hexY, radius, null);
                   ctx.stroke();
                   ctx.beginPath();
-                  ctx.setLineDash([5-borderOffSet, borderOffset]);
+                  ctx.setLineDash([(5-borderOffset), borderOffset]);
                }
             } else {
                ctx.strokeStyle = "black";
