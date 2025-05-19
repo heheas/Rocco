@@ -50,13 +50,13 @@ class Game {
     for (let y = 0; y < 22; y++) {
       for (let x = 0; x < 9; x++) {
         if (this.homeLocations.some(home => home.x == x && home.y == y)) {
-          setTile(x,y, new Tile(x,y, false, TileType.HOME));
+          this.setTile(x,y, new Tile(x,y, false, TileType.HOME));
         } else if (this.resourceLocations.some(resource => resource.x == x && resource.y == y)) {
-          setTile(x,y, new Tile(x,y, false, TileType.RESOURCE));
+          this.setTile(x,y, new Tile(x,y, false, TileType.RESOURCE));
         } else if (this.tileLocations.some(tile => tile.x == x && tile.y == y)) {
-          setTile(x,y, new Tile(x,y, false, TileType.EMPTY));
+          this.setTile(x,y, new Tile(x,y, false, TileType.EMPTY));
         } else {
-          setTile(x,y, new Tile(x,y, false, TileType.INVALID));
+          this.setTile(x,y, new Tile(x,y, false, TileType.INVALID));
         }
       }
     }
@@ -85,8 +85,8 @@ class Game {
     var origTile = getTile(origX, origY);
     var newTile = getTile(newX, newY);
     var tempTile = newTile;
-    setTile(newX, newY, origTile);
-    setTile(oldX, oldY, tempTile);
+    this.setTile(newX, newY, origTile);
+    this.setTile(oldX, oldY, tempTile);
   }
   
   rotateSelectedTile(rotateClockwise = true) {
