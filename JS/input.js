@@ -259,7 +259,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                   ctx.beginPath();
                   ctx.strokeStyle = "red";
                   ctx.lineDashOffset = 0;
-                  ctx.setLineDash([5, 5]);
+                  ctx.setLineDash([selectDash, 10-selectDash]);
                }
             } else {
                ctx.strokeStyle = "black";
