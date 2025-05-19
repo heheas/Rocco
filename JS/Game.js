@@ -70,7 +70,7 @@ class Game {
 
   selectTile(x, y) {
     var tile = this.getTile(x,y);
-    if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN].includes(this.selectedItem.type)) {
+    if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN].includes(tile.type)) {
       this.setSelectedItem(this.getTile(x,y)); 
     }
   }
