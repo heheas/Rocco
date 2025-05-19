@@ -24,6 +24,7 @@ var horizontalSpacing = 0;
 var verticalSpacing = 0;
 var movingTile = false;
 var borderOffset = 0;
+var updateTime = 0;
 
 var otherX;
 var otherY;
@@ -182,8 +183,9 @@ function update(deltaTime) {
  // This would be where you update your game state
  //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-if (movingTile) {
+if (movingTile && (this.lastTimestamp - updateTime > 500) {
    borderOffset = borderOffset < 5 ? borderOffset + 1 : 0;
+   updateTime = this.lastTimestamp;
 }
    
   drawBoard(gameX,gameY, boardHexSize);
