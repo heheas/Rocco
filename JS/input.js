@@ -131,8 +131,9 @@ function getHexSize() {
 function clickFunc(event) {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
-
+      console.log("click");
       if (!viewingPlayerBoard) {
+      console.log("notViewingPlayerBoard");
          if (currentClickX < playerBoardTabSize) {
             if (currentClickY >= playerBoardY && currentClickY <= playerBoardY + playerBoardTabSize) {
                viewingPlayerBoard = true;
@@ -153,6 +154,7 @@ function clickFunc(event) {
          }
          game.selectTile(selection.x, selection.y);
       } else if (viewingPlayerBoard) {
+      console.log("viewingPlayerBoard");
          if (currentClickX >= playerBoardWidth && currentClickX <= playerBoardWidth + playerBoardTabSize) {
             if (currentClickY >= playerBoardY && currentClickY <= playerBoardY + playerBoardTabSize) {
                viewingPlayerBoard = false;
