@@ -399,6 +399,7 @@ function renderHexagon(x, y, radius, tile) {
          switch(tile.type) {
             case TileType.HOME:
                ctx.strokeStyle = "black";
+               console.log("getColor: "+ tile.homeType);
                ctx.fillStyle = getRobotColor(tile.homeType);
                break;
             case TileType.RESOURCE:
@@ -528,7 +529,6 @@ function getRobotColor(robot) {
          color = RobotColor.NOTSET;
          break;
    }
-   console.log("getColor: "+robot + " | " + color);
    return color;
 }
 
