@@ -438,11 +438,32 @@ function renderHexagon(x, y, radius, tile) {
 
          //draw home tiles
          if (tile.type == TileType.HOME && tile.homeType != RobotType.NOTSET) {
+            var robotIMG;
+            switch(tile.homeType) {
+               case RobotType.ROBOT1:
+                  robotIMG = robot1IMG;
+                  break;
+               case RobotType.ROBOT2:
+                  robotIMG = robot2IMG;
+                  break;
+               case RobotType.ROBOT3:
+                  robotIMG = robot3IMG;
+                  break;
+               case RobotType.ROBOT4:
+                  robotIMG = robot4IMG;
+                  break;
+               case RobotType.ROBOT5:
+                  robotIMG = robot5IMG;
+                  break;
+               case RobotType.ROBOT6:
+                  robotIMG = robot6IMG;
+                  break;
+            }
             console.log("Drawing Home");
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate((-60+(tile.direction*60))*Math.PI/180);
-            ctx.drawImage(robot1IMG,-3*radius/8,-3*radius/8, 3*radius/4, 3*radius/4);
+            ctx.drawImage(robotIMG,-3*radius/8,-3*radius/8, 3*radius/4, 3*radius/4);
             ctx.restore();
          }
       }
