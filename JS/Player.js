@@ -1,6 +1,6 @@
 class Player {
   name = "";
-  robot = 
+  robot = RobotType.NOTSET;
   homeLocation = "";
   skillLevels = {move:2, build:2, alter:2, remove:2};
   handCards = [];
@@ -10,7 +10,7 @@ class Player {
   constructor(name, homeLocation, robot) {
     this.name = name;
     this.homeLocation = homeLocation;
-    this.
+    this.robot = robot;
   }
 
   changeName(name) {
