@@ -269,18 +269,25 @@ function removeSelectedTile() {
    game.removeSelectedTile();
 }
 
-function assignHome() {
-   var homeLocation = $("#selAssignHome").val();
+function assignHome(homeLocation) {
    if (homeLocation) {
       game.addNewPlayer("Player1", homeLocation);
       var gameHomeLocation = game.getHomeLocation(homeLocation);
       var homeTile = game.getTile(gameHomeLocation.x, gameHomeLocation.y);
       if (homeTile) {
-         homeTile.setHomeType(HomeType.ROBOT1);
+         homeTile.setHomeType(RobotType.ROBOT1);
          homeTile.setDirection(homeLocation);
       }
       $("#selAssignHome option[value='" + homeLocation + "']").remove();
    }
+}
+
+function addPlayer() {
+   var playerName = $('#txtPlayerName').val();
+   var homeLocation = $("#selAssignHome").val();
+   var robot = $("#selRobot').val();
+   assignHome(homeLocation);
+   game.addNewPlayer(playerName, homeLocation, robot);
 }
 
 
@@ -428,7 +435,7 @@ function renderHexagon(x, y, radius, tile) {
          ctx.stroke();
 
          //draw home tiles
-         if (tile.type == TileType.HOME && tile.homeType != HomeType.NOTSET) {
+         if (tile.type == TileType.HOME && tile.homeType != RobotType.NOTSET) {
             console.log("Drawing Home");
             ctx.save();
             ctx.translate(x, y);
