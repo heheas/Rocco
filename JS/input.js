@@ -1,7 +1,7 @@
 //Rendering Variables
 var xPos = 0;
 var yPos = 0;
-var scale = 2;
+var scale = 1.2;
 
 var dragging = false;
 var ctrlDown = false;
@@ -13,6 +13,10 @@ var itemOrigY = 0;
 
 var canvas;
 var ctx;
+
+var viewingPlayerBoard = true;
+var playerBoardTabSize = 50;
+var playerBoardX = 0, playerBoardY = 50, playerBoardWidth = 825, playerBoardHeight = 500;
 
 //selected item variables
 var selectedBoxSize = 150;
@@ -80,9 +84,13 @@ function initListeners() {
 
   this.canvas.addEventListener('wheel', function(event){
       if (event.deltaY < 0) {
-         scale += 0.1;
+         if (scale < 3.5) {
+            scale += 0.1;
+         }
       } else if (event.deltaY > 0) {
-         scale -= 0.1;
+         if (scale > 0.7) {
+            scale -= 0.1;
+         }
       }
        event.preventDefault();
    });
@@ -124,6 +132,38 @@ function clickFunc(event) {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
 
+      if (!viewingPlayerBoard) {
+         if (currentClickX < playerBoardTabSize) {
+            if (currentClickY >= playerBoardY && currentClickY <= playerBoardY + playerBoardTabSize) {
+               viewingPlayerBoard = true;
+               playerBoardX = 0;
+               return;
+            }
+         }
+
+         var selection = getGridSelection(currentClickX, currentClickY);
+
+         if (movingTile) {
+            movingTile = !game.moveSelectedTile(selection.x, selection.y);
+            if (movingTile) {
+               $('#btnMove').val("Cancel");
+            } else {
+               $('#btnMove').val("Move");
+            }
+         }
+         game.selectTile(selection.x, selection.y);
+      } else if (viewingPlayerBoard) {
+         if (currentClickX >= playerBoardWidth && currentClickX <= playerBoardWidth + playerBoardTabSize) {
+            if (currentClickY >= playerBoardY && currentClickY <= playerBoardY + playerBoardTabSize) {
+               viewingPlayerBoard = false;
+               playerBoardX = -playerBoardWidth;
+               return;
+            }
+         }
+      }
+   }
+
+   function getGridSelection(currentClickX, currentClickY) {
       horizontalSpacing = (scale*(1.5*getHexSize()+2*spacing))/2;
       verticalSpacing = (scale*(((getHexSize()+spacing)/2)*(Math.sqrt(3)/2)));
 
@@ -136,10 +176,7 @@ function clickFunc(event) {
       var isFlipped = topY % 2 == 0;
       var modifier = isMirror ^ isFlipped ? 1 : 0;
 
-      if (movingTile) {
-         game.moveSelectedTile(Math.floor(leftX/2), (topY + modifier));
-      }
-      game.selectTile(Math.floor(leftX/2),(topY + modifier));
+      return {x: Math.floor(leftX/2), y: (topY + modifier) };
    }
 
 
@@ -194,6 +231,7 @@ if (movingTile && (this.lastTimestamp - updateTime > 125)) {
    
   drawBoard(gameX,gameY, boardHexSize);
   drawSelectedItem();
+  drawPlayerBoard();
 }
 
 function calcDistance(x1,y1,x2,y2) {
@@ -219,6 +257,10 @@ function moveTile() {
    } else {
       $('#btnMove').val("Move");
    }
+}
+
+function removeSelectedTile() {
+   game.removeSelectedTile();
 }
 
 
@@ -259,18 +301,20 @@ function drawBoard(xPos, yPos, hexRadius) {
             //border and highlight if selected
             ctx.lineWidth = 3;
             if (tile == game.selectedItem) {
-               ctx.strokeStyle = "green";
-               if (movingTile) {
-                  
-                  ctx.lineDashOffset = 2*selectDash;
-                  ctx.setLineDash([selectDashSize, selectDashSize]);
-                  drawHexagon(hexX, hexY, radius, null);
-                  ctx.stroke();
-                  
-                  ctx.setLineDash([]);
-               } else {
-                  drawHexagon(hexX, hexY, radius, null);
-                  ctx.stroke();
+               if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(tile.type)) {
+                  ctx.strokeStyle = "green";
+                  if (movingTile) {
+                     
+                     ctx.lineDashOffset = 2*selectDash;
+                     ctx.setLineDash([selectDashSize, selectDashSize]);
+                     drawHexagon(hexX, hexY, radius, null);
+                     ctx.stroke();
+                     
+                     ctx.setLineDash([]);
+                  } else {
+                     drawHexagon(hexX, hexY, radius, null);
+                     ctx.stroke();
+                  }
                }
             } else {
                ctx.strokeStyle = "black";
@@ -368,23 +412,76 @@ function renderHexagon(x, y, radius, tile) {
 
 function drawSelectedItem() {
    if (game.selectedItem) {
-      //box outline
-      ctx.beginPath();
-      ctx.fillStyle = "white";
-      ctx.fillRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
-      ctx.fill();
-      
-      ctx.beginPath();
-      ctx.strokeStyle = "black";
-      ctx.strokeRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
-      ctx.stroke();
-      
       if (game.selectedItem instanceof Tile) {
-         drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100, game.selectedItem);
+
+         if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(game.selectedItem.type)) {
+            //box outline
+            ctx.beginPath();
+            ctx.fillStyle = "white";
+            ctx.fillRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.strokeStyle = "black";
+            ctx.strokeRect(canvas.width - selectedBoxSize, 0, selectedBoxSize, selectedBoxSize);
+            ctx.stroke();
+
+            drawHexagon(canvas.width - selectedBoxSize/2, selectedBoxSize/2, 100, game.selectedItem);
+         }
       } else {
          
       }
    }
+}
+
+function drawPlayerBoard() {
+   //background
+   ctx.beginPath();
+   ctx.lineWidth = 5;
+   ctx.strokeStyle = "black";
+   ctx.fillStyle = "rgb(75,65,77)";
+   ctx.moveTo(playerBoardX, playerBoardY);
+   ctx.lineTo(playerBoardX + playerBoardWidth + playerBoardTabSize, playerBoardY);
+   ctx.lineTo(playerBoardX + playerBoardWidth + playerBoardTabSize, playerBoardY + playerBoardTabSize);
+   ctx.lineTo(playerBoardX + playerBoardWidth, playerBoardY + playerBoardTabSize);
+   ctx.lineTo(playerBoardX + playerBoardWidth, playerBoardY + playerBoardHeight);
+   ctx.lineTo(playerBoardX, playerBoardY + playerBoardHeight);
+   ctx.stroke();
+   ctx.fill();
+   
+   ctx.drawImage(playerBoardIMG, playerBoardX + 10, playerBoardY + 10, playerBoardWidth - 20, playerBoardHeight - 20);
+
+   if (!viewingPlayerBoard) {
+      ctx.beginPath();
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "black";
+      ctx.moveTo(playerBoardX + playerBoardWidth + playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
+      ctx.lineTo(playerBoardX + playerBoardWidth + 3*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
+      ctx.lineTo(playerBoardX + playerBoardWidth + 2.5*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/4);
+      ctx.lineTo(playerBoardX + playerBoardWidth + 3*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
+      ctx.lineTo(playerBoardX + playerBoardWidth + 2.5*playerBoardTabSize/4, playerBoardY + 3*playerBoardTabSize/4);
+      ctx.stroke();
+   } else {
+      ctx.beginPath();
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "black";
+      ctx.moveTo(playerBoardX + playerBoardWidth + 3*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
+      ctx.lineTo(playerBoardX + playerBoardWidth + playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
+      ctx.lineTo(playerBoardX + playerBoardWidth + 1.5*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/4);
+      ctx.lineTo(playerBoardX + playerBoardWidth + playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
+      ctx.lineTo(playerBoardX + playerBoardWidth + 1.5*playerBoardTabSize/4, playerBoardY + 3*playerBoardTabSize/4);
+      ctx.stroke();
+   }
+
+   //draw character
+   ctx.beginPath();
+   ctx.lineWidth = 2;
+   ctx.fillStyle = "rgb(90,73,94)";
+   ctx.strokeStyle = "black";
+   ctx.fillRect(playerBoardX + 37, playerBoardY + 165, 183, 228);
+   ctx.fill();
+
+   ctx.drawImage(robot1IMG, playerBoardX + 35, playerBoardY + 170, 180, 225);
 }
 
 function loadImages() {
@@ -438,4 +535,7 @@ function loadImages() {
    robot5IMG.src = "./Art/Robots/Robot5.png";
    robot6IMG = new Image();
    robot6IMG.src = "./Art/Robots/Robot6.png";
+
+   playerBoardIMG = new Image();
+   playerBoardIMG.src = "./Art/PlayerBoard1.png";
 }

@@ -24,6 +24,7 @@ class Game {
     {x:2, y:18},{x:3, y:18},{x:4, y:18},
     {x:2, y:19},{x:3, y:19},
   ];
+  tileBag = [];
 
 
   constructor() {
@@ -45,7 +46,7 @@ class Game {
   }
 
   copyTile(tile2Copy) {
-    var tileClone = new Tile(tile2Copy.x,tile2Copy.y,tile2Copy.flipped, tile2Copy.type, tile2Copy.isDebris);
+    var tileClone = new Tile(tile2Copy.x, tile2Copy.y, tile2Copy.flipped, tile2Copy.type, tile2Copy.isDebris);
     return tileClone;
   }
   
@@ -65,6 +66,7 @@ class Game {
         }
       }
     }
+    this.setTile(4,4, new Tile(4,4, false, TileType.CORNER, true));
   }
 
   setSelectedItem(item) {
@@ -80,19 +82,22 @@ class Game {
   }
 
   selectTile(x, y) {
-    var tile = this.getTile(x,y);
-    if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(tile.type)) {
-      this.setSelectedItem(this.getTile(x,y)); 
-    }
+    this.setSelectedItem(this.getTile(x,y)); 
   }
 
   moveSelectedTile(newX, newY) {
-    if (this.selectedItem && this.selectedItem instance of Tile) {
+    if (this.selectedItem && this.selectedItem instanceof Tile) {
       var origTile = this.copyTile(this.selectedItem);
       var replacedTile = this.copyTile(this.getTile(newX, newY));
-      this.setTile(newX, newY, origTile);
-      this.setTile(this.selectedItem.x, this.selectedItem.y, replacedTile);
-      this.selectTile(newX, newY);
+      if (replacedTile.type == TileType.EMPTY) {
+        this.setTile(newX, newY, origTile);
+        this.setTile(this.selectedItem.x, this.selectedItem.y, replacedTile);
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
   
@@ -106,7 +111,17 @@ class Game {
 
   flipSelectedTile() {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
+      if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(this.selectedItem.type)) {
         this.selectedItem.flipped = !this.selectedItem.flipped;
+      }
+    }
+  }
+
+  removeSelectedTile() {
+    if (this.selectedItem && this.selectedItem instanceof Tile) {
+      this.tileBag.push(this.getTile(this.selectedItem.x, this.selectedItem.y));
+      this.setTile(this.selectedItem.x, this.selectedItem.y, new Tile(this.selectedItem.x, this.selectedItem.y, false, TileType.EMPTY, true));
+      this.selectedItem = null;
     }
   }
 }

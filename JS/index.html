@@ -5,10 +5,13 @@
   <script src="GameObjects.js"></script>
 </head>
 <body>
-   <canvas id="myCanvas" width="1200" height="800" style="border:1px solid #000000;display:inline-block;">
+   <canvas id="myCanvas" width="900" height="600" style="border:1px solid #000000;display:inline-block;">
 </canvas>
+<br/>
+<input type="button" value="Pull New Tile" onclick="pullNewTile()"/>
 <input type="button" id="btnMove" value="Move" onclick="moveTile()"/>
 <input type="button" value="<-" onclick="rotateSelectedTile(false)"/>
 <input type="button" value="->" onclick="rotateSelectedTile(true)"/>
 <input type="button" value="flip" onclick="flipSelectedTile(true)"/>
+<input type="button" value="remove" onclick="removeSelectedTile()"/>
 </body>

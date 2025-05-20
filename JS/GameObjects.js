@@ -53,43 +53,6 @@ class Tile extends GameObject {
     this.flipped = flipped;
     this.type = type;
     this.isDebris = isDebris;
-    this.direction = Math.floor(Math.random()*6)+1; //TODO: Remove
-    if (this.type == TileType.EMPTY) {
-       switch(Math.floor(Math.random()*7)) { //TODO: Remove
-           case 0:
-             this.type = TileType.EMPTY;
-             break;
-          case 1:
-            this.type = TileType.STRAIGHT;
-            this.flipped = Math.random() < 0.5;
-            this.isDebris = Math.random() < 0.5;
-             break;
-          case 2:
-            this.type = TileType.SPLIT;
-            this.flipped = Math.random() < 0.5;
-            this.isDebris = Math.random() < 0.5;
-             break;
-          case 3:
-            this.type = TileType.TRIDENT;
-            this.flipped = Math.random() < 0.5;
-            this.isDebris = Math.random() < 0.5;
-             break;
-          case 4:
-            this.type = TileType.SIXWAY;
-            this.flipped = Math.random() < 0.5;
-            this.isDebris = Math.random() < 0.5;
-             break;
-          case 5:
-            this.type = TileType.UTURN;
-            this.flipped = Math.random() < 0.5;
-            this.isDebris = Math.random() < 0.5;
-             break;
-          case 6:
-            this.type = TileType.CORNER;
-            this.flipped = Math.random() < 0.5;
-            this.isDebris = Math.random() < 0.5;
-             break;
-        }
-    }
+    this.direction = 1;
   }
 }
