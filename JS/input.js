@@ -324,7 +324,7 @@ function drawBoard(xPos, yPos, hexRadius) {
 
             var playerTile = game.getPlayers().find(player => (player.x == x && player.y == y));
             if (playerTile) {
-               ctx.arc(hexX, hexY, radius*0.95, 0, 2*MATH.PI);
+               ctx.arc(hexX, hexY, radius*0.95, 0, 2*Math.PI);
             }
             
             //border and highlight if selected
