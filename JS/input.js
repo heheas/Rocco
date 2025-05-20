@@ -322,10 +322,14 @@ function drawBoard(xPos, yPos, hexRadius) {
                tile
             );
 
+            //draw player token
             var playerTile = game.getPlayers().find(player => (player.x == x && player.y == y));
-            console.log("Player Tile: " + playerTile);
             if (playerTile) {
+               ctx.beginPath();
+               ctx.lineWidth = 3;
+               ctx.strokeStyle = "blue";
                ctx.arc(hexX, hexY, radius*0.95, 0, 2*Math.PI);
+               ctx.stroke();
             }
             
             //border and highlight if selected
