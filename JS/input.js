@@ -14,7 +14,7 @@ var itemOrigY = 0;
 var canvas;
 var ctx;
 
-var viewingPlayerBoard = true;
+var viewingPlayerBoard = false;
 var playerBoardTabSize = 50;
 var playerBoardX = 0, playerBoardY = 50, playerBoardWidth = 825, playerBoardHeight = 500;
 
