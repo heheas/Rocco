@@ -1,14 +1,16 @@
 class Player {
   name = "";
+  robot = 
   homeLocation = "";
   skillLevels = {move:2, build:2, alter:2, remove:2};
   handCards = [];
   draftedCards = {p1:null, p2:null, extra:null};
   storage = {resources: [], tiles: []};
 
-  constructor(name, homeLocation) {
+  constructor(name, homeLocation, robot) {
     this.name = name;
     this.homeLocation = homeLocation;
+    this.
   }
 
   changeName(name) {
