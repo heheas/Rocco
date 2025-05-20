@@ -58,7 +58,7 @@ class Tile extends GameObject {
     this.direction = 1;
   }
 
-  function setHomeType(homeType) = {
+  setHomeType(homeType) = {
     this.homeType = homeType;
   }
 }
