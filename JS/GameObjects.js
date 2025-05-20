@@ -19,7 +19,7 @@ const TileType = {
   HOME: "home",
   RESOURCE: "resource",
   INVALID: "invalid",
-  EMPTY: "empty"
+  EMPTY: "empty",
 }
 
 const HomeType = {
@@ -29,7 +29,7 @@ const HomeType = {
   ROBOT4: "robot4",
   ROBOT5: "robot5",
   ROBOT6: "robot6",
-  NOTSET: "not_set"
+  NOTSET: "not_set",
 }
 
 const ResourceType = {
