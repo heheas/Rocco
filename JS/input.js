@@ -328,7 +328,9 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.beginPath();
                ctx.lineWidth = 3;
                ctx.strokeStyle = "blue";
-               ctx.arc(hexX, hexY, radius*0.95, 0, 2*Math.PI);
+               ctx.fillStyle = "yellow";
+               ctx.arc(hexX, hexY, radius*0.95/2, 0, 2*Math.PI);
+               ctx.fill();
                ctx.stroke();
             }
             
