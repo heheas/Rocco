@@ -322,7 +322,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                tile
             );
 
-            var playerTile = players.find(player => (player.x == x && player.y == y));
+            var playerTile = game.getPlayers().find(player => (player.x == x && player.y == y));
             if (playerTile) {
                ctx.arc(hexX, hexY, radius*0.95, 0, 2*MATH.PI);
             }
