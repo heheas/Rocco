@@ -380,6 +380,7 @@ function drawHexagon(x, y, radius, tile) {
 
 function renderHexagon(x, y, radius, tile) {
       ctx.fillStyle = "rgba(0, 0, 0, 0)";
+      ctx.lineWidth = 3;
       let hexIMG;
       if (tile.flipped) {
          if (tile.isDebris) {
@@ -498,7 +499,7 @@ function drawSelectedItem() {
 function drawPlayerBoard() {
    //background
    ctx.beginPath();
-   ctx.lineWidth = 5;
+   ctx. = 5;
    ctx.strokeStyle = "black";
    ctx.fillStyle = "rgb(75,65,77)";
    ctx.moveTo(playerBoardX, playerBoardY);
@@ -514,7 +515,7 @@ function drawPlayerBoard() {
 
    if (!viewingPlayerBoard) {
       ctx.beginPath();
-      ctx.lineWidth = 5;
+      ctx. = 5;
       ctx.strokeStyle = "black";
       ctx.moveTo(playerBoardX + playerBoardWidth + playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
       ctx.lineTo(playerBoardX + playerBoardWidth + 3*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
@@ -524,7 +525,7 @@ function drawPlayerBoard() {
       ctx.stroke();
    } else {
       ctx.beginPath();
-      ctx.lineWidth = 5;
+      ctx. = 5;
       ctx.strokeStyle = "black";
       ctx.moveTo(playerBoardX + playerBoardWidth + 3*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
       ctx.lineTo(playerBoardX + playerBoardWidth + playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
