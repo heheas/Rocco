@@ -7,11 +7,16 @@
 <body>
    <canvas id="myCanvas" width="900" height="600" style="border:1px solid #000000;display:inline-block;">
 </canvas>
+  <br/>
+  Home: <input id="txtAssignHome" type="text"></input>
+  <input id="btnAssignHome" value="Assign Home" onclick="assignHome()"/>
 <br/>
-<input type="button" value="Pull New Tile" onclick="pullNewTile()"/>
+Tiles: 
+<input type="button" disabled value="Pull New Tile" onclick="pullNewTile()"/>
 <input type="button" id="btnMove" value="Move" onclick="moveTile()"/>
 <input type="button" value="<-" onclick="rotateSelectedTile(false)"/>
 <input type="button" value="->" onclick="rotateSelectedTile(true)"/>
 <input type="button" value="flip" onclick="flipSelectedTile(true)"/>
 <input type="button" value="remove" onclick="removeSelectedTile()"/>
+<br/>
 </body>
