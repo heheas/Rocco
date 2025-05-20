@@ -276,6 +276,7 @@ function assignHome() {
    var homeTile = game.getTile(gameHomeLocation.x, gameHomeLocation.y);
    if (homeTile) {
       homeTile.setHomeType(HomeType.ROBOT1);
+      homeTile.setDirection(homeLocation);
    }
    $("#selAssignHome option[value='" + homeLocation + "']").remove();
 }
