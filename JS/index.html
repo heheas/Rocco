@@ -9,7 +9,20 @@
    <canvas id="myCanvas" width="900" height="600" style="border:1px solid #000000;display:inline-block;">
 </canvas>
   <br/>
-  Home: <select id="selAssignHome" type="text">
+  Player Setup: 
+  Name:
+  <input id="txtPlayerName" type="text"></input>
+  Robot: 
+  <select id="selRobot">
+    <option value="robot1">Robot 1</option>
+    <option value="robot2">Robot 2</option>
+    <option value="robot3">Robot 3</option>
+    <option value="robot4">Robot 4</option>
+    <option value="robot5">Robot 5</option>
+    <option value="robot6">Robot 6</option>
+  </select>
+  Home Location: 
+  <select id="selAssignHome">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -17,7 +30,7 @@
     <option value="5">5</option>
     <option value="6">6</option>
   </select>
-  <input id="btnAssignHome" type="button" value="Assign Home" onclick="assignHome()"/>
+  <input id="btnAssignHome" type="button" value="Add Player" onclick="assignHome()"/>
 <br/>
 Tiles: 
 <input type="button" disabled value="Pull New Tile" onclick="pullNewTile()"/>
