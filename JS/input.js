@@ -499,7 +499,7 @@ function drawSelectedItem() {
 function drawPlayerBoard() {
    //background
    ctx.beginPath();
-   ctx. = 5;
+   ctx.lineWidth = 5;
    ctx.strokeStyle = "black";
    ctx.fillStyle = "rgb(75,65,77)";
    ctx.moveTo(playerBoardX, playerBoardY);
@@ -515,7 +515,7 @@ function drawPlayerBoard() {
 
    if (!viewingPlayerBoard) {
       ctx.beginPath();
-      ctx. = 5;
+      ctx.lineWidth = 5;
       ctx.strokeStyle = "black";
       ctx.moveTo(playerBoardX + playerBoardWidth + playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
       ctx.lineTo(playerBoardX + playerBoardWidth + 3*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
@@ -525,7 +525,7 @@ function drawPlayerBoard() {
       ctx.stroke();
    } else {
       ctx.beginPath();
-      ctx. = 5;
+      ctx.lineWidth = 5;
       ctx.strokeStyle = "black";
       ctx.moveTo(playerBoardX + playerBoardWidth + 3*playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
       ctx.lineTo(playerBoardX + playerBoardWidth + playerBoardTabSize/4, playerBoardY + playerBoardTabSize/2);
