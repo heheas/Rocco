@@ -39,7 +39,7 @@ const RobotColor = {
   ROBOT4: "orange",
   ROBOT5: "blue",
   ROBOT6: "purple",
-  NOTSET: "not_set",
+  NOTSET: "black",
 }
 
 const ResourceType = {
