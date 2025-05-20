@@ -263,6 +263,15 @@ function removeSelectedTile() {
    game.removeSelectedTile();
 }
 
+function assignHome() {
+   var homeLocation = $("#selAssignHome").val();
+   game.addNewPlayer("Player1", homeLocation);
+   var homeTile = game.getTile(game.getHomeLocation(homeLocation));
+   if (homeTile) {
+      homeTile.setHomeType = HomeType.ROBOT1;
+   }
+   $("#selAssignHome option[value='" + homeLocation + "']").remove();
+}
 
 
 
