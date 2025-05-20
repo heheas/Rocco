@@ -49,6 +49,10 @@ class Game {
     return this.board;
   }
 
+  getHomeLocation(val) {
+    return this.homeLocations[val-1];
+  }
+  
   getTile(x,y) {
     return this.board.get("[" + x + "," + y + "]");
   }
