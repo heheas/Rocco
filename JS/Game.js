@@ -25,12 +25,21 @@ class Game {
     {x:2, y:19},{x:3, y:19},
   ];
   tileBag = [];
+  players = [];
 
 
   constructor() {
     this.initGame();
   }
 
+  getPlayers() {
+    return this.players;
+  }
+
+  addPlayer(player) {
+    this.players.push(player);
+  }
+  
   getBoardState() {
     return this.board;
   }
