@@ -36,8 +36,8 @@ class Game {
     return this.players;
   }
 
-  addNewPlayer(name, homeLocation) {
-    var newPlayer = new Player(name, homeLocation);
+  addNewPlayer(name, homeLocation, robot) {
+    var newPlayer = new Player(name, homeLocation, robot);
     this.addPlayer(newPlayer);
   }
   
