@@ -59,7 +59,7 @@ class Tile extends GameObject {
   }
 
   setHomeType(homeType) {
-    console.log("Setting Home Type: " + homeType);
+    console.log("New Home Tile: " + JSON.stringify(this));
     this.homeType = homeType;
   }
 }
