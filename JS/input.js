@@ -543,7 +543,7 @@ function drawPlayerBoard() {
    ctx.fill();
 
    var robotIMG;
-   switch(tile.homeType) {
+   switch(game.getActivePlayer().robot) {
       case RobotType.ROBOT1:
          robotIMG = robot1IMG;
          break;
