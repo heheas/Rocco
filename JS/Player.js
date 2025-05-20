@@ -10,7 +10,7 @@ class Player {
   constructor(name, homeLocation, robot) {
     this.name = name;
     this.homeLocation = homeLocation;
-    this.robot = robot;
+    this.robot = RobotType[robot];
   }
 
   changeName(name) {
