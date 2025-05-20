@@ -32,6 +32,16 @@ const RobotType = {
   NOTSET: "not_set",
 }
 
+const RobotColor = {
+  ROBOT1: "yellow",
+  ROBOT2: "red",
+  ROBOT3: "green",
+  ROBOT4: "orange",
+  ROBOT5: "blue",
+  ROBOT6: "purple",
+  NOTSET: "not_set",
+}
+
 const ResourceType = {
   CRYSTAL: "crystal",
   FAUNA: "fauna",
