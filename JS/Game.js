@@ -26,6 +26,7 @@ class Game {
   ];
   tileBag = [];
   players = [];
+  activePlayer = 0;
 
 
   constructor() {
