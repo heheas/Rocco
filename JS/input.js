@@ -503,6 +503,30 @@ function drawSelectedItem() {
    }
 }
 
+function getRobotColor(robot) {
+   var color = black;
+   switch(robot) {
+      case RobotType.ROBOT1:
+         color = RobotColor.ROBOT1;
+         break;
+      case RobotType.ROBOT2:
+         color = RobotColor.ROBOT2;
+         break;
+      case RobotType.ROBOT3:
+         color = RobotColor.ROBOT3;
+         break;
+      case RobotType.ROBOT4:
+         color = RobotColor.ROBOT4;
+         break;
+      case RobotType.ROBOT5:
+         color = RobotColor.ROBOT5;
+         break;
+      case RobotType.ROBOT6:
+         color = RobotColor.ROBOT6;
+         break;
+   }
+}
+
 function drawPlayerBoard() {
    //background
    ctx.beginPath();
