@@ -271,14 +271,16 @@ function removeSelectedTile() {
 
 function assignHome() {
    var homeLocation = $("#selAssignHome").val();
-   game.addNewPlayer("Player1", homeLocation);
-   var gameHomeLocation = game.getHomeLocation(homeLocation);
-   var homeTile = game.getTile(gameHomeLocation.x, gameHomeLocation.y);
-   if (homeTile) {
-      homeTile.setHomeType(HomeType.ROBOT1);
-      homeTile.setDirection(homeLocation);
+   if (homeLocation) {
+      game.addNewPlayer("Player1", homeLocation);
+      var gameHomeLocation = game.getHomeLocation(homeLocation);
+      var homeTile = game.getTile(gameHomeLocation.x, gameHomeLocation.y);
+      if (homeTile) {
+         homeTile.setHomeType(HomeType.ROBOT1);
+         homeTile.setDirection(homeLocation);
+      }
+      $("#selAssignHome option[value='" + homeLocation + "']").remove();
    }
-   $("#selAssignHome option[value='" + homeLocation + "']").remove();
 }
 
 
