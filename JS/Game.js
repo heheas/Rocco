@@ -36,6 +36,11 @@ class Game {
     return this.players;
   }
 
+  addNewPlayer(name, homeLocation) {
+    Player newPlayer = new Player(name, homeLocation);
+    this.addPlayer(newPlayer);
+  }
+  
   addPlayer(player) {
     this.players.push(player);
   }
