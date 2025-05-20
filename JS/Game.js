@@ -1,7 +1,7 @@
 class Game {
   board;
   selectedItem;
-  homeLocations = [{x:3, y:0},{x:0, y:5},{x:5, y:5}, {x:0, y:15},{x:5, y:15},{x:3, y:20}];
+  homeLocations = [{x:3, y:0},{x:5, y:5},{x:5, y:15},{x:3, y:20},{x:0, y:15},{x:0, y:5}];
   resourceLocations = [{x:1, y:1},{x:4, y:1},{x:1, y:19},{x:4, y:19},{x:0, y:10},{x:6, y:10}];
   tileLocations = [
     {x:2, y:1},{x:3, y:1},
