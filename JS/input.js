@@ -528,6 +528,7 @@ function getRobotColor(robot) {
          color = RobotColor.NOTSET;
          break;
    }
+   console.log("getColor: "+robot + " | " + color);
    return color;
 }
 
