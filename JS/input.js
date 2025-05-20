@@ -323,6 +323,7 @@ function drawBoard(xPos, yPos, hexRadius) {
             );
 
             var playerTile = game.getPlayers().find(player => (player.x == x && player.y == y));
+            console.log("Player Tile: " + playerTile);
             if (playerTile) {
                ctx.arc(hexX, hexY, radius*0.95, 0, 2*Math.PI);
             }
@@ -460,7 +461,7 @@ function renderHexagon(x, y, radius, tile) {
                   robotIMG = robot6IMG;
                   break;
             }
-            console.log("Drawing Home");
+            
             if (robotIMG) {
                ctx.save();
                ctx.translate(x, y);
