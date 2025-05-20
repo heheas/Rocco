@@ -77,6 +77,7 @@ class Game {
   
   initGame() {
     console.log("Initialize Board");
+    this.selectedItem = null;
     this.board = new Map([]);
     for (let y = 0; y < 22; y++) {
       for (let x = 0; x < 9; x++) {
@@ -92,6 +93,10 @@ class Game {
       }
     }
     this.setTile(4,4, new Tile(4,4, false, TileType.CORNER, true));
+
+    //init players
+    this.players = [];
+    this.activePlayer = 0;
   }
 
   setSelectedItem(item) {
