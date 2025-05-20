@@ -8,8 +8,15 @@
    <canvas id="myCanvas" width="900" height="600" style="border:1px solid #000000;display:inline-block;">
 </canvas>
   <br/>
-  Home: <input id="txtAssignHome" type="text"></input>
-  <input id="btnAssignHome" value="Assign Home" onclick="assignHome()"/>
+  Home: <select id="selAssignHome" type="text">
+    <option value="1"></option>
+    <option value="2"></option>
+    <option value="3"></option>
+    <option value="4"></option>
+    <option value="5"></option>
+    <option value="6"></option>
+  </select>
+  <input id="btnAssignHome" type="button" value="Assign Home" onclick="assignHome()"/>
 <br/>
 Tiles: 
 <input type="button" disabled value="Pull New Tile" onclick="pullNewTile()"/>
