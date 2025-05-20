@@ -328,7 +328,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.beginPath();
                ctx.lineWidth = 3;
                ctx.strokeStyle = "blue";
-               ctx.fillStyle = getRobotColor(playerTile.robot);
+               ctx.fillStyle = "orange"; //getRobotColor(playerTile.robot);
                ctx.arc(hexX, hexY, radius*0.95/2, 0, 2*Math.PI);
                ctx.fill();
                ctx.stroke();
@@ -399,7 +399,7 @@ function renderHexagon(x, y, radius, tile) {
          switch(tile.type) {
             case TileType.HOME:
                ctx.strokeStyle = "black";
-               ctx.fillStyle = getRobotColor(tile.homeType);
+               ctx.fillStyle = "green"; //getRobotColor(tile.homeType);
                console.log("getColor: "+ tile.homeType + " | " + ctx.fillStyle);
                break;
             case TileType.RESOURCE:
