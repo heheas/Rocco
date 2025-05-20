@@ -49,6 +49,8 @@ class Game {
   getActivePlayer() {
     return this.players[this.activePlayer];
   }
+
+  playerCount = () => {return this.players.length};
   
   getBoardState() {
     return this.board;
