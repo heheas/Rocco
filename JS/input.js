@@ -292,9 +292,6 @@ function addPlayer() {
    game.addNewPlayer(playerName, homeLocation, RobotType[robot]);
 }
 
-
-
-
 /* =====================================================================================================
 * RENDERING FUNCTIONS
 ===================================================================================================== */
@@ -310,7 +307,7 @@ function drawBoard(xPos, yPos, hexRadius) {
    var labSize = radius/1.5;
    ctx.drawImage(labIMG, xPos - labSize/2, yPos - labSize/2, labSize, labSize);
    
-   //draw tiles
+   //draw board
    for (let y = 0; y < 22; y++) {
      for (let x = 0; x < 9; x++) {
          let tile = game.getTile(x,y);
@@ -324,8 +321,12 @@ function drawBoard(xPos, yPos, hexRadius) {
                radius,
                tile
             );
-            
 
+            var playerTile = players.find(player => (player.x == x && player.y == y));
+            if (playerTile) {
+               ctx.arc(hexX, hexY, radius*0.95, 0, 2*MATH.PI);
+            }
+            
             //border and highlight if selected
             ctx.lineWidth = 3;
             if (tile == game.selectedItem) {
@@ -359,7 +360,6 @@ function drawBoard(xPos, yPos, hexRadius) {
          }
      }
    }
-
 }
 
 function drawHexagon(x, y, radius, tile) {
