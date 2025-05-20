@@ -159,7 +159,6 @@ function clickFunc(event) {
          }
          game.selectTile(selection.x, selection.y);
       } else if (viewingPlayerBoard) {
-      console.log("viewingPlayerBoard");
          if (currentClickX >= playerBoardWidth && currentClickX <= playerBoardWidth + playerBoardTabSize) {
             if (currentClickY >= playerBoardY && currentClickY <= playerBoardY + playerBoardTabSize) {
                viewingPlayerBoard = false;
@@ -274,6 +273,7 @@ function assignHome() {
    var homeLocation = $("#selAssignHome").val();
    game.addNewPlayer("Player1", homeLocation);
    var homeTile = game.getTile(game.getHomeLocation(homeLocation));
+   console.log("Assigning: " + JSON.stringify(homeTile));
    if (homeTile) {
       homeTile.setHomeType = HomeType.ROBOT1;
    }
