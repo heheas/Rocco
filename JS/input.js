@@ -588,8 +588,8 @@ function loadImages() {
    robot2IMG.src = "./Art/Robots/Robot2Blue.png";
    robot3IMG = new Image();
    robot3IMG.src = "./Art/Robots/Robot3.png";
-   robot4HIMG = new Image();
-   robot4HIMG.src = "./Art/Robots/Robot4.png";
+   robot4IMG = new Image();
+   robot4IMG.src = "./Art/Robots/Robot4.png";
    robot5IMG = new Image();
    robot5IMG.src = "./Art/Robots/Robot5.png";
    robot6IMG = new Image();
