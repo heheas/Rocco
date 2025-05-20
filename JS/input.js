@@ -374,7 +374,11 @@ function renderHexagon(x, y, radius, tile) {
                ctx.fillStyle = "black";
                ctx.fillStyle = "yellow";
                if (tile.HomeType != HomeType.NOTSET) {
-                  hexIMG = robot1IMG;
+                  ctx.save();
+                  ctx.translate(x, y);
+                  ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
+                  ctx.drawImage(robot1IMG,-radius/2, -radius/2, 3*radius/4, 3*radius/4);
+                  ctx.restore();
                }
                break;
             case TileType.RESOURCE:
