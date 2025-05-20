@@ -29,6 +29,7 @@ const HomeType = {
   ROBOT4: "robot4",
   ROBOT5: "robot5",
   ROBOT6: "robot6",
+  NOTSET: "not_set"
 }
 
 const ResourceType = {
@@ -37,7 +38,8 @@ const ResourceType = {
   MAGNETIC_ORE: "magnetic_ore",
   NEBULA_CRYSTAL: "nebula_crystal",
   NUTRIENT_PODS: "nutrient_pods",
-  PLASMA_NODE: "plasma_node"
+  PLASMA_NODE: "plasma_node",
+  NOTSET: "not_set",
 }
 
 class Tile extends GameObject {
@@ -45,8 +47,8 @@ class Tile extends GameObject {
   flipped = false;
   isDebris = true;
   direction = 1; //1-6 directions
-  homeType = -1; //1-6
-  resourceType = -1; //1-6
+  homeType = HomeType.NOTSET;
+  resourceType = ResourceType.NOTSET;
 
   constructor(x, y, flipped = false, type = TileType.EMPTY, isDebris = true) {
     super(x,y);
@@ -54,5 +56,9 @@ class Tile extends GameObject {
     this.type = type;
     this.isDebris = isDebris;
     this.direction = 1;
+  }
+
+  setHomeType(homeType) = {
+    this.homeType = homeType;
   }
 }
