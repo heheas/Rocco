@@ -269,24 +269,22 @@ function removeSelectedTile() {
    game.removeSelectedTile();
 }
 
-function assignHome(homeLocation) {
+function addPlayer() {
+   var playerName = $('#txtPlayerName').val();
+   var homeLocation = $("#selAssignHome").val();
+   var robot = RobotType[$('#selRobot').val()];
+
+   //setup home tile
    if (homeLocation) {
-      game.addNewPlayer("Player1", homeLocation);
       var gameHomeLocation = game.getHomeLocation(homeLocation);
       var homeTile = game.getTile(gameHomeLocation.x, gameHomeLocation.y);
       if (homeTile) {
-         homeTile.setHomeType(RobotType.ROBOT1);
+         homeTile.setHomeType(robot);
          homeTile.setDirection(homeLocation);
       }
       $("#selAssignHome option[value='" + homeLocation + "']").remove();
    }
-}
-
-function addPlayer() {
-   var playerName = $('#txtPlayerName').val();
-   var homeLocation = $("#selAssignHome").val();
-   var robot = $('#selRobot').val();
-   assignHome(homeLocation);
+   
    game.addNewPlayer(playerName, homeLocation, robot);
 }
 
