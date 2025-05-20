@@ -1,4 +1,4 @@
-class Player {
+class Player extends GameObject {
   name = "";
   robot = RobotType.NOTSET;
   homeLocation = "";
@@ -7,7 +7,8 @@ class Player {
   draftedCards = {p1:null, p2:null, extra:null};
   storage = {resources: [], tiles: []};
 
-  constructor(name, homeLocation, robot) {
+  constructor(x, y, name, homeLocation, robot) {
+    super(x,y);
     this.name = name;
     this.homeLocation = homeLocation;
     this.robot = robot;
