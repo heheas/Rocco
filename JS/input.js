@@ -380,14 +380,6 @@ function renderHexagon(x, y, radius, tile) {
             case TileType.HOME:
                ctx.fillStyle = "black";
                ctx.fillStyle = "yellow";
-               
-               if (tile.HomeType != HomeType.NOTSET) {
-                  ctx.save();
-                  ctx.translate(x, y);
-                  ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
-                  ctx.drawImage(robot1IMG,-radius/2, -radius/2, 3*radius/4, 3*radius/4);
-                  ctx.restore();
-               }
                break;
             case TileType.RESOURCE:
                ctx.fillStyle = "black";
@@ -419,6 +411,15 @@ function renderHexagon(x, y, radius, tile) {
                ctx.fillStyle = "black";
                break;
          }
+      }
+   
+               
+      if (tile.HomeType != HomeType.NOTSET) {
+         ctx.save();
+         ctx.translate(x, y);
+         ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
+         ctx.drawImage(robot1IMG,-radius/2, -radius/2, 3*radius/4, 3*radius/4);
+         ctx.restore();
       }
    
       if (hexIMG) {
