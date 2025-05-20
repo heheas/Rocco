@@ -460,11 +460,13 @@ function renderHexagon(x, y, radius, tile) {
                   break;
             }
             console.log("Drawing Home");
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate((-60+(tile.direction*60))*Math.PI/180);
-            ctx.drawImage(robotIMG,-3*radius/8,-3*radius/8, 3*radius/4, 3*radius/4);
-            ctx.restore();
+            if (robotIMG) {
+               ctx.save();
+               ctx.translate(x, y);
+               ctx.rotate((-60+(tile.direction*60))*Math.PI/180);
+               ctx.drawImage(robotIMG,-3*radius/8,-3*radius/8, 3*radius/4, 3*radius/4);
+               ctx.restore();
+            }
          }
       }
 }
@@ -540,7 +542,30 @@ function drawPlayerBoard() {
    ctx.fillRect(playerBoardX + 37, playerBoardY + 165, 183, 228);
    ctx.fill();
 
-   ctx.drawImage(robot1IMG, playerBoardX + 35, playerBoardY + 170, 180, 225);
+   var robotIMG;
+   switch(tile.homeType) {
+      case RobotType.ROBOT1:
+         robotIMG = robot1IMG;
+         break;
+      case RobotType.ROBOT2:
+         robotIMG = robot2IMG;
+         break;
+      case RobotType.ROBOT3:
+         robotIMG = robot3IMG;
+         break;
+      case RobotType.ROBOT4:
+         robotIMG = robot4IMG;
+         break;
+      case RobotType.ROBOT5:
+         robotIMG = robot5IMG;
+         break;
+      case RobotType.ROBOT6:
+         robotIMG = robot6IMG;
+         break;
+   }
+   if (robotIMG) {
+      ctx.drawImage(robot1IMG, playerBoardX + 35, playerBoardY + 170, 180, 225);
+   }
 }
 
 function loadImages() {
