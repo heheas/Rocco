@@ -429,8 +429,8 @@ function renderHexagon(x, y, radius, tile) {
             console.log("Drawing Home");
             ctx.save();
             ctx.translate(x, y);
-            ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
-            ctx.drawImage(robot1IMG,0, 0, 3*radius/4, 3*radius/4);
+            ctx.rotate(((tile.direction*60))*Math.PI/180);
+            ctx.drawImage(robot1IMG,-3*radius/8,-3*radius/8, 3*radius/4, 3*radius/4);
             ctx.restore();
          }
       }
