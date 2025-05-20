@@ -329,7 +329,7 @@ function drawBoard(xPos, yPos, hexRadius) {
                ctx.lineWidth = 3;
                ctx.strokeStyle = "blue";
                ctx.fillStyle = "orange"; //getRobotColor(playerTile.robot);
-               ctx.arc(hexX, hexY, radius*0.95/2, 0, 2*Math.PI);
+               ctx.arc(hexX, hexY, radius*0.95/4, 0, 2*Math.PI);
                ctx.fill();
                ctx.stroke();
             }
