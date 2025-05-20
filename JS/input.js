@@ -58,6 +58,13 @@ $(document).ready(function() {
    ctx = canvas.getContext('2d');
    gameX = canvas.width/2;
    gameY = canvas.height/2;
+
+   if (viewingPlayerBoard) {
+      playerBoardX = 0;
+   } else {
+      playerBoardX = -playerBoardWidth;
+   }
+   
    loadImages();
    initListeners();
    
@@ -131,9 +138,7 @@ function getHexSize() {
 function clickFunc(event) {
       currentClickX = event.pageX - $('#myCanvas').offset().left;
       currentClickY = event.pageY - $('#myCanvas').offset().top;
-      console.log("click");
       if (!viewingPlayerBoard) {
-      console.log("notViewingPlayerBoard");
          if (currentClickX < playerBoardTabSize) {
             if (currentClickY >= playerBoardY && currentClickY <= playerBoardY + playerBoardTabSize) {
                viewingPlayerBoard = true;
