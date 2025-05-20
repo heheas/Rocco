@@ -10,7 +10,7 @@ class Player {
   constructor(name, homeLocation, robot) {
     this.name = name;
     this.homeLocation = homeLocation;
-    this.robot = RobotType[robot];
+    this.robot = robot;
     console.log("New Player: " + JSON.stringify(this));
   }
 
