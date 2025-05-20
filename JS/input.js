@@ -504,7 +504,7 @@ function drawSelectedItem() {
 }
 
 function getRobotColor(robot) {
-   var color = black;
+   var color;
    switch(robot) {
       case RobotType.ROBOT1:
          color = RobotColor.ROBOT1;
@@ -524,7 +524,11 @@ function getRobotColor(robot) {
       case RobotType.ROBOT6:
          color = RobotColor.ROBOT6;
          break;
+      default:
+         color = RobotColor.NOTSET;
+         break;
    }
+   return color;
 }
 
 function drawPlayerBoard() {
