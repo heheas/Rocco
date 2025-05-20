@@ -37,7 +37,7 @@ class Game {
   }
 
   addNewPlayer(name, homeLocation) {
-    Player newPlayer = new Player(name, homeLocation);
+    var newPlayer = new Player(name, homeLocation);
     this.addPlayer(newPlayer);
   }
   
