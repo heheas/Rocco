@@ -272,7 +272,7 @@ function removeSelectedTile() {
 function addPlayer() {
    var playerName = $('#txtPlayerName').val();
    var homeLocation = $("#selAssignHome").val();
-   var robot = RobotType[$('#selRobot').val()];
+   var robot = $('#selRobot').val();
 
    //setup home tile
    if (homeLocation) {
@@ -284,8 +284,12 @@ function addPlayer() {
       }
       $("#selAssignHome option[value='" + homeLocation + "']").remove();
    }
+
+   if (robot) {
+      $("#selRobot option[value='" + robot + "']").remove();
+   }
    
-   game.addNewPlayer(playerName, homeLocation, robot);
+   game.addNewPlayer(playerName, homeLocation, RobotType[robot]);
 }
 
 
