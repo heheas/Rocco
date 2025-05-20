@@ -273,11 +273,9 @@ function assignHome() {
    var homeLocation = $("#selAssignHome").val();
    game.addNewPlayer("Player1", homeLocation);
    var gameHomeLocation = game.getHomeLocation(homeLocation);
-   console.log("GameHome: " + gameHomeLocation);
    var homeTile = game.getTile(gameHomeLocation.x, gameHomeLocation.y);
-   console.log("Assigning: " + JSON.stringify(homeTile));
    if (homeTile) {
-      homeTile.setHomeType = HomeType.ROBOT1;
+      homeTile.setHomeType(HomeType.ROBOT1);
    }
    $("#selAssignHome option[value='" + homeLocation + "']").remove();
 }
