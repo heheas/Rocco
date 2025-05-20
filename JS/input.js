@@ -534,37 +534,39 @@ function drawPlayerBoard() {
       ctx.stroke();
    }
 
-   //draw character
-   ctx.beginPath();
-   ctx.lineWidth = 2;
-   ctx.fillStyle = "rgb(90,73,94)";
-   ctx.strokeStyle = "black";
-   ctx.fillRect(playerBoardX + 37, playerBoardY + 165, 183, 228);
-   ctx.fill();
-
-   var robotIMG;
-   switch(game.getActivePlayer().robot) {
-      case RobotType.ROBOT1:
-         robotIMG = robot1IMG;
-         break;
-      case RobotType.ROBOT2:
-         robotIMG = robot2IMG;
-         break;
-      case RobotType.ROBOT3:
-         robotIMG = robot3IMG;
-         break;
-      case RobotType.ROBOT4:
-         robotIMG = robot4IMG;
-         break;
-      case RobotType.ROBOT5:
-         robotIMG = robot5IMG;
-         break;
-      case RobotType.ROBOT6:
-         robotIMG = robot6IMG;
-         break;
-   }
-   if (robotIMG) {
-      ctx.drawImage(robot1IMG, playerBoardX + 35, playerBoardY + 170, 180, 225);
+   if (game.playerCount > 0) {
+      //draw character
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.fillStyle = "rgb(90,73,94)";
+      ctx.strokeStyle = "black";
+      ctx.fillRect(playerBoardX + 37, playerBoardY + 165, 183, 228);
+      ctx.fill();
+   
+      var robotIMG;
+      switch(game.getActivePlayer().robot) {
+         case RobotType.ROBOT1:
+            robotIMG = robot1IMG;
+            break;
+         case RobotType.ROBOT2:
+            robotIMG = robot2IMG;
+            break;
+         case RobotType.ROBOT3:
+            robotIMG = robot3IMG;
+            break;
+         case RobotType.ROBOT4:
+            robotIMG = robot4IMG;
+            break;
+         case RobotType.ROBOT5:
+            robotIMG = robot5IMG;
+            break;
+         case RobotType.ROBOT6:
+            robotIMG = robot6IMG;
+            break;
+      }
+      if (robotIMG) {
+         ctx.drawImage(robot1IMG, playerBoardX + 35, playerBoardY + 170, 180, 225);
+      }
    }
 }
 
