@@ -11,6 +11,7 @@ class Player {
     this.name = name;
     this.homeLocation = homeLocation;
     this.robot = RobotType[robot];
+    console.log("New Player: " + JSON.stringify(this));
   }
 
   changeName(name) {
