@@ -414,7 +414,7 @@ function renderHexagon(x, y, radius, tile) {
       }
    
                
-      if (tile.HomeType != HomeType.NOTSET) {
+      if (tile.type == TileType.HOME && tile.HomeType != HomeType.NOTSET) {
          ctx.save();
          ctx.translate(x, y);
          ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
