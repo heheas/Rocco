@@ -419,7 +419,8 @@ function renderHexagon(x, y, radius, tile) {
          ctx.save();
          ctx.translate(x, y);
          ctx.rotate((-35+(tile.direction*60))*Math.PI/180);
-         ctx.drawImage(robot1IMG,-radius/2, -radius/2, 3*radius/4, 3*radius/4);
+         ctx.drawImage(robot1IMG,0, 0, 3*radius/4, 3*radius/4);
+         ctx.drawRect(0,0, 10,10);
          ctx.restore();
       }
    
