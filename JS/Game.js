@@ -45,6 +45,10 @@ class Game {
   addPlayer(player) {
     this.players.push(player);
   }
+
+  getActivePlayer() {
+    return this.players[this.activePlayer];
+  }
   
   getBoardState() {
     return this.board;
