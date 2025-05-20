@@ -1,4 +1,4 @@
-public Player {
+class Player {
   name = "";
   homeLocation = "";
   skillLevels = {move:2, build:2, alter:2, remove:2};
