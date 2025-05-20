@@ -285,7 +285,7 @@ function assignHome(homeLocation) {
 function addPlayer() {
    var playerName = $('#txtPlayerName').val();
    var homeLocation = $("#selAssignHome").val();
-   var robot = $("#selRobot').val();
+   var robot = $('#selRobot').val();
    assignHome(homeLocation);
    game.addNewPlayer(playerName, homeLocation, robot);
 }
