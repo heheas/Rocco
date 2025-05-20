@@ -22,7 +22,7 @@ const TileType = {
   EMPTY: "empty",
 }
 
-const HomeType = {
+const RobotType = {
   ROBOT1: "robot1",
   ROBOT2: "robot2",
   ROBOT3: "robot3",
@@ -47,7 +47,7 @@ class Tile extends GameObject {
   flipped = false;
   isDebris = true;
   direction = 1; //1-6 directions
-  homeType = HomeType.NOTSET;
+  homeType = RobotType.NOTSET;
   resourceType = ResourceType.NOTSET;
 
   constructor(x, y, flipped = false, type = TileType.EMPTY, isDebris = true) {
