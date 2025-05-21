@@ -6,6 +6,7 @@ class Player extends GameObject {
   handCards = [];
   draftedCards = {p1:null, p2:null, extra:null};
   storage = {resources: [], tiles: []};
+  isMoving = false;
 
   constructor(x, y, name, homeLocation, robot) {
     super(x,y);
