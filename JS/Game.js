@@ -3,6 +3,7 @@ class Game {
   selectedItem;
   homeLocations = [{x:3, y:0},{x:5, y:5},{x:5, y:15},{x:3, y:20},{x:0, y:15},{x:0, y:5}];
   resourceLocations = [{x:1, y:1},{x:4, y:1},{x:1, y:19},{x:4, y:19},{x:0, y:10},{x:6, y:10}];
+  pathTileTypes = [TileType.CORNER, TileType.STRAIGHT, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT];
   tileLocations = [
     {x:2, y:1},{x:3, y:1},
     {x:2, y:2},{x:3, y:2},{x:4, y:2},
@@ -38,10 +39,17 @@ class Game {
   }
 
   addNewPlayer(name, homeLocation, robot) {
-    console.log(robot);
-    var position = this.getHomeLocation(homeLocation);
-    var newPlayer = new Player(position.x, position.y, name, homeLocation, robot);
-    this.addPlayer(newPlayer);
+    if (name != undefined && homeLocation != undefined && robot != undefined) {
+      var position = this.getHomeLocation(homeLocation);
+      var homeTile = this.getTile(position.x, position.y);
+      if (homeTile) {
+         homeTile.setHomeType(robot);
+         //homeTile.setDirection(homeLocation);
+      }
+
+      var newPlayer = new Player(position.x, position.y, name, homeLocation, robot);
+      this.addPlayer(newPlayer);
+    }
   }
   
   addPlayer(player) {
@@ -74,6 +82,7 @@ class Game {
 
   copyTile(tile2Copy) {
     var tileClone = new Tile(tile2Copy.x, tile2Copy.y, tile2Copy.flipped, tile2Copy.type, tile2Copy.isDebris);
+    tileClone.setHomeType(tile2Copy.homeType);
     return tileClone;
   }
   
@@ -81,6 +90,11 @@ class Game {
     console.log("Initialize Board");
     this.selectedItem = null;
     this.board = new Map([]);
+    //init players
+    this.players = [];
+    this.activePlayer = 0;
+    
+    //init board
     for (let y = 0; y < 22; y++) {
       for (let x = 0; x < 9; x++) {
         if (this.homeLocations.some(home => home.x == x && home.y == y)) {
@@ -94,17 +108,24 @@ class Game {
         }
       }
     }
-    this.setTile(4,4, new Tile(4,4, false, TileType.CORNER, true));
 
-    //init players
-    this.players = [];
-    this.activePlayer = 0;
+    //temp for testing
+    this.addNewPlayer("TEST", 1, RobotType.ROBOT1);
+    this.setTile(3,2, new Tile(3,2, false, TileType.CORNER, true, 3));
+    this.setTile(3,3, new Tile(3,3, false, TileType.SIXWAY, true, 3));
+    this.setTile(2,3, new Tile(2,3, false, TileType.CORNER, true, 6));
+    this.setTile(2,4, new Tile(2,4, false, TileType.SPLIT, true, 6));
+    this.setTile(2,5, new Tile(2,5, false, TileType.TRIDENT, true, 6));
+    this.setTile(3,4, new Tile(3,4, false, TileType.UTURN, true, 6));
+    this.setTile(3,6, new Tile(3,6, false, TileType.STRAIGHT, true, 6));
+    this.setTile(2,7, new Tile(2,7, false, TileType.CORNER, true, 3));
+
   }
 
   setSelectedItem(item) {
     if (item != null) {
       if (item instanceof Tile) {
-        this.selectedItem = item.type != TileType.INVALID ? item : null;
+        this.selectedItem = (this.pathTileTypes.includes(item.type)) ? item : null;
       } else {
         this.selectedItem = item;
       }
@@ -114,11 +135,16 @@ class Game {
   }
 
   selectTile(x, y) {
-    this.setSelectedItem(this.getTile(x,y)); 
+    var player = this.players.find((player) => player.x == x && player.y == y);
+    if (player) {
+      this.setSelectedItem(player);
+    } else {
+      this.setSelectedItem(this.getTile(x,y)); 
+    }
   }
 
   moveSelectedTile(newX, newY) {
-    if (this.selectedItem && this.selectedItem instanceof Tile) {
+    if ((!this.players.some((player) => player.x == newX && player.y == newY)) && (this.selectedItem && this.selectedItem instanceof Tile)) {
       var origTile = this.copyTile(this.selectedItem);
       var replacedTile = this.copyTile(this.getTile(newX, newY));
       if (replacedTile.type == TileType.EMPTY) {
@@ -135,7 +161,7 @@ class Game {
   
   rotateSelectedTile(rotateClockwise = true) {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
-      if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(this.selectedItem.type)) {
+      if (this.pathTileTypes.includes(this.selectedItem.type)) {
         this.selectedItem.direction += rotateClockwise ? 1 : -1;
       }
     }
@@ -143,7 +169,7 @@ class Game {
 
   flipSelectedTile() {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
-      if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(this.selectedItem.type)) {
+      if (this.pathTileTypes.includes(this.selectedItem.type)) {
         this.selectedItem.flipped = !this.selectedItem.flipped;
       }
     }

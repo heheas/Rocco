@@ -33,13 +33,13 @@ const RobotType = {
 }
 
 const RobotColor = {
-  ROBOT1: "yellow",
-  ROBOT2: "red",
-  ROBOT3: "green",
-  ROBOT4: "orange",
-  ROBOT5: "blue",
-  ROBOT6: "purple",
-  NOTSET: "grey",
+  ROBOT1: "rgb(159 131 70)",
+  ROBOT2: "rgb(44 62 107)",
+  ROBOT3: "rgb(59 56 96)",
+  ROBOT4: "rgb(137 66 58)",
+  ROBOT5: "rgb(39 81 55)",
+  ROBOT6: "rgb(122 79 41)",
+  NOTSET: "yellow",
 }
 
 const ResourceType = {
@@ -60,12 +60,12 @@ class Tile extends GameObject {
   homeType = RobotType.NOTSET;
   resourceType = ResourceType.NOTSET;
 
-  constructor(x, y, flipped = false, type = TileType.EMPTY, isDebris = true) {
+  constructor(x, y, flipped = false, type = TileType.EMPTY, isDebris = true, direction = 1) {
     super(x,y);
     this.flipped = flipped;
     this.type = type;
     this.isDebris = isDebris;
-    this.direction = 1;
+    this.direction = direction;
   }
 
   setHomeType(homeType) {
