@@ -401,11 +401,15 @@ function renderHexagon(x, y, radius, tile) {
             case TileType.HOME:
                ctx.strokeStyle = "black";
                ctx.fillStyle = "green"; //getRobotColor(tile.homeType);
+               ctx.fill();
+               ctx.stroke();
                //console.log("getColor: "+ tile.homeType + " | " + ctx.fillStyle);
                break;
             case TileType.RESOURCE:
                ctx.strokeStyle = "black";
                ctx.fillStyle = "purple";
+               ctx.fill();
+               ctx.stroke();
                break;
             case TileType.STRAIGHT:
                hexIMG = tile.isDebris ? straightIMG : c_straightIMG;
@@ -427,10 +431,12 @@ function renderHexagon(x, y, radius, tile) {
                break;
             case TileType.EMPTY:
                ctx.strokeStyle = "black";
+         ctx.stroke();
                break;
             default:
                hexIMG = null;
                ctx.fillStyle = "black";
+         ctx.fill();
                break;
          }
       }
@@ -443,8 +449,6 @@ function renderHexagon(x, y, radius, tile) {
          ctx.drawImage(hexIMG,-radius/2, -radius/2, radius, radius);
          ctx.restore();
       } else {
-         ctx.fill();
-         ctx.stroke();
 
          //draw home tiles
          if (tile.type == TileType.HOME && tile.homeType != RobotType.NOTSET) {
