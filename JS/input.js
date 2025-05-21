@@ -283,6 +283,14 @@ function addPlayer() {
    game.addNewPlayer(playerName, homeLocation, RobotType[robot]);
 }
 
+function worldToBoardCoords(x, y) {
+
+}
+
+function boardToWorldCoords(x,y) {
+
+}
+
 /* =====================================================================================================
 * RENDERING FUNCTIONS
 ===================================================================================================== */
