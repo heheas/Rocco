@@ -28,6 +28,7 @@ class Game {
   tileBag = [];
   players = [];
   activePlayer = 0;
+  currentPathsTrace = [];
 
 
   constructor() {
@@ -180,6 +181,18 @@ class Game {
       this.tileBag.push(this.getTile(this.selectedItem.x, this.selectedItem.y));
       this.setTile(this.selectedItem.x, this.selectedItem.y, new Tile(this.selectedItem.x, this.selectedItem.y, false, TileType.EMPTY, true));
       this.selectedItem = null;
+    }
+  }
+
+  getCurrentPathsTrace() {
+    loadCurrentPaths();
+    return this.currentPathsTrace;
+  }
+
+  loadCurrentPaths() {
+    this.currentPathsTrace = [];
+    if (this.selectedItem && this.selectedItem instanceof Player && this.selectedItem.isMoving) {
+      console.log("Moving Player");
     }
   }
 }
