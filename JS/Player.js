@@ -12,7 +12,6 @@ class Player extends GameObject {
     this.name = name;
     this.homeLocation = homeLocation;
     this.robot = robot;
-    console.log("New Player: " + JSON.stringify(this));
   }
 
   changeName(name) {
