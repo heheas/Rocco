@@ -323,13 +323,13 @@ function drawBoard(xPos, yPos, hexRadius) {
             );
 
             //draw player token
-            var playerTile = game.getPlayers().find(player => (player.x == x && player.y == y));
-            if (playerTile) {
+            var player = game.getPlayers().find(player => (player.x == x && player.y == y));
+            if (player) {
                ctx.beginPath();
                ctx.lineWidth = 3;
                ctx.strokeStyle = "blue";
-               ctx.fillStyle = getRobotColor(playerTile.robot);
-               console.log(ctx.fillStyle);
+               ctx.fillStyle = getRobotColor(player.robot);
+               //console.log(ctx.fillStyle);
                ctx.arc(hexX, hexY, radius*0.95/4, 0, 2*Math.PI);
                ctx.fill();
                ctx.stroke();
@@ -510,6 +510,7 @@ function drawSelectedItem() {
 }
 
 function getRobotColor(robot) {
+   console.log("Getting Color for: " + robot);
    var color;
    switch(robot) {
       case RobotType.ROBOT1:
@@ -534,6 +535,7 @@ function getRobotColor(robot) {
          color = RobotColor.NOTSET;
          break;
    }
+   console.log("Returning Color: " + color);
    return color;
 }
 
