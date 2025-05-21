@@ -190,7 +190,7 @@ class Game {
   }
 
   loadCurrentPaths() {
-    this.currentPathsTrace = [];
+    this.currentPathsTrace = [[{x:4,y:5},{x:8,y:9}]];
     if (this.selectedItem && this.selectedItem instanceof Player && this.selectedItem.isMoving) {
       console.log("Moving Player");
     }
