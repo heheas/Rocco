@@ -338,6 +338,8 @@ function drawBoard(xPos, yPos, hexRadius) {
 
 function drawPlayerToken(hexX, hexY, radius, player) {
    if (player) {
+      drawPlayerPath();
+      
       ctx.beginPath();
       ctx.lineWidth = 2;
       ctx.strokeStyle = "black";
@@ -396,14 +398,20 @@ function drawPlayerToken(hexX, hexY, radius, player) {
             ctx.restore();
             break;
       }
-      if (player == game.selectedItem) {
-         drawPlayerPath();
-      }
    }
 }
 
 function drawPlayerPath() {
-   console.log("DRAW PATH");
+   if (player == game.selectedItem && player.isMoving) {
+      console.log("DRAW PATH");
+      var pathConnections = game.getCurrentPathsTrace();
+      pathConnections.forEach((connection) => {
+         ctx.beginPath();
+         ctx.moveTo(connection[0].x, connection[0].y);
+         ctx.lineTo(connection[1].x, connection[1].y);
+         ctx.closePath();
+      }
+   }
 }
 
 function drawHexagon(x, y, radius, tile) {
