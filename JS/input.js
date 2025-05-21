@@ -338,7 +338,7 @@ function drawBoard(xPos, yPos, hexRadius) {
 
 function drawPlayerToken(hexX, hexY, radius, player) {
    if (player) {
-      drawPlayerPath();
+      drawPlayerPath(player);
       
       ctx.beginPath();
       ctx.lineWidth = 2;
@@ -401,7 +401,7 @@ function drawPlayerToken(hexX, hexY, radius, player) {
    }
 }
 
-function drawPlayerPath() {
+function drawPlayerPath(player) {
    if (player == game.selectedItem && player.isMoving) {
       console.log("DRAW PATH");
       var pathConnections = game.getCurrentPathsTrace();
