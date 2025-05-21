@@ -410,7 +410,7 @@ function drawPlayerPath() {
          ctx.moveTo(connection[0].x, connection[0].y);
          ctx.lineTo(connection[1].x, connection[1].y);
          ctx.closePath();
-      }
+      });
    }
 }
 
