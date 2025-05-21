@@ -403,9 +403,9 @@ function drawPlayerToken(hexX, hexY, radius, player) {
 
 function drawPlayerPath(player) {
    if (player == game.selectedItem && player.isMoving) {
-      console.log("DRAW PATH");
       var pathConnections = game.getCurrentPathsTrace();
       pathConnections.forEach((connection) => {
+      console.log("Connection: {"+connection[0].x+","+connection[0].y+"} -> {"+connection[1].x+","+connection[1].y+"}");
          ctx.beginPath();
          ctx.moveTo(connection[0].x, connection[0].y);
          ctx.lineTo(connection[1].x, connection[1].y);
