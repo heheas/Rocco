@@ -38,6 +38,7 @@ class Game {
   }
 
   addNewPlayer(name, homeLocation, robot) {
+    console.log(robot);
     var position = this.getHomeLocation(homeLocation);
     var newPlayer = new Player(position.x, position.y, name, homeLocation, robot);
     this.addPlayer(newPlayer);

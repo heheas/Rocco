@@ -326,11 +326,9 @@ function drawBoard(xPos, yPos, hexRadius) {
             var player = game.getPlayers().find(player => (player.x == x && player.y == y));
             if (player) {
                ctx.beginPath();
-               ctx.lineWidth = 3;
+               ctx.lineWidth = 2;
                ctx.strokeStyle = "blue";
-               console.log(JSON.stringify(player));
-               ctx.fillStyle = getRobotColor(player.robot);
-               //console.log(ctx.fillStyle);
+               ctx.fillStyle = getRobotColor(player.getRobot());
                ctx.arc(hexX, hexY, radius*0.95/4, 0, 2*Math.PI);
                ctx.fill();
                ctx.stroke();
@@ -401,10 +399,10 @@ function renderHexagon(x, y, radius, tile) {
          switch(tile.type) {
             case TileType.HOME:
                ctx.strokeStyle = "black";
-               ctx.fillStyle = "green"; //getRobotColor(tile.homeType);
+               console.log(JSON.stringify(tile));
+               ctx.fillStyle = getRobotColor(tile.homeType);
                ctx.fill();
                ctx.stroke();
-               //console.log("getColor: "+ tile.homeType + " | " + ctx.fillStyle);
                break;
             case TileType.RESOURCE:
                ctx.strokeStyle = "black";
@@ -511,7 +509,7 @@ function drawSelectedItem() {
 }
 
 function getRobotColor(robot) {
-   console.log("Getting Color for: " + robot);
+   //console.log("Getting Color for: " + robot);
    var color;
    switch(robot) {
       case RobotType.ROBOT1:
@@ -536,7 +534,7 @@ function getRobotColor(robot) {
          color = RobotColor.NOTSET;
          break;
    }
-   console.log("Returning Color: " + color);
+   //console.log("Returning Color: " + color);
    return color;
 }
 

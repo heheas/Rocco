@@ -18,6 +18,10 @@ class Player extends GameObject {
     this.name = name;
   }
   
+  getRobot() {
+    return this.robot;
+  }
+  
   //Skill Upgrades
   upgradeMove() {
     skillLevels.move++;
