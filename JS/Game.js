@@ -185,7 +185,7 @@ class Game {
   }
 
   getCurrentPathsTrace() {
-    loadCurrentPaths();
+    this.loadCurrentPaths();
     return this.currentPathsTrace;
   }
 
