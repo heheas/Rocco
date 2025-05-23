@@ -44,7 +44,7 @@ class Game {
       var position = this.getHomeLocation(homeLocation);
       var homeTile = this.getTile(position.x, position.y);
       if (homeTile) {
-         homeTile.setHomeType(robot);
+         homeTile.setHome(homeLocation, robot);
          //homeTile.setDirection(homeLocation);
       }
 
@@ -111,15 +111,17 @@ class Game {
     }
 
     //temp for testing
-    this.addNewPlayer("TEST", 1, RobotType.ROBOT1);
+    //this.addNewPlayer("TEST", 5, RobotType.ROBOT1);
+    this.setTile(1,11, new Tile(1,11, false, TileType.CORNER, true, 3));
+    this.setTile(1,9, new Tile(1,9, false, TileType.CORNER, true, 3));
     this.setTile(3,2, new Tile(3,2, false, TileType.CORNER, true, 3));
     this.setTile(3,3, new Tile(3,3, false, TileType.SIXWAY, true, 3));
-    this.setTile(2,3, new Tile(2,3, false, TileType.CORNER, true, 6));
-    this.setTile(2,4, new Tile(2,4, false, TileType.SPLIT, true, 6));
-    this.setTile(2,5, new Tile(2,5, false, TileType.TRIDENT, true, 6));
-    this.setTile(3,4, new Tile(3,4, false, TileType.UTURN, true, 6));
-    this.setTile(3,6, new Tile(3,6, false, TileType.STRAIGHT, true, 6));
-    this.setTile(2,7, new Tile(2,7, false, TileType.CORNER, true, 3));
+    this.setTile(2,3, new Tile(2,3, false, TileType.CORNER, true, 5));
+    this.setTile(2,4, new Tile(2,4, false, TileType.SPLIT, true, 0));
+    this.setTile(2,5, new Tile(2,5, false, TileType.TRIDENT, true, 5));
+    this.setTile(3,4, new Tile(3,4, false, TileType.UTURN, true, 5));
+    this.setTile(3,6, new Tile(3,6, false, TileType.STRAIGHT, true, 5));
+    this.setTile(2,7, new Tile(2,7, false, TileType.CORNER, true, 0));
 
   }
 
@@ -139,6 +141,7 @@ class Game {
     var player = this.players.find((player) => player.x == x && player.y == y);
     if (player) {
       this.setSelectedItem(player);
+		this.loadPathGraph();
     } else {
       this.setSelectedItem(this.getTile(x,y)); 
     }
@@ -163,7 +166,7 @@ class Game {
   rotateSelectedTile(rotateClockwise = true) {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
       if (this.pathTileTypes.includes(this.selectedItem.type)) {
-        this.selectedItem.direction += rotateClockwise ? 1 : -1;
+        this.selectedItem.rotateDirection(rotateClockwise);
       }
     }
   }
@@ -184,15 +187,74 @@ class Game {
     }
   }
 
-  getCurrentPathsTrace() {
-    this.loadCurrentPaths();
-    return this.currentPathsTrace;
+  getCurrentPathsGraph() {
+    return this.currentPathsGraph;
   }
 
-  loadCurrentPaths() {
-    this.currentPathsTrace = [[{x:4,y:5},{x:8,y:9}]];
+  loadPathGraph() {
+    var pathsTrace = [];
     if (this.selectedItem && this.selectedItem instanceof Player && this.selectedItem.isMoving) {
-      console.log("Moving Player");
+		console.log("Moving Player");
+		var connections = [];
+		this.getTileGraphPoints(connections, {x:this.selectedItem.x, y:this.selectedItem.y});
+		//console.log(JSON.stringify(currentTileGraph));
+		this.currentPathsGraph = connections;
     }
   }
+
+	getTileGraphPoints(connections, tilePoint) {
+		var tile = this.getTile(tilePoint.x,tilePoint.y); //CURRENT TILE
+		if (tile && tile.type != TileType.EMPTY) {
+			var tilePathPoints = tile.getPathPoints(); // LIST OF TILES TO CHECK FOR CONNECTION
+			console.log("Path Points for " + tilePoint.x +","+tilePoint.y+": " + JSON.stringify(tilePathPoints));
+			tilePathPoints.forEach((newTilePoint) => {
+				//console.log("Tile "+JSON.stringify(tilePoint)+": " + JSON.stringify(newTilePoint));
+				var newTile = this.getTile(newTilePoint.x, newTilePoint.y);
+				if (newTile && newTile.type != TileType.EMPTY) {
+					var newTilePathPoints = newTile.getPathPoints();
+					//console.log("new path points for " + newTile.x +","+newTile.y+": " + JSON.stringify(newTilePathPoints));
+					var connection = newTilePathPoints.find((point) => JSON.stringify(tilePoint) === JSON.stringify(point));
+					if (connection) {
+						if (this.addUniqueConnection(connections, [tilePoint,newTilePoint])) {
+							//console.log("Connection: " + JSON.stringify(connection));
+							var newTilePathPointsSubset = newTilePathPoints.filter((point) => JSON.stringify(point) != JSON.stringify(connection));
+							
+							newTilePathPointsSubset.forEach((point) => {
+								this.getTileGraphPoints(connections, point);
+							});
+						}
+					}
+				}
+			});
+			//return connections;
+		}
+	}
+	
+	addUniqueConnection(connections, newConnection) {
+		if (!connections.find((estConn) => this.isMatchingConnection(estConn, newConnection))) {
+			//console.log(JSON.stringify(newConnection) + " | " + JSON.stringify(connections));
+			connections.push(newConnection);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	// appendArrayUnique(originalArray, newElements) {
+		// console.log("appending");
+	  // newElements.forEach(newItem => {
+		// console.log("newItems");
+		// if (!originalArray.find((origItem) => this.isMatchingConnection(origItem, newItem))) {
+		  // originalArray.push(newItem);
+		// }
+	  // });
+	  // return originalArray;
+	// }
+	
+	isMatchingConnection(item1, item2) {
+		var item1Sorted = item1.map(obj => JSON.stringify(obj)).sort();
+		var item2Sorted = item2.map(obj => JSON.stringify(obj)).sort();
+	//console.log(JSON.stringify(item1Sorted) + " | " + JSON.stringify(item2Sorted));
+		return JSON.stringify(item1Sorted) === JSON.stringify(item2Sorted);
+	}
 }
