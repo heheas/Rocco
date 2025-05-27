@@ -1,8 +1,8 @@
-public class InitVals {
-  homeLocations = [{x:3, y:0},{x:5, y:5},{x:5, y:15},{x:3, y:20},{x:0, y:15},{x:0, y:5}];
-  resourceLocations = [{x:1, y:1},{x:4, y:1},{x:1, y:19},{x:4, y:19},{x:0, y:10},{x:6, y:10}];
-  pathTileTypes = [TileType.CORNER, TileType.STRAIGHT, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT];
-  tileLocations = [
+class InitVals {
+  static homeLocations = [{x:3, y:0},{x:5, y:5},{x:5, y:15},{x:3, y:20},{x:0, y:15},{x:0, y:5}];
+  static resourceLocations = [{x:1, y:1},{x:4, y:1},{x:1, y:19},{x:4, y:19},{x:0, y:10},{x:6, y:10}];
+  static pathTileTypes = [TileType.CORNER, TileType.STRAIGHT, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT];
+  static tileLocations = [
     {x:2, y:1},{x:3, y:1},
     {x:2, y:2},{x:3, y:2},{x:4, y:2},
     {x:1, y:3},{x:2, y:3},{x:3, y:3},{x:4, y:3},
@@ -23,7 +23,7 @@ public class InitVals {
     {x:2, y:18},{x:3, y:18},{x:4, y:18},
     {x:2, y:19},{x:3, y:19},
   ];
-  pathBagSetup = [
+  static pathBagSetup = [
     { 
       type: TileType.CORNER,
       debrisCount: 12,
