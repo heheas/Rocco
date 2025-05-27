@@ -44,7 +44,7 @@ class Game {
   }
 
   getHomeLocation(val) {
-    return this.homeLocations[val-1];
+    return InitVals.homeLocations[val-1];
   }
   
   getTile(x,y) {
@@ -67,6 +67,10 @@ class Game {
     console.log("Initialize Board");
     this.selectedItem = null;
     this.board = new Map([]);
+
+   //init path tilebag
+   this.initPathTileBag();
+	  
     //init players
     this.players = [];
     this.activePlayer = 0;
@@ -74,11 +78,11 @@ class Game {
     //init board
     for (let y = 0; y < 22; y++) {
       for (let x = 0; x < 9; x++) {
-        if (this.homeLocations.some(home => home.x == x && home.y == y)) {
+        if (InitVals.homeLocations.some(home => home.x == x && home.y == y)) {
           this.setTile(x,y, new Tile(x,y, false, TileType.HOME));
-        } else if (this.resourceLocations.some(resource => resource.x == x && resource.y == y)) {
+        } else if (InitVals.resourceLocations.some(resource => resource.x == x && resource.y == y)) {
           this.setTile(x,y, new Tile(x,y, false, TileType.RESOURCE));
-        } else if (this.tileLocations.some(tile => tile.x == x && tile.y == y)) {
+        } else if (InitVals.tileLocations.some(tile => tile.x == x && tile.y == y)) {
           this.setTile(x,y, new Tile(x,y, false, TileType.EMPTY));
         } else {
           this.setTile(x,y, new Tile(x,y, false, TileType.INVALID));
@@ -101,10 +105,17 @@ class Game {
 
   }
 
+initPathTileBag() {
+	this.tileBag = [];
+	InitVals.pathBagSetup.forEach((type) => {
+
+	});
+}
+
   setSelectedItem(item) {
     if (item != null) {
       if (item instanceof Tile) {
-        this.selectedItem = (this.pathTileTypes.includes(item.type)) ? item : null;
+        this.selectedItem = (InitVals.pathTileTypes.includes(item.type)) ? item : null;
       } else {
         this.selectedItem = item;
       }
@@ -141,7 +152,7 @@ class Game {
   
   rotateSelectedTile(rotateClockwise = true) {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
-      if (this.pathTileTypes.includes(this.selectedItem.type)) {
+      if (InitVals.pathTileTypes.includes(this.selectedItem.type)) {
         this.selectedItem.rotateDirection(rotateClockwise);
       }
     }
@@ -149,7 +160,7 @@ class Game {
 
   flipSelectedTile() {
     if (this.selectedItem && this.selectedItem instanceof Tile) {
-      if (this.pathTileTypes.includes(this.selectedItem.type)) {
+      if (InitVals.pathTileTypes.includes(this.selectedItem.type)) {
         this.selectedItem.flipped = !this.selectedItem.flipped;
       }
     }
