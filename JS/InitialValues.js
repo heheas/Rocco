@@ -22,3 +22,41 @@ tileLocations = [
   {x:2, y:18},{x:3, y:18},{x:4, y:18},
   {x:2, y:19},{x:3, y:19},
 ];
+pathBagSetup = [
+  { 
+    type: TileType.CORNER,
+    debrisCount: 12,
+    pitfallCount: 7,
+    directional: 3
+  },
+  {
+    type: TileType.STRAIGHT,
+    debrisCount: 11,
+    pitfallCount: 6,
+    directional: 4
+  },
+  { 
+    type:  TileType.SIXWAY,
+    debrisCount: 4,
+    pitfallCount: 5,
+    directional: 0
+  },
+  { 
+    type:  TileType.SPLIT,
+    debrisCount: 16,
+    pitfallCount: 8,
+    directional: 3
+  },
+  { 
+    type:  TileType.UTURN,
+    debrisCount: 10,
+    pitfallCount: 5,
+    directional: 0
+  },
+  { 
+    type:  TileType.TRIDENT
+    debrisCount: 10,
+    pitfallCount: 5,
+    directional: 3
+  }
+];
