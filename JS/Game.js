@@ -1,6 +1,7 @@
 class Game {
   board;
   selectedItem;
+  holdingItem;
   tileBag = [];
   players = [];
   activePlayer = 0;
@@ -58,7 +59,7 @@ class Game {
   }
 
   copyTile(tile2Copy) {
-    var tileClone = new Tile(tile2Copy.x, tile2Copy.y, tile2Copy.flipped, tile2Copy.type, tile2Copy.isDebris);
+    var tileClone = new Tile(tile2Copy.x, tile2Copy.y, tile2Copy.flipped, tile2Copy.type, tile2Copy.isDebris, tile2Copy.direction);
     tileClone.setHome(tile2Copy.homeLocation, tile2Copy.homeType);
     return tileClone;
   }
@@ -126,18 +127,26 @@ initPathTileBag() {
 }
 
 pullPathTile() {
-	if (this.tileBag.length > 0) {
+	if (!this.holdingItem && this.tileBag.length > 0) {
 		var pullID = Math.floor(Math.random() * this.tileBag.length);
 		var tile = this.tileBag[pullID];
 		this.tileBag.splice(pullID, 1);
 		return tile;
 	}
-	console.log(this.tileBag.length-1);
 }
 
-putPathTileBack(tile) {
-	if (tile) {
-		this.tileBag.push(tile);
+holdSelectedItem() {
+	if (this.selectedItem instanceof Tile) {
+		this.holdingItem = this.copyTile(this.selectedItem);
+		this.selectedItem.type = TileType.EMPTY;
+		this.selectedItem = this.holdingItem;
+	}
+}
+
+releaseItem(x, y) {
+	if (this.holdingItem instanceof Tile) {
+		this.setTile(x,y, this.copyTile(this.holdingItem));
+		this.holdingItem = null;
 	}
 }
 
@@ -170,6 +179,7 @@ putPathTileBack(tile) {
       if (replacedTile.type == TileType.EMPTY) {
         this.setTile(newX, newY, origTile);
         this.setTile(this.selectedItem.x, this.selectedItem.y, replacedTile);
+		this.setSelectedItem(origTile);
         return true;
       } else {
         return false;
@@ -250,5 +260,9 @@ putPathTileBack(tile) {
 		var item2Sorted = item2.map(obj => JSON.stringify(obj)).sort();
 	//console.log(JSON.stringify(item1Sorted) + " | " + JSON.stringify(item2Sorted));
 		return JSON.stringify(item1Sorted) === JSON.stringify(item2Sorted);
+	}
+	
+	holdItem(item) {
+		this.holdingItem = item;
 	}
 }
