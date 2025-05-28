@@ -163,19 +163,22 @@ function clickFunc(event) {
          }
       }
 
-      var selection = worldToBoardCoords(currentClickX, currentClickY);
-	  $('#xy').text(selection.x + "," + selection.y);
-      if (movingTile) {
-         movingTile = !game.moveSelectedTile(selection.x, selection.y);
-         if (movingTile) {
-            $('#btnMove').val("Cancel");
-         } else {
-            $('#btnMove').val("Move");
-         }
-      } else if (addingTile) {
-         addingTile = !game.moveSelectedTile(selection.x, selection.y);
-      }
-      game.selectTile(selection.x, selection.y);
+	var selection = worldToBoardCoords(currentClickX, currentClickY);
+	$('#xy').text(selection.x + "," + selection.y);
+	
+	 //movingTile = !game.moveSelectedTile(selection.x, selection.y);
+	if (movingTile) {
+		moveTile(selection.x, selection.y);
+	}
+	
+	if (addingTile) {
+		console.log("Set New Tile");
+		//addingTile = !game.moveSelectedTile(selection.x, selection.y);
+		game.releaseItem(selection.x, selection.y);
+		game.setSelectedItem(null);
+		addingTile = false;
+	} 
+	game.selectTile(selection.x, selection.y);
    } else if (viewingPlayerBoard) {
       if (currentClickX >= playerBoardWidth && currentClickX <= playerBoardWidth + playerBoardTabSize) {
          if (currentClickY >= playerBoardY && currentClickY <= playerBoardY + playerBoardTabSize) {
@@ -231,10 +234,10 @@ function update(deltaTime) {
    // This would be where you update your game state
    //console.log(`Frame time: ${deltaTime.toFixed(3)} seconds`);
 
-   if (movingTile && (this.lastTimestamp - updateTime > 125)) {
-      selectDash = selectDash < selectDashSize ? selectDash + 1 : 0;
-      updateTime = this.lastTimestamp;
-   }
+   // if (movingTile && (this.lastTimestamp - updateTime > 125)) {
+      // selectDash = selectDash < selectDashSize ? selectDash + 1 : 0;
+      // updateTime = this.lastTimestamp;
+   // }
 
    drawBoard(gameX, gameY);
    drawSelectedItem();
@@ -247,8 +250,11 @@ function calcDistance(x1, y1, x2, y2) {
 }
 
 function pullNewTile() {
+	if (!game.holdingItem) {
 	addingTile = true;
 	game.setSelectedItem(game.pullPathTile());
+	game.holdSelectedItem();
+	}
 }
 
 function rotateSelectedTile(rotateClockwise = true) {
@@ -259,12 +265,17 @@ function flipSelectedTile() {
    game.flipSelectedTile();
 }
 
-function moveTile() {
-   movingTile = !movingTile;
-   if (movingTile) {
+function moveTile(x, y) {
+   if (game.holdingItem) {
+	   console.log("releasing");
+		game.releaseItem(x, y);
+		movingTile = false;
       $('#btnMove').val("Cancel");
    } else {
+	   console.log("holding");
+	game.holdSelectedItem();
       $('#btnMove').val("Move");
+	movingTile = true;
    }
 }
 
@@ -329,12 +340,14 @@ function drawBoard(worldX, worldY) {
 		let tile = game.getTile(tileLocation.x, tileLocation.y);
 		if (tile != undefined && tile.type != TileType.INVALID) {
 			var coords = boardToWorldCoords(tile.x,tile.y);
-			drawHexagon(
-			   coords.x,
-			   coords.y,
-			   getHexSize(),
-			   tile
-			);
+			if (tile != game.selectedItem || !movingTile) {
+				drawHexagon(
+				   coords.x,
+				   coords.y,
+				   getHexSize(),
+				   tile
+				);
+			}
 
 			//draw border
 			ctx.strokeStyle = "black";
@@ -604,14 +617,14 @@ function drawSelectionBorder() {
       ctx.strokeStyle = "green";
 	 if (game.selectedItem instanceof Tile && game.selectedItem.x != -1 && game.selectedItem.y != -1) {
 		if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(game.selectedItem.type)) {
-		   if (movingTile) {
-			  ctx.lineDashOffset = 2 * selectDash;
-			  ctx.setLineDash([selectDashSize, selectDashSize]);
-			  drawHexagon(coords.x, coords.y, getHexSize(), null);
-			  ctx.stroke();
+		    if (!movingTile) {
+			  // ctx.lineDashOffset = 2 * selectDash;
+			  // ctx.setLineDash([selectDashSize, selectDashSize]);
+			  // drawHexagon(coords.x, coords.y, getHexSize(), null);
+			  // ctx.stroke();
 
-			  ctx.setLineDash([]);
-		   } else {
+			  // ctx.setLineDash([]);
+		   // } else {
 			  drawHexagon(coords.x, coords.y, getHexSize(), null);
 			  ctx.stroke();
 		   }
@@ -653,7 +666,35 @@ function getRobotColor(robot) {
 }
 
 function drawContextMenu() {
-
+	if (game.selectedItem) {
+		if (addingTile || movingTile) {
+			var boardCoords = worldToBoardCoords(xPos, yPos);
+			
+			if (InitVals.tileLocations.some(tile => tile.x == boardCoords.x && tile.y == boardCoords.y)) {
+				if (game.getTile(boardCoords.x, boardCoords.y).type == TileType.EMPTY || (game.selectedItem.x == boardCoords.x && game.selectedItem.y == boardCoords.y)) {
+					var coords = boardToWorldCoords(boardCoords.x, boardCoords.y);
+					ctx.save();
+					
+					var offset = 10;
+					
+					//draw shadow
+					ctx.fillStyle = "rgb(0 0 0 0.2)";
+					drawHexagon(coords.x + offset/2, coords.y - offset/2, getHexSize(), null);
+					ctx.fill();
+					
+					//tile
+					drawHexagon(coords.x + offset, coords.y - offset, getHexSize(), game.selectedItem);
+					
+					//draw tile border
+					ctx.strokeStyle = "black";
+					drawHexagon(coords.x + offset, coords.y - offset, getHexSize(), null);
+					ctx.stroke();
+					
+					ctx.restore();
+				}
+			}
+		}
+	}
 }
 
 function drawPlayerBoard() {
