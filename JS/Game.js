@@ -59,7 +59,7 @@ class Game {
 
   copyTile(tile2Copy) {
     var tileClone = new Tile(tile2Copy.x, tile2Copy.y, tile2Copy.flipped, tile2Copy.type, tile2Copy.isDebris);
-    tileClone.setHomeType(tile2Copy.homeType);
+    tileClone.setHome(tile2Copy.homeLocation, tile2Copy.homeType);
     return tileClone;
   }
   
@@ -84,7 +84,9 @@ class Game {
           this.setTile(x,y, new Tile(x,y, false, TileType.RESOURCE));
         } else if (InitVals.tileLocations.some(tile => tile.x == x && tile.y == y)) {
           this.setTile(x,y, new Tile(x,y, false, TileType.EMPTY));
-        } else {
+        } else if (InitVals.labLocation.some(tile => tile.x == x && tile.y == y)) {
+          this.setTile(x,y, new Tile(x,y, false, TileType.LAB));
+		} else {
           this.setTile(x,y, new Tile(x,y, false, TileType.INVALID));
         }
       }
@@ -92,24 +94,51 @@ class Game {
 
     //temp for testing
     //this.addNewPlayer("TEST", 5, RobotType.ROBOT1);
-    this.setTile(1,11, new Tile(1,11, false, TileType.CORNER, true, 3));
-    this.setTile(1,9, new Tile(1,9, false, TileType.CORNER, true, 3));
-    this.setTile(3,2, new Tile(3,2, false, TileType.CORNER, true, 3));
-    this.setTile(3,3, new Tile(3,3, false, TileType.SIXWAY, true, 3));
-    this.setTile(2,3, new Tile(2,3, false, TileType.CORNER, true, 5));
-    this.setTile(2,4, new Tile(2,4, false, TileType.SPLIT, true, 0));
-    this.setTile(2,5, new Tile(2,5, false, TileType.TRIDENT, true, 5));
-    this.setTile(3,4, new Tile(3,4, false, TileType.UTURN, true, 5));
-    this.setTile(3,6, new Tile(3,6, false, TileType.STRAIGHT, true, 5));
-    this.setTile(2,7, new Tile(2,7, false, TileType.CORNER, true, 0));
+    // this.pullPathTile(1,11);
+    // this.pullPathTile(1,9);
+    // this.pullPathTile(3,2);
+    // this.pullPathTile(3,3);
+    // this.pullPathTile(2,3);
+    // this.pullPathTile(2,4);
+    // this.pullPathTile(2,5);
+    // this.pullPathTile(3,4);
+    // this.pullPathTile(3,6);
+    // this.pullPathTile(2,7);
 
   }
 
 initPathTileBag() {
 	this.tileBag = [];
-	InitVals.pathBagSetup.forEach((type) => {
-
+	InitVals.pathBagSetup.forEach((pathType) => {
+		//generate Debris Tiles
+		for (var i = 0; i < pathType.debrisCount; i++) {
+			this.tileBag.push(new Tile(-1,-1, false, pathType.type, true, true, 0));
+		}
+		//generate Pitfall Tiles
+		for (var i = 0; i < pathType.pitfallCount; i++) {
+			this.tileBag.push(new Tile(-1,-1, false, pathType.type, false, true, 0));
+		}
+		//generate Directional Tiles
+		//for (var i = 0; i < type.debrisCount; i++) {
+		//	this.tileBag.push(new Tile(-1,-1, false, true, 0);
+		//}
 	});
+}
+
+pullPathTile() {
+	if (this.tileBag.length > 0) {
+		var pullID = Math.floor(Math.random() * this.tileBag.length);
+		var tile = this.tileBag[pullID];
+		this.tileBag.splice(pullID, 1);
+		return tile;
+	}
+	console.log(this.tileBag.length-1);
+}
+
+putPathTileBack(tile) {
+	if (tile) {
+		this.tileBag.push(tile);
+	}
 }
 
   setSelectedItem(item) {
@@ -181,11 +210,10 @@ initPathTileBag() {
   loadPathGraph() {
     var pathsTrace = [];
     if (this.selectedItem && this.selectedItem instanceof Player && this.selectedItem.isMoving) {
-		console.log("Moving Player");
 		var connections = [];
 		this.getTileGraphPoints(connections, {x:this.selectedItem.x, y:this.selectedItem.y});
-		//console.log(JSON.stringify(currentTileGraph));
 		this.currentPathsGraph = connections;
+		console.log(JSON.stringify(this.currentPathsGraph));
     }
   }
 
@@ -193,50 +221,29 @@ initPathTileBag() {
 		var tile = this.getTile(tilePoint.x,tilePoint.y); //CURRENT TILE
 		if (tile && tile.type != TileType.EMPTY) {
 			var tilePathPoints = tile.getPathPoints(); // LIST OF TILES TO CHECK FOR CONNECTION
-			console.log("Path Points for " + tilePoint.x +","+tilePoint.y+": " + JSON.stringify(tilePathPoints));
 			tilePathPoints.forEach((newTilePoint) => {
-				//console.log("Tile "+JSON.stringify(tilePoint)+": " + JSON.stringify(newTilePoint));
 				var newTile = this.getTile(newTilePoint.x, newTilePoint.y);
 				if (newTile && newTile.type != TileType.EMPTY) {
 					var newTilePathPoints = newTile.getPathPoints();
-					//console.log("new path points for " + newTile.x +","+newTile.y+": " + JSON.stringify(newTilePathPoints));
-					var connection = newTilePathPoints.find((point) => JSON.stringify(tilePoint) === JSON.stringify(point));
-					if (connection) {
+					var connectionID = newTilePathPoints.findIndex((point) => JSON.stringify(tilePoint) === JSON.stringify(point));
+					if (connectionID != -1) {
 						if (this.addUniqueConnection(connections, [tilePoint,newTilePoint])) {
-							//console.log("Connection: " + JSON.stringify(connection));
-							var newTilePathPointsSubset = newTilePathPoints.filter((point) => JSON.stringify(point) != JSON.stringify(connection));
-							
-							newTilePathPointsSubset.forEach((point) => {
-								this.getTileGraphPoints(connections, point);
-							});
+							this.getTileGraphPoints(connections, newTilePoint);
 						}
 					}
 				}
 			});
-			//return connections;
 		}
 	}
 	
 	addUniqueConnection(connections, newConnection) {
 		if (!connections.find((estConn) => this.isMatchingConnection(estConn, newConnection))) {
-			//console.log(JSON.stringify(newConnection) + " | " + JSON.stringify(connections));
 			connections.push(newConnection);
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-	// appendArrayUnique(originalArray, newElements) {
-		// console.log("appending");
-	  // newElements.forEach(newItem => {
-		// console.log("newItems");
-		// if (!originalArray.find((origItem) => this.isMatchingConnection(origItem, newItem))) {
-		  // originalArray.push(newItem);
-		// }
-	  // });
-	  // return originalArray;
-	// }
 	
 	isMatchingConnection(item1, item2) {
 		var item1Sorted = item1.map(obj => JSON.stringify(obj)).sort();
