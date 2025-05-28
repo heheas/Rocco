@@ -25,6 +25,7 @@ var selectedBoardY;
 var currentClickX = 0;
 var currentClickY = 0;
 var movingTile = false;
+var addingTile = false;
 var selectDash = 0;
 var selectDashSize = 15;
 var updateTime = 0;
@@ -171,6 +172,8 @@ function clickFunc(event) {
          } else {
             $('#btnMove').val("Move");
          }
+      } else if (addingTile) {
+         addingTile = !game.moveSelectedTile(selection.x, selection.y);
       }
       game.selectTile(selection.x, selection.y);
    } else if (viewingPlayerBoard) {
@@ -236,6 +239,7 @@ function update(deltaTime) {
    drawBoard(gameX, gameY);
    drawSelectedItem();
    drawPlayerBoard();
+   drawContextMenu();
 }
 
 function calcDistance(x1, y1, x2, y2) {
