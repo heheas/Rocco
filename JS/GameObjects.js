@@ -19,6 +19,7 @@ const TileType = {
   HOME: "home",
   RESOURCE: "resource",
   INVALID: "invalid",
+  LAB: "lab",
   EMPTY: "empty",
 }
 
@@ -125,6 +126,7 @@ class Tile extends GameObject {
 				pathPoints = [3,4];
 				break;
 			  case TileType.SIXWAY:
+			  case TileType.LAB:
 				pathPoints = [0,1,2,3,4,5,6];
 				break;
 			  case TileType.HOME:
