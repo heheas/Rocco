@@ -243,7 +243,8 @@ function calcDistance(x1, y1, x2, y2) {
 }
 
 function pullNewTile() {
-
+	this.moveTile();
+	game.setSelectedItem(game.pullPathTile());
 }
 
 function rotateSelectedTile(rotateClockwise = true) {
@@ -319,30 +320,36 @@ function drawBoard(worldX, worldY) {
    ctx.drawImage(labIMG, worldX - labSize / 2, worldY - labSize / 2, labSize, labSize);
 
    //draw board
-   for (let y = 0; y < 22; y++) {
-      for (let x = 0; x < 9; x++) {
-         let tile = game.getTile(x, y);
-         if (tile != undefined && tile.type != TileType.INVALID) {
-            //let oddfset = y % 2 == 0 ? 0 : 0.75 * getHexSize() + getSpacing();
-            //let hexX = worldX + (x * (1.5 * getHexSize() + 2 * getSpacing())) + oddfset - getBoardWidth() / 2;
-            //let hexY = worldY + (y * (((getHexSize() + getSpacing()) / 2) * (Math.sqrt(3) / 2))) - getBoardHeight() / 2;
-			var coords = boardToWorldCoords(x,y);
-            drawHexagon(
-               coords.x,
-               coords.y,
-               getHexSize(),
-               tile
-            );
+   
+   [...InitVals.tileLocations, ...InitVals.homeLocations, ...InitVals.resourceLocations].forEach((tileLocation) => {
+		let tile = game.getTile(tileLocation.x, tileLocation.y);
+		if (tile != undefined && tile.type != TileType.INVALID) {
+			var coords = boardToWorldCoords(tile.x,tile.y);
+			drawHexagon(
+			   coords.x,
+			   coords.y,
+			   getHexSize(),
+			   tile
+			);
 
-            //draw border
-            ctx.strokeStyle = "black";
-            drawHexagon(coords.x, coords.y, getHexSize(), null);
-            ctx.stroke();
+			//draw border
+			ctx.strokeStyle = "black";
+			drawHexagon(coords.x, coords.y, getHexSize(), null);
+			ctx.stroke();
+			
+			// //draw path points
+			// tile.getPathPoints().forEach((point) => {
+				// var pointCoords = boardToWorldCoords(point.x,point.y);
+				// ctx.strokeStyle="red";
+				// ctx.beginPath();
+				// ctx.moveTo(coords.x, coords.y);
+				// ctx.lineTo(pointCoords.x, pointCoords.y);
+				// ctx.closePath();
+				// ctx.stroke();
+			// });
 
-
-         }
-      }
-   }
+		}
+   });
    
    //draw player tokens
    for (let y = 0; y < 22; y++) {
@@ -591,7 +598,7 @@ function drawSelectionBorder() {
 	  ctx.beginPath();
       ctx.lineWidth = 3.25;
       ctx.strokeStyle = "green";
-	 if (game.selectedItem instanceof Tile) {
+	 if (game.selectedItem instanceof Tile && game.selectedItem.x != -1 && game.selectedItem.y != -1) {
 		if ([TileType.CORNER, TileType.STRAIGHT, TileType.RESOURCE, TileType.SIXWAY, TileType.SPLIT, TileType.UTURN, TileType.TRIDENT].includes(game.selectedItem.type)) {
 		   if (movingTile) {
 			  ctx.lineDashOffset = 2 * selectDash;
