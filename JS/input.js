@@ -247,7 +247,7 @@ function calcDistance(x1, y1, x2, y2) {
 }
 
 function pullNewTile() {
-	this.moveTile();
+	addingTile = true;
 	game.setSelectedItem(game.pullPathTile());
 }
 
