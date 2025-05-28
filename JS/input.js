@@ -652,6 +652,10 @@ function getRobotColor(robot) {
    return color;
 }
 
+function drawContextMenu() {
+
+}
+
 function drawPlayerBoard() {
    //background
    ctx.beginPath();
