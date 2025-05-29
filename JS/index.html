@@ -33,6 +33,11 @@
     <option value="6">6</option>
   </select>
   <input id="btnAddPlayer" type="button" value="Add Player" onclick="addPlayer()"/>
+  <input id="btnMovePlayer" type="button" value="Move Player" onclick="movePlayer()"/>
+  <br>
+  <div id="energy"></div>
+  <input id="btnLowerEnergy" type="button" value="E-" onclick="energy(-1)"/>
+  <input id="btnGainEnergy" type="button" value="E+" onclick="energy(1)"/>
 <br/>
 Tiles: 
 <input type="button" value="Pull New Tile" onclick="pullNewTile()"/>
