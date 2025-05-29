@@ -6,7 +6,8 @@ class Player extends GameObject {
   handCards = [];
   draftedCards = {p1:null, p2:null, extra:null};
   storage = {resources: [], tiles: []};
-  isMoving = true;
+  isMoving = true
+  energy = 1;
 
   constructor(x, y, name, homeLocation, robot) {
     super(x,y);
@@ -21,6 +22,15 @@ class Player extends GameObject {
   
   getRobot() {
     return this.robot;
+  }
+  
+  getMovement() {
+	  return this.energy * this.skillLevels.move;
+  }
+  
+  addEnergy(val) {
+	  console.log("adding energy");
+	  this.energy += val;
   }
   
   //Skill Upgrades
