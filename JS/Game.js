@@ -140,6 +140,8 @@ holdSelectedItem() {
 		this.holdingItem = this.copyTile(this.selectedItem);
 		this.selectedItem.type = TileType.EMPTY;
 		this.selectedItem = this.holdingItem;
+	} else if (this.selectedItem instanceof Player) {
+		this.holdingItem = this.selectedItem;
 	}
 }
 
@@ -147,6 +149,10 @@ releaseItem(x, y) {
 	if (this.holdingItem instanceof Tile) {
 		this.setTile(x,y, this.copyTile(this.holdingItem));
 		this.holdingItem = null;
+	} else if (this.selectedItem instanceof Player) {
+		this.holdingItem = null;
+		this.selectedItem.x = x;
+		this.selectedItem.y = y;
 	}
 }
 
@@ -221,24 +227,27 @@ releaseItem(x, y) {
     var pathsTrace = [];
     if (this.selectedItem && this.selectedItem instanceof Player && this.selectedItem.isMoving) {
 		var connections = [];
-		this.getTileGraphPoints(connections, {x:this.selectedItem.x, y:this.selectedItem.y});
+		this.getTileGraphPoints(connections, {x:this.selectedItem.x, y:this.selectedItem.y}, 0, this.selectedItem.getMovement());
 		this.currentPathsGraph = connections;
-		console.log(JSON.stringify(this.currentPathsGraph));
+		//console.log(JSON.stringify(this.currentPathsGraph));
     }
   }
 
-	getTileGraphPoints(connections, tilePoint) {
+	getTileGraphPoints(connections, tilePoint, depth, maxDepth) {
+		if (maxDepth == 0 || depth == maxDepth) {
+			return;
+		}
 		var tile = this.getTile(tilePoint.x,tilePoint.y); //CURRENT TILE
 		if (tile && tile.type != TileType.EMPTY) {
 			var tilePathPoints = tile.getPathPoints(); // LIST OF TILES TO CHECK FOR CONNECTION
 			tilePathPoints.forEach((newTilePoint) => {
 				var newTile = this.getTile(newTilePoint.x, newTilePoint.y);
-				if (newTile && newTile.type != TileType.EMPTY) {
+				if (newTile && newTile.type != TileType.EMPTY && depth != maxDepth) {
 					var newTilePathPoints = newTile.getPathPoints();
 					var connectionID = newTilePathPoints.findIndex((point) => JSON.stringify(tilePoint) === JSON.stringify(point));
 					if (connectionID != -1) {
 						if (this.addUniqueConnection(connections, [tilePoint,newTilePoint])) {
-							this.getTileGraphPoints(connections, newTilePoint);
+							this.getTileGraphPoints(connections, newTilePoint, depth + 1, maxDepth);
 						}
 					}
 				}
