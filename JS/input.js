@@ -25,6 +25,14 @@ var selectedBoardY;
 var currentClickX = 0;
 var currentClickY = 0;
 var movingTile = false;
+
+var movingPlayer = false;
+var movingPlayerX = 0;
+var movingPlayerY = 0;
+var playerOrigX = 0;
+var playerOrigY = 0;
+
+
 var addingTile = false;
 var selectDash = 0;
 var selectDashSize = 15;
@@ -171,6 +179,10 @@ function clickFunc(event) {
 		moveTile(selection.x, selection.y);
 	}
 	
+	if (movingPlayer) {
+		movePlayer(selection.x, selection.y);
+	}
+	
 	if (addingTile) {
 		console.log("Set New Tile");
 		//addingTile = !game.moveSelectedTile(selection.x, selection.y);
@@ -246,6 +258,7 @@ function update(deltaTime) {
 }
 
 function calcDistance(x1, y1, x2, y2) {
+	//console.log("Calcing: " +x1+","+y1+","+x2+","+y2);
    return Math.sqrt(Math.abs(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)));
 }
 
@@ -267,15 +280,13 @@ function flipSelectedTile() {
 
 function moveTile(x, y) {
    if (game.holdingItem) {
-	   console.log("releasing");
 		game.releaseItem(x, y);
 		movingTile = false;
-      $('#btnMove').val("Cancel");
-   } else {
-	   console.log("holding");
-	game.holdSelectedItem();
       $('#btnMove').val("Move");
-	movingTile = true;
+   } else {
+		game.holdSelectedItem();
+		movingTile = true;
+      $('#btnMove').val("Cancel");
    }
 }
 
@@ -298,6 +309,38 @@ function addPlayer() {
    }
 
    game.addNewPlayer(playerName, homeLocation, RobotType[robot]);
+}
+
+function movePlayer(x, y) {
+	if (game.getCurrentPathsGraph().length) {
+		if (x == undefined && y == undefined) {
+			x = playerOrigX;
+			y = playerOrigY;
+		}
+	   if (game.holdingItem) {
+			game.releaseItem(movingPlayerX, movingPlayerY);
+			movingPlayer = false;
+			$('#btnMovePlayer').val("Move Player");
+	   } else {
+			playerOrigX = x;
+			playerOrigY = y;
+			game.holdSelectedItem();
+			//console.log("HOLDING ITEM: " + JSON.stringify(game.holdingItem));
+			movingPlayer = true;
+		  $('#btnMovePlayer').val("Cancel");
+			//console.log(JSON.stringify(game.selectedItem) + " | " + JSON.stringify(game.holdingItem));
+	   }
+	}
+}
+
+function energy(val) {
+	if (game.selectedItem instanceof Player) {
+		game.selectedItem.addEnergy(val);
+		if (movingPlayer) {
+			game.loadPathGraph();
+		}
+		$('#energy').text(game.selectedItem.energy);
+	}
 }
 
 function worldToBoardCoords(worldX, worldY) {
@@ -377,7 +420,9 @@ function drawBoard(worldX, worldY) {
             var player = game.getPlayers().find(player => (player.x == x && player.y == y));
 			if (player) {
 				drawPlayerPath(player);
-				drawPlayerToken(coords.x, coords.y, getHexSize(), player);
+				if (player != game.holdingItem) {
+					drawPlayerToken(coords.x, coords.y, getHexSize(), player);
+				}
 			}
             //border and highlight if selected
             drawSelectionBorder();
@@ -577,7 +622,7 @@ function renderHexagon(x, y, radius, tile) {
          if (robotIMG) {
             ctx.save();
             ctx.translate(x, y);
-            ctx.rotate((-60 + (tile.direction * 60)) * Math.PI / 180);
+            ctx.rotate(((tile.direction * 60)) * Math.PI / 180);
             ctx.drawImage(robotIMG, -3 * radius / 8, -3 * radius / 8, 3 * radius / 4, 3 * radius / 4);
             ctx.restore();
          }
@@ -667,12 +712,12 @@ function getRobotColor(robot) {
 
 function drawContextMenu() {
 	if (game.selectedItem) {
+		var boardCoords = worldToBoardCoords(xPos, yPos);
+		var coords = boardToWorldCoords(boardCoords.x, boardCoords.y);
 		if (addingTile || movingTile) {
-			var boardCoords = worldToBoardCoords(xPos, yPos);
 			
 			if (InitVals.tileLocations.some(tile => tile.x == boardCoords.x && tile.y == boardCoords.y)) {
 				if (game.getTile(boardCoords.x, boardCoords.y).type == TileType.EMPTY || (game.selectedItem.x == boardCoords.x && game.selectedItem.y == boardCoords.y)) {
-					var coords = boardToWorldCoords(boardCoords.x, boardCoords.y);
 					ctx.save();
 					
 					var offset = 10;
@@ -691,6 +736,31 @@ function drawContextMenu() {
 					ctx.stroke();
 					
 					ctx.restore();
+				}
+			}
+		} else if (movingPlayer) {
+			if (game.selectedItem instanceof Player) {
+				if (game.getCurrentPathsGraph()) {
+					var smallest = game.getCurrentPathsGraph().at(0).at(0);
+					var	smallestWorldPoint = boardToWorldCoords(smallest.x, smallest.y);
+					game.getCurrentPathsGraph().forEach((connection) => {
+						console.log(JSON.stringify(connection));
+						connection.forEach((point) => {
+							var pathWorldPoint = boardToWorldCoords(point.x, point.y);
+							var dist = calcDistance(xPos, yPos, pathWorldPoint.x, pathWorldPoint.y);
+							
+							smallestWorldPoint = boardToWorldCoords(smallest.x, smallest.y);
+							var smallestDist = calcDistance(xPos, yPos, smallestWorldPoint.x, smallestWorldPoint.y);
+							//console.log(dist + " vs " + smallestDist);
+							if (dist < smallestDist) {
+								smallest = point;
+							}
+						});
+					});
+					movingPlayerX = smallest.x;
+					movingPlayerY = smallest.y;
+					smallestWorldPoint = boardToWorldCoords(smallest.x, smallest.y);
+					drawPlayerToken(smallestWorldPoint.x, smallestWorldPoint.y, getHexSize(), game.selectedItem);
 				}
 			}
 		}
