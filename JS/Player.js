@@ -1,5 +1,4 @@
 class Player extends GameObject {
-  name = "";
   robot = RobotType.NOTSET;
   homeLocation = "";
   skillLevels = {move:2, build:2, alter:2, remove:2};
@@ -9,8 +8,8 @@ class Player extends GameObject {
   isMoving = true
   energy = 1;
 
-  constructor(x, y, name, homeLocation, robot) {
-    super(x,y);
+  constructor(id = "", x, y, name = "", homeLocation, robot) {
+    super(id, x,y);
     this.name = name;
     this.homeLocation = homeLocation;
     this.robot = robot;
