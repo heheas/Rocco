@@ -1,9 +1,11 @@
 class GameObject {
+  id = -1;
   x = -1;
   y = -1;
-  parent;
+  source;
 
-  constructor(x, y) {
+  constructor(id, x, y) {
+	this.id = id;
     this.x = x;
     this.y = y;
   }
@@ -35,7 +37,7 @@ const RobotType = {
 
 const RobotColor = {
   ROBOT1: "rgb(159 131 70)",
-  ROBOT2: "rgb(44 62 107)",
+  ROBOT2: "rgb(122 156 242)",
   ROBOT3: "rgb(59 56 96)",
   ROBOT4: "rgb(137 66 58)",
   ROBOT5: "rgb(39 81 55)",
@@ -53,6 +55,11 @@ const ResourceType = {
   NOTSET: "not_set",
 }
 
+const TileOrigins = {
+	TILEBAG: "tilebag",
+	PLAYERBOARD: "playerboard",
+}
+
 class Tile extends GameObject {
   type = TileType.EMPTY;
   flipped = false;
@@ -60,14 +67,20 @@ class Tile extends GameObject {
   direction = 0; //0-5 directions
   homeType = RobotType.NOTSET;
   resourceType = ResourceType.NOTSET;
+  origin = TileOrigins.TILEBAG;
 
-  constructor(x, y, flipped = false, type = TileType.EMPTY, isDebris = true, direction = 0) {
-    super(x,y);
+  constructor(id, x, y, flipped = false, type = TileType.EMPTY, isDebris = true, direction = 0, origin = TileOrigins.TILEBAG) {
+    super(id,x,y);
     this.flipped = flipped;
     this.type = type;
     this.isDebris = isDebris;
     this.direction = direction;
 	this.homeLocation = 0;
+	this.origin = origin;
+  }
+  
+  setOrigin(origin) {
+	  this.origin = origin;
   }
 
   setHome(homeLocation, homeType) {
@@ -126,6 +139,7 @@ class Tile extends GameObject {
 				pathPoints = [3,4];
 				break;
 			  case TileType.SIXWAY:
+			  case TileType.RESOURCE:
 			  case TileType.LAB:
 				pathPoints = [0,1,2,3,4,5,6];
 				break;
