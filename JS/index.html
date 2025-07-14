@@ -10,7 +10,7 @@
    <canvas id="myCanvas" width="900" height="600" style="border:1px solid #000000;display:inline-block;">
 </canvas>
   <br/>
-  XY: <div id="xy"></div>
+  <div>XY: <span id="xy"></span></div>
   Player Setup: 
   Name:
   <input id="txtPlayerName" type="text"></input>
@@ -33,18 +33,17 @@
     <option value="6">6</option>
   </select>
   <input id="btnAddPlayer" type="button" value="Add Player" onclick="addPlayer()"/>
-  <input id="btnMovePlayer" type="button" value="Move Player" onclick="movePlayer()"/>
+  <input id="btnMovePlayer" type="button" value="Move Player" onclick="btnMovePlayer()"/>
   <br>
-  <div id="energy"></div>
-  <input id="btnLowerEnergy" type="button" value="E-" onclick="energy(-1)"/>
-  <input id="btnGainEnergy" type="button" value="E+" onclick="energy(1)"/>
+  <div>Energy: <span id="energy"></span></div>
+  <input id="btnLowerEnergy" type="button" value="Energy-" onclick="energy(-1)"/>
+  <input id="btnGainEnergy" type="button" value="Energy+" onclick="energy(1)"/>
 <br/>
+  <input id="btnNextTurn" type="button" value="Next Turn" onclick="btnNextTurn()"/>
+  <br/>
 Tiles: 
-<input type="button" value="Pull New Tile" onclick="pullNewTile()"/>
-<input type="button" id="btnMove" value="Move" onclick="moveTile()"/>
-<input type="button" value="<-" onclick="rotateSelectedTile(false)"/>
-<input type="button" value="->" onclick="rotateSelectedTile(true)"/>
-<input type="button" value="flip" onclick="flipSelectedTile(true)"/>
-<input type="button" value="remove" onclick="removeSelectedTile()"/>
+<input type="button" value="Build" onclick="btnPullNewTile()"/>
+<input type="button" value="Alter" onclick="btnAlterSelectedTile()"/>
+<input type="button" value="Remove" onclick="btnRemoveSelectedTile()"/>
 <br/>
 </body>
