@@ -1,8 +1,24 @@
 <html>
     <head>
+        <style>
+            .canvas-wrapper {
+            position: relative; /* Or absolute, fixed, etc. */
+            height: 100vh; /* Example: full viewport height */
+            width: 100vw; /* Example: full viewport width */
+            }
+
+            canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            }
+        </style>
         <script src="game.js"></script>
     </head>
-    <body>
-        <canvas id="matter-canvas"></canvas>
+    <body style="background-color: darkslategrey;">
+        <div class="canvas-wrapper">
+            <canvas id="matter-canvas" ></canvas>
+        </div>
     </body>
 </html>
